@@ -5,6 +5,18 @@
     <UserSecretsId>aspnet-Samsys_Custos-D8B51848-6619-4D65-84E3-4C62E7695C63</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\CATEGORIA\**" />
+    <Content Remove="Views\CATEGORIA\**" />
+    <EmbeddedResource Remove="Views\CATEGORIA\**" />
+    <None Remove="Views\CATEGORIA\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180523113919_CATEGORIA.cs" />
+    <Compile Remove="Data\Migrations\20180523113919_CATEGORIA.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -20,6 +32,14 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\CATEGORIA\Create.cshtml" />
+    <None Include="Views\CATEGORIA\Delete.cshtml" />
+    <None Include="Views\CATEGORIA\Details.cshtml" />
+    <None Include="Views\CATEGORIA\Edit.cshtml" />
+    <None Include="Views\CATEGORIA\Index.cshtml" />
   </ItemGroup>
 
 </Project>

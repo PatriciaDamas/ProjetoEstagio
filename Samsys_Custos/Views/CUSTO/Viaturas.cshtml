@@ -44,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="data" class="control-label"></label>
-                <input asp-for="data" class="form-control" />
+                <input asp-for="data" id="currentdate" class="form-control" disabled/>
                 <span asp-validation-for="data" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -68,7 +68,7 @@
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Viaturas" class="btn btn-default" />
             </div>
         </form>
     </div>

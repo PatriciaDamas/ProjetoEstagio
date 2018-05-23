@@ -10,8 +10,8 @@ namespace Samsys_Custos.Data
     {
         [Key]
         public int id_categoria { get; set; }
-        public int id_pai { get; set; }
-        public int nome { get; set; }
+        public int? id_pai { get; set; }
+        public String nome { get; set; }
 
     }
 }
