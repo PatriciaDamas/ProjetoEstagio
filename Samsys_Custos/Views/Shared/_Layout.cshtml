@@ -31,6 +31,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="samsysdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Samsys
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a asp-area="" asp-controller="CUSTO" asp-action="Viaturas">Viaturas</a>
+                            <a asp-area="" asp-controller="CUSTO" asp-action="Gsm">GSM</a>
+                            <a asp-area="" asp-controller="CUSTO" asp-action="Index">Prémios</a>
+                        </div>
+                    </li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
