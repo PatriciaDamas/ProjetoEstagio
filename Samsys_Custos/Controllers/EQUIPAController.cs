@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Models;
 
 namespace Samsys_Custos.Controllers
 {
@@ -25,7 +26,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: EQUIPA/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -65,7 +66,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: EQUIPA/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -85,7 +86,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id_equipa,id_lider,nome")] EQUIPA eQUIPA)
+        public async Task<IActionResult> Edit(string id, [Bind("id_equipa,id_lider,nome")] EQUIPA eQUIPA)
         {
             if (id != eQUIPA.id_equipa)
             {
@@ -116,7 +117,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: EQUIPA/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -136,7 +137,7 @@ namespace Samsys_Custos.Controllers
         // POST: EQUIPA/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var eQUIPA = await _context.EQUIPA.SingleOrDefaultAsync(m => m.id_equipa == id);
             _context.EQUIPA.Remove(eQUIPA);
@@ -144,7 +145,7 @@ namespace Samsys_Custos.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EQUIPAExists(int id)
+        private bool EQUIPAExists(string id)
         {
             return _context.EQUIPA.Any(e => e.id_equipa == id);
         }

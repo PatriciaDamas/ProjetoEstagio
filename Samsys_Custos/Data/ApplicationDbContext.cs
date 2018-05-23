@@ -42,12 +42,12 @@ namespace Samsys_Custos.Data
 
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
 
-        public DbSet<Samsys_Custos.Data.EQUIPA> EQUIPA { get; set; }
-
         public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
 
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
 
         public DbSet<Samsys_Custos.Data.UTILIZADOR_PERMISSAO> UTILIZADOR_PERMISSAO { get; set; }
+
+        public DbSet<Samsys_Custos.Models.EQUIPA> EQUIPA { get; set; }
     }
 }

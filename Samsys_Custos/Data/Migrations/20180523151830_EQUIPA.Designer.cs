@@ -11,7 +11,7 @@ using System;
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180523115305_EQUIPA")]
+    [Migration("20180523151830_EQUIPA")]
     partial class EQUIPA
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,9 +154,9 @@ namespace Samsys_Custos.Data.Migrations
                     b.Property<int>("id_categoria")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("id_pai");
+                    b.Property<int?>("id_pai");
 
-                    b.Property<int>("nome");
+                    b.Property<string>("nome");
 
                     b.HasKey("id_categoria");
 
@@ -207,20 +207,6 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasKey("id_phc");
 
                     b.ToTable("DADOS_PHC");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
-                {
-                    b.Property<int>("id_equipa")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("id_lider");
-
-                    b.Property<string>("nome");
-
-                    b.HasKey("id_equipa");
-
-                    b.ToTable("EQUIPA");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>

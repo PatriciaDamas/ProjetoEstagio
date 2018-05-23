@@ -1,11 +1,8 @@
 ﻿@model Samsys_Custos.Data.CUSTO
-
 @{
     ViewData["Title"] = "Viaturas";
 }
-
 <h2>Viaturas</h2>
-
 <h4>CUSTO</h4>
 <hr />
 <div class="row">
@@ -44,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="data" class="control-label"></label>
-                <input asp-for="data" id="currentdate" class="form-control" disabled/>
+                <input asp-for="data" id="currentdate" class="form-control" />
                 <span asp-validation-for="data" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,11 +70,10 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<script src="~/js/viaturas.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
