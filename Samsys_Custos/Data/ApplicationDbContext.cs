@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Models;
+using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data
 {
@@ -32,5 +33,21 @@ namespace Samsys_Custos.Data
         public DbSet<Samsys_Custos.Models.PERMISSAO> PERMISSAO { get; set; }
 
         public DbSet<Samsys_Custos.Models.PERFIL> PERFIL { get; set; }
+
+        public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
+
+        public DbSet<Samsys_Custos.Data.CATEGORIA> CATEGORIA { get; set; }
+
+        public DbSet<Samsys_Custos.Data.DADOS_PHC> DADOS_PHC { get; set; }
+
+        public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
+
+        public DbSet<Samsys_Custos.Data.EQUIPA> EQUIPA { get; set; }
+
+        public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
+
+        public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
+
+        public DbSet<Samsys_Custos.Data.UTILIZADOR_PERMISSAO> UTILIZADOR_PERMISSAO { get; set; }
     }
 }

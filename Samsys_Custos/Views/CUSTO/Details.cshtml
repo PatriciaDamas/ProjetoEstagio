@@ -1,0 +1,84 @@
+﻿@model Samsys_Custos.Data.CUSTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CUSTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_colaborador)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_colaborador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_categoria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_categoria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_gsm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_gsm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_phc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_phc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_viatura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_viatura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_salario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_salario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ano)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ano)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.designacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.designacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.valor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_custo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

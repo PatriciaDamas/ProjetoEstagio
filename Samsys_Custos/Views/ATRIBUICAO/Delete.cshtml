@@ -1,0 +1,51 @@
+﻿@model Samsys_Custos.Data.ATRIBUICAO
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ATRIBUICAO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_viatura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_viatura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_gsm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_gsm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.id_colaborador)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id_colaborador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.data_inicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data_inicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.data_fim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data_fim)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id_atribuicao" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
