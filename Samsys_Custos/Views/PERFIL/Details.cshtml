@@ -1,0 +1,36 @@
+﻿@model Samsys_Custos.Models.PERFIL
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PERFIL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.salario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.salario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.premio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.premio)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_perfil">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

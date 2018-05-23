@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Samsys_Custos.Models.UTILIZADOR>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.id_perfil)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.id_equipa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.data_admissao)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_perfil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_equipa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_admissao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_colaborador">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id_colaborador">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_colaborador">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
