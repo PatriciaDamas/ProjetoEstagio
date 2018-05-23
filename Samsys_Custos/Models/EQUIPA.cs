@@ -14,5 +14,6 @@ namespace Samsys_Custos.Models
         [ForeignKey("UTILIZADOR")]
         public int id_lider { get; set; }
         public String nome { get; set; }
+        //YY
     }
 }
