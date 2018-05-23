@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Samsys_Custos.Data.Migrations
 {
-    public partial class CUSTO : Migration
+    public partial class PERFIL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
