@@ -11,8 +11,8 @@ using System;
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180523103500_VIATURA")]
-    partial class VIATURA
+    [Migration("20180523113634_ATRIBUICAO")]
+    partial class ATRIBUICAO
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
