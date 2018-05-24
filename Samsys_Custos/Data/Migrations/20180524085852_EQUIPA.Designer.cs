@@ -11,7 +11,7 @@ using System;
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180523151830_EQUIPA")]
+    [Migration("20180524085852_EQUIPA")]
     partial class EQUIPA
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -304,6 +304,20 @@ namespace Samsys_Custos.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Samsys_Custos.Models.EQUIPA", b =>
+                {
+                    b.Property<string>("id_equipa")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("id_lider");
+
+                    b.Property<string>("nome");
+
+                    b.HasKey("id_equipa");
+
+                    b.ToTable("EQUIPA");
+                });
+
             modelBuilder.Entity("Samsys_Custos.Models.PERFIL", b =>
                 {
                     b.Property<int>("id_perfil")
@@ -363,13 +377,17 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<DateTime>("data_admissao");
 
-                    b.Property<int>("id_equipa");
+                    b.Property<string>("id_equipa");
 
                     b.Property<int>("id_perfil");
 
                     b.Property<string>("nome");
 
                     b.HasKey("id_colaborador");
+
+                    b.HasIndex("id_equipa");
+
+                    b.HasIndex("id_perfil");
 
                     b.ToTable("UTILIZADOR");
                 });
@@ -432,6 +450,18 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasOne("Samsys_Custos.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.UTILIZADOR", b =>
+                {
+                    b.HasOne("Samsys_Custos.Models.EQUIPA", "EQUIPA")
+                        .WithMany()
+                        .HasForeignKey("id_equipa");
+
+                    b.HasOne("Samsys_Custos.Models.PERFIL", "PERFIL")
+                        .WithMany()
+                        .HasForeignKey("id_perfil")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

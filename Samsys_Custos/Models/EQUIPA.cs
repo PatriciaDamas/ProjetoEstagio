@@ -10,10 +10,10 @@ namespace Samsys_Custos.Models
     public class EQUIPA
     {
         [Key]
-        public String id_equipa { get; set; }
+        public string id_equipa { get; set; }
         [ForeignKey("UTILIZADOR")]
         public int id_lider { get; set; }
-        public String nome { get; set; }
+        public string nome { get; set; }
         //YY
     }
 }

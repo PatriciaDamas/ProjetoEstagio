@@ -45,7 +45,8 @@ namespace Samsys_Custos.Controllers
         // GET: CUSTO/Viaturas
         public IActionResult Viaturas()
         {
-            return View();
+            CUSTO a = new CUSTO();
+            return View(a);
         }
 
         // GET: CUSTO/Gsm
