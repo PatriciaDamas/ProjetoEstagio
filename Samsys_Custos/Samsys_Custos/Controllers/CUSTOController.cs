@@ -49,17 +49,57 @@ namespace Samsys_Custos.Controllers
             return View(cUSTO);
         }
 
+        // GET: CUSTO/viatura
+        public IActionResult Viatura()
+        {
+            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            return View();
+        }
+
+        // POST: CUSTO/viatura
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Viatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
+        {
+            if (ModelState.IsValid)
+            {
+                if (cUSTO.designacao == null)// temos de esperimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
+                {
+                    cUSTO.designacao = "";
+                }
+
+                cUSTO.data = DateTime.Now;
+                _context.Add(cUSTO);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            return View(cUSTO);
+        }
+
+
         // GET: CUSTO/Create
         public IActionResult Create()
         {
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "id_categoria");
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
             ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
             ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View();
         }
+
+
 
         // POST: CUSTO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -70,6 +110,7 @@ namespace Samsys_Custos.Controllers
         {
             if (ModelState.IsValid)
             {
+                cUSTO.data = DateTime.Now;
                 _context.Add(cUSTO);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
