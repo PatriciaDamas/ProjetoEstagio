@@ -22,19 +22,19 @@ namespace Samsys_Custos.Data
         public CATEGORIA CATEGORIA { get; set; }
 
         [ForeignKey("GSM")]
-        public int id_gsm { get; set; }
+        public int? id_gsm { get; set; }
         public GSM GSM { get; set; }
 
         [ForeignKey("DADOS_PHC")]
-        public int id_phc { get; set; }
+        public int? id_phc { get; set; }
         public DADOS_PHC DADOS_PHC { get; set; }
 
         [ForeignKey("VIATURA")]
-        public int id_viatura { get; set; }
+        public int? id_viatura { get; set; }
         public VIATURA VIATURA { get; set; }
 
         [ForeignKey("SALARIO")]
-        public int id_salario { get; set; }
+        public int? id_salario { get; set; }
         public SALARIO SALARIO { get; set; }
 
         public DateTime data { get; set; }

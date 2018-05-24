@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-Samsys_Custos-2EDDE366-F515-436D-8394-2E55D038EFB2</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180524102539_Classes.cs" />
+    <Compile Remove="Data\Migrations\20180524102539_Classes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180524110337_TESTE.cs" />
+    <Compile Remove="Data\Migrations\20180524110337_TESTE.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />

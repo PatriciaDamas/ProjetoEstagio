@@ -11,7 +11,7 @@ using System;
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180524102539_Classes")]
+    [Migration("20180524111145_Classes")]
     partial class Classes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,13 +184,13 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int>("id_colaborador");
 
-                    b.Property<int>("id_gsm");
+                    b.Property<int?>("id_gsm");
 
-                    b.Property<int>("id_phc");
+                    b.Property<int?>("id_phc");
 
-                    b.Property<int>("id_salario");
+                    b.Property<int?>("id_salario");
 
-                    b.Property<int>("id_viatura");
+                    b.Property<int?>("id_viatura");
 
                     b.Property<string>("mes");
 
@@ -236,9 +236,9 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<string>("nome");
 
-                    b.Property<int>("sugestao_categoria");
+                    b.Property<int?>("sugestao_categoria");
 
-                    b.Property<bool>("sugestao_custo");
+                    b.Property<bool?>("sugestao_custo");
 
                     b.HasKey("id_fornecedor");
 
@@ -513,23 +513,19 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.HasOne("Samsys_Custos.Data.GSM", "GSM")
                         .WithMany()
-                        .HasForeignKey("id_gsm")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("id_gsm");
 
                     b.HasOne("Samsys_Custos.Data.DADOS_PHC", "DADOS_PHC")
                         .WithMany()
-                        .HasForeignKey("id_phc")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("id_phc");
 
                     b.HasOne("Samsys_Custos.Models.SALARIO", "SALARIO")
                         .WithMany()
-                        .HasForeignKey("id_salario")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("id_salario");
 
                     b.HasOne("Samsys_Custos.Models.VIATURA", "VIATURA")
                         .WithMany()
-                        .HasForeignKey("id_viatura")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("id_viatura");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.DADOS_PHC", b =>
@@ -544,8 +540,7 @@ namespace Samsys_Custos.Data.Migrations
                 {
                     b.HasOne("Samsys_Custos.Data.CATEGORIA", "CATEGORIA")
                         .WithMany()
-                        .HasForeignKey("sugestao_categoria")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("sugestao_categoria");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR_PERMISSAO", b =>
