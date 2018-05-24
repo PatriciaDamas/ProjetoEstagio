@@ -1,0 +1,48 @@
+﻿@model Samsys_Custos.Data.ATRIBUICAO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ATRIBUICAO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data_inicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data_inicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.data_fim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data_fim)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GSM.id_gsm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UTILIZADOR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UTILIZADOR.id_colaborador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VIATURA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VIATURA.id_viatura)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_atribuicao">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

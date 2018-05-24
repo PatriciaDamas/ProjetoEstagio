@@ -1,0 +1,33 @@
+﻿@model Samsys_Custos.Data.DADOS_PHC
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DADOS_PHC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.custo_interno)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.custo_interno)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FORNECEDOR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FORNECEDOR.id_fornecedor)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id_phc" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

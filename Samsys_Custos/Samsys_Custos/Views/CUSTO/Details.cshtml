@@ -1,0 +1,84 @@
+﻿@model Samsys_Custos.Data.CUSTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CUSTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ano)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ano)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.mes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.mes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.designacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.designacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.valor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORIA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORIA.id_categoria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DADOS_PHC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DADOS_PHC.id_phc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GSM)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GSM.id_gsm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SALARIO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SALARIO.id_salario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UTILIZADOR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UTILIZADOR.id_colaborador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VIATURA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VIATURA.id_viatura)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.id_custo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

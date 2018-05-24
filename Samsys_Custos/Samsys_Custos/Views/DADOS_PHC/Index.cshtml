@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Samsys_Custos.Data.DADOS_PHC>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.custo_interno)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FORNECEDOR)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custo_interno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FORNECEDOR.id_fornecedor)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_phc">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id_phc">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_phc">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

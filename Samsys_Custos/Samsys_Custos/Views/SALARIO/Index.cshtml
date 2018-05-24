@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Samsys_Custos.Models.SALARIO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.liquido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.subsidio_alimentacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.outros)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.seguranca_social)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.irs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.outras_despesas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.outras_regalias)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.liquido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subsidio_alimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outros)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seguranca_social)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.irs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outras_despesas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outras_regalias)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_salario">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id_salario">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_salario">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
