@@ -49,11 +49,19 @@ namespace Samsys_Custos.Controllers
         // GET: ATRIBUICAO/Create
         public IActionResult Create()
         {
+            List<SelectListItem> tipo = new List<SelectListItem>();
+            tipo.Add(new SelectListItem() { Text = "Gsm", Value = "1" });
+            tipo.Add(new SelectListItem() { Text = "Viatura", Value = "2" });
+
+            ViewData["teste"] = new SelectList(tipo, "Text", "Value");
+
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura");
             return View();
         }
+
+
 
         // POST: ATRIBUICAO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
