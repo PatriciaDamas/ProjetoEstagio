@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Viatura">
+        <form asp-action="CriarViatura">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
@@ -32,7 +32,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="mes" class="control-label"></label>
-                <input asp-for="mes" class="form-control" />
+                <select asp-for="mes" class="form-control">
+                    <option value="janeiro">Janeiro</option>
+                    <option value="fevereiro">Fevereiro</option>
+                    <option value="março">Março</option>
+                    <option value="abril">Abril</option>
+                    <option value="junho">Junho</option>
+                    <option value="julho">Julho</option>
+                    <option value="agosto">Agosto</option>
+                    <option value="setembro">Setembro</option>
+                    <option value="outubro">Outubro</option>
+                    <option value="novembro">Novembro</option>
+                    <option value="dezembro">Dezembro</option>
+                </select>
+              
                 <span asp-validation-for="mes" class="text-danger"></span>
             </div>
             <div class="form-group">

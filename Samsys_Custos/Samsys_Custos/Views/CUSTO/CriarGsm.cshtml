@@ -25,11 +25,6 @@
                 <select asp-for="id_gsm" class ="form-control" asp-items="ViewBag.id_gsm"></select>
             </div>
             <div class="form-group">
-                <label asp-for="data" class="control-label"></label>
-                <input asp-for="data" class="form-control" />
-                <span asp-validation-for="data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ano" class="control-label">Ano</label>
                 <input asp-for="ano" class="form-control" />
                 <span asp-validation-for="ano" class="text-danger"></span>
@@ -50,12 +45,7 @@
                     <option value="dezembro">Dezembro</option>
                 </select>
                 <span asp-validation-for="mes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="designacao" class="control-label">Designação</label>
-                <input asp-for="designacao" class="form-control" />
-                <span asp-validation-for="designacao" class="text-danger"></span>
-            </div>
+            </div>          
             <div class="form-group">
                 <label asp-for="valor" class="control-label">Valor</label>
                 <input asp-for="valor" class="form-control" />
