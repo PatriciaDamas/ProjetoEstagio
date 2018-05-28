@@ -26,6 +26,13 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Custo Viaturas
+        public async Task<IActionResult> Viatura()
+        {
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c=> c.id_viatura != null);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: CUSTO/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -64,7 +71,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: CUSTO/viatura
-        public IActionResult Viatura()
+        public IActionResult CriarViatura()
         {
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
@@ -79,7 +86,7 @@ namespace Samsys_Custos.Controllers
         // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Viatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
+        public async Task<IActionResult> GuardarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +98,7 @@ namespace Samsys_Custos.Controllers
                 cUSTO.data = DateTime.Now;
                 _context.Add(cUSTO);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Viatura));
             }
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
