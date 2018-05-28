@@ -54,7 +54,7 @@ namespace Samsys_Custos.Controllers
         public IActionResult Gsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
-            var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault()
+            var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
             Debug.WriteLine("-------------" + temp2.nome);
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
