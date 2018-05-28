@@ -49,6 +49,21 @@ namespace Samsys_Custos.Controllers
             return View(cUSTO);
         }
 
+
+
+
+
+        class Filhos
+        {
+            public int id_categoria { get; set; }
+            public string nome { get; set; }
+        }
+        //GET: 
+        public IActionResult Gsm()
+        {
+
+        }
+
         // GET: CUSTO/viatura
         public IActionResult Viatura()
         {
