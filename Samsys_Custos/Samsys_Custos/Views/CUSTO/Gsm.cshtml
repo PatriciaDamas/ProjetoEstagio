@@ -1,77 +1,77 @@
-﻿@model Samsys_Custos.Data.CUSTO
+﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
 
 @{
     ViewData["Title"] = "Gsm";
 }
 
-<h2>Gsm</h2>
+<h2>Custo de Gsm</h2>
 
-<h4>CUSTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Gsm">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="id_colaborador" class="control-label"></label>
-                <select asp-for="id_colaborador" class ="form-control" asp-items="ViewBag.id_colaborador"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_categoria" class="control-label"></label>
-                <select asp-for="id_categoria" class ="form-control" asp-items="ViewBag.id_categoria"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_gsm" class="control-label"></label>
-                <select asp-for="id_gsm" class ="form-control" asp-items="ViewBag.id_gsm"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_phc" class="control-label"></label>
-                <select asp-for="id_phc" class ="form-control" asp-items="ViewBag.id_phc"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_viatura" class="control-label"></label>
-                <select asp-for="id_viatura" class ="form-control" asp-items="ViewBag.id_viatura"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_salario" class="control-label"></label>
-                <select asp-for="id_salario" class ="form-control" asp-items="ViewBag.id_salario"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="data" class="control-label"></label>
-                <input asp-for="data" class="form-control" />
-                <span asp-validation-for="data" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ano" class="control-label"></label>
-                <input asp-for="ano" class="form-control" />
-                <span asp-validation-for="ano" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="mes" class="control-label"></label>
-                <input asp-for="mes" class="form-control" />
-                <span asp-validation-for="mes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="designacao" class="control-label"></label>
-                <input asp-for="designacao" class="form-control" />
-                <span asp-validation-for="designacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="valor" class="control-label"></label>
-                <input asp-for="valor" class="form-control" />
-                <span asp-validation-for="valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<p>
+    <a asp-action="CriarGsm">Adicionar Custo Gsm</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ano)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.mes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.designacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.valor)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CATEGORIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GSM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UTILIZADOR)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.designacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GSM.numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.id_custo">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>
