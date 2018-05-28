@@ -30,12 +30,37 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
-            </div>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Equipas</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Custos
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Create">Gerais</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Viatura">Viaturas</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Gsm">GSM</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Premio">Prémios</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Salario">Salários</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Economato">Economato</a></li>
+                            <li><a asp-area="" asp-controller="CUSTO" asp-action="Validacao">Validação PHC</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Gestão
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="" asp-action="">Atribuições</a></li>
+                        <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
+                        <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
+                    </ul>
+                    </li>
+                    @await Html.PartialAsync("_LoginPartial")
+</div>
         </div>
     </nav>
     <div class="container body-content">

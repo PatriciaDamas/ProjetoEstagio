@@ -65,82 +65,44 @@ namespace Samsys_Custos.Controllers
             return View(cUSTO);
         }
 
-        [Authorize]
+        public IActionResult Geral()
+        {
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
+            // SHOW ONLY IF VALIDATION IS CHECKED
+            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
+            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
+            // SHOW ONLY IF USER HAS ACCESS
+            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            return View();
+        }
+
         //GET: 
         public IActionResult CriarGsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
-            Debug.WriteLine("-------------" + temp2.nome);
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+           /* SelectList lista = new SelectList();
+
+            ViewData["ano"] = new SelectList()*/
 
             return View();
         }
-
-        // GET: CUSTO/viatura
-        public IActionResult CriarViatura()
-        {
-            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View();
-        }
-
-        // GET: CUSTO/Create
-        public IActionResult Create()
-        {
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
-            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
-            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View();
-        }
-
-        // POST: CUSTO/viatura
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GuardarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
-        {
-            if (ModelState.IsValid)
-            {
-                if (cUSTO.designacao == null)// temos de esperimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
-                {
-                    cUSTO.designacao = "";
-                }
-
-                cUSTO.data = DateTime.Now;
-                _context.Add(cUSTO);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Viatura));
-            }
-            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View(cUSTO);
-        }
-
-
         // POST: CUSTO/gsm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GuardarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
+        public async Task<IActionResult> CriarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
             {
-                if (cUSTO.designacao == null)// temos de esperimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
+                if (cUSTO.designacao == null)
                 {
-                    cUSTO.designacao = "";
+                    cUSTO.designacao = _context.CATEGORIA.Where(a=> a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
                 }
-
                 cUSTO.data = DateTime.Now;
                 _context.Add(cUSTO);
                 await _context.SaveChangesAsync();
@@ -153,31 +115,42 @@ namespace Samsys_Custos.Controllers
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
+        // GET: CUSTO/viatura
+        public IActionResult CriarViatura()
+        {
 
-       
 
 
-
-        // POST: CUSTO/Create
+            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            return View();
+        }
+        // POST: CUSTO/viatura
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")] CUSTO cUSTO)
+        public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
             {
+                if (cUSTO.designacao == null)
+                {
+                    cUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
+                }
+
                 cUSTO.data = DateTime.Now;
                 _context.Add(cUSTO);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Viatura));
             }
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "id_categoria", cUSTO.id_categoria);
-            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc", cUSTO.id_phc);
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm", cUSTO.id_gsm);
-            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario", cUSTO.id_salario);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", cUSTO.id_colaborador);
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura", cUSTO.id_viatura);
+            var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View(cUSTO);
         }
 
