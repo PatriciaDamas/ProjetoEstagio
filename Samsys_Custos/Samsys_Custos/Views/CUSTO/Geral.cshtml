@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+@{ViewData["Title"] = "Geral";}<h2>Geral</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data Registo</th>
+            <th>
+                Ano
+            </th>
+            <th>
+                Mês
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Designação
+            </th>
+
+            <th>
+                Categoria
+            </th>
+            <th>
+                Colaborador
+            </th>
+            <th>
+                Viatura
+            </th>
+            <th>
+                Telemóvel
+            </th>>
+            <th>
+                PHC
+            </th>
+            <th>
+                Salário
+            </th>
+
+            <th>Comandos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GSM.numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DADOS_PHC.id_phc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SALARIO.id_salario)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
