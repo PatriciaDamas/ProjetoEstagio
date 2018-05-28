@@ -34,6 +34,13 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: CUSTO
+        public async Task<IActionResult> Gsm()
+        {
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: CUSTO/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -60,14 +67,14 @@ namespace Samsys_Custos.Controllers
 
         [Authorize]
         //GET: 
-        public IActionResult Gsm()
+        public IActionResult CriarGsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
             Debug.WriteLine("-------------" + temp2.nome);
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
 
             return View();
         }
@@ -78,6 +85,18 @@ namespace Samsys_Custos.Controllers
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            return View();
+        }
+
+        // GET: CUSTO/Create
+        public IActionResult Create()
+        {
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
+            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
+            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
+            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View();
         }
@@ -110,17 +129,32 @@ namespace Samsys_Custos.Controllers
         }
 
 
-        // GET: CUSTO/Create
-        public IActionResult Create()
+        // POST: CUSTO/gsm
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GuardarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
-            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
-            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (cUSTO.designacao == null)// temos de esperimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
+                {
+                    cUSTO.designacao = "";
+                }
+
+                cUSTO.data = DateTime.Now;
+                _context.Add(cUSTO);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Gsm));
+            }
+            var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
+            var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
+            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            return View(cUSTO);
         }
+
+       
 
 
 
