@@ -130,11 +130,11 @@ namespace Samsys_Custos.Controllers
         // POST: CUSTO/gsm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GuardarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
+        public async Task<IActionResult> CriarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
             {
-                if (cUSTO.designacao == null)// temos de esperimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
+                if (cUSTO.designacao == null)// temos de experimentar se vier com valor null, se implementa na mesma na BD, se der tira-se este if
                 {
                     cUSTO.designacao = "";
                 }
