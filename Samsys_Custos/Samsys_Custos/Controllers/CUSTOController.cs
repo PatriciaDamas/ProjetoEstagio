@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Controllers
@@ -20,65 +22,46 @@ namespace Samsys_Custos.Controllers
             _context = context;
         }
 
-        // GET: CUSTO
-        public async Task<IActionResult> Index()
+        // GET: Custos Gerais
+        public async Task<IActionResult> Geral()
         {
+            //AUTH FOR PROFILE
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Custo Viaturas
-        public async Task<IActionResult> Viatura()
+        // GET: Custos Gerais
+        public async Task<IActionResult> Premios()
         {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c=> c.id_viatura != null);
+            //AUTH FOR PROFILE
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }
+        public IActionResult CriarPremio()
+        {
+            
+            ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a=>a.nome == "Comercial" || a.nome=="Campanha" || a.nome=="Operacional"),"id_categoria","nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
+            return View();
+        }
 
-        // GET: CUSTO
+        public JsonResult getRubrica(int id)
+        {
+            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == id),"id_categoria","nome")));
+        }
+
+        // GET: GSM
         public async Task<IActionResult> Gsm()
         {
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
             return View(await applicationDbContext.ToListAsync());
         }
-
-        // GET: CUSTO/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cUSTO = await _context.CUSTO
-                .Include(c => c.CATEGORIA)
-                .Include(c => c.DADOS_PHC)
-                .Include(c => c.GSM)
-                .Include(c => c.SALARIO)
-                .Include(c => c.UTILIZADOR)
-                .Include(c => c.VIATURA)
-                .SingleOrDefaultAsync(m => m.id_custo == id);
-            if (cUSTO == null)
-            {
-                return NotFound();
-            }
-
-            return View(cUSTO);
-        }
-
-        public IActionResult Geral()
-        {
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome");
-            // SHOW ONLY IF VALIDATION IS CHECKED
-            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc");
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
-            // SHOW ONLY IF USER HAS ACCESS
-            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View();
-        }
-
-        //GET: 
         public IActionResult CriarGsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
@@ -88,13 +71,15 @@ namespace Samsys_Custos.Controllers
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-           /* SelectList lista = new SelectList();
-
-            ViewData["ano"] = new SelectList()*/
-
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i<=Int32.Parse(DateTime.Now.Year.ToString());i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years,"Value","Value");
             return View();
         }
-        // POST: CUSTO/gsm
+        // POST: GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CriarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
@@ -117,16 +102,24 @@ namespace Samsys_Custos.Controllers
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
-        // GET: CUSTO/viatura
+        // GET: Viaturas
+        public async Task<IActionResult> Viatura()
+        {
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
+            return View(await applicationDbContext.ToListAsync());
+        }
         public IActionResult CriarViatura()
         {
-
-
-
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
             return View();
         }
         // POST: CUSTO/viatura
@@ -185,7 +178,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")] CUSTO cUSTO)
+        public async Task<IActionResult> EditViatura(int id, [Bind("id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (id != cUSTO.id_custo)
             {
@@ -210,7 +203,7 @@ namespace Samsys_Custos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Geral));
             }
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "id_categoria", cUSTO.id_categoria);
             ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc", cUSTO.id_phc);
@@ -253,7 +246,7 @@ namespace Samsys_Custos.Controllers
             var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
             _context.CUSTO.Remove(cUSTO);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Geral));
         }
 
         private bool CUSTOExists(int id)
