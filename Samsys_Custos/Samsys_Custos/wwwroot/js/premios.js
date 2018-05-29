@@ -1,6 +1,8 @@
 ﻿
 $(document).ready(function () {
-    $('#table_id').DataTable();
+    $('#table_premios').DataTable();
+
+    //Vai buscar o nome da categoria nivel 1
     var catArray = new Array();
     $('#table_premios tr').each(function () {
         catArray.push($(this).find(".categoria").html());
