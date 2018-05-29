@@ -31,6 +31,9 @@ namespace Samsys_Custos.Controllers
         }
         public async Task<IActionResult> Salario()
         {
+            
+            
+            
             //AUTH FOR PROFILE
 
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Where(c => c.id_salario != null);
@@ -143,6 +146,7 @@ namespace Samsys_Custos.Controllers
         // GET: Viaturas
         public async Task<IActionResult> Viatura()
         {
+
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
             return View(await applicationDbContext.ToListAsync());
         }

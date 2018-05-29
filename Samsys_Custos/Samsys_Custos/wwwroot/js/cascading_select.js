@@ -1,5 +1,7 @@
 ﻿
-        $(document).ready(function () {
+$(document).ready(function () {
+
+    //Preenche o select tipo de prémios após ser seleccionado o seu pai
             $(document.body).on('change', '#tipo_categoria', function () {
 
                 $("#rubrica").empty();
@@ -25,6 +27,9 @@
                     }
                 });
                 return false;
-            })
+    })
+    
+
+
         });
   
