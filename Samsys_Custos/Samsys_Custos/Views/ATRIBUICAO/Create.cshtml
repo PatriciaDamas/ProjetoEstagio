@@ -8,34 +8,10 @@
 
 <h4>ATRIBUICAO</h4>
 <hr />
-<script>
-    $(document).ready(function () {
-
-        // get redes de bikes
-        $.getJSON("http://api.citybik.es/v2/networks", function (result) {
-            var txtHtml = "";
-
-
-            $.each(result.networks, function (i, field) {
-
-                txtHtml += "<option value='" + field.id + "'>" + field.id + "</option>";
-
-
-            });
-
-            $("#tipo").append(txtHtml);
-
-        });
-
-</script>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label  class="control-label"></label>
-                <select id="tipo" class="form-control"></select>
-            </div>
             <div class="form-group">
                 <label asp-for="id_viatura" class="control-label"></label>
                 <select asp-for="id_viatura" class ="form-control" asp-items="ViewBag.id_viatura"></select>

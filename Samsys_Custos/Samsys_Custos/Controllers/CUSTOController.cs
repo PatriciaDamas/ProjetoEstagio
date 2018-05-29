@@ -30,11 +30,20 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //GET: Economato
         // GET: Custos Gerais
-        public async Task<IActionResult> Premios()
+        public async Task<IActionResult> Economato()
         {
             //AUTH FOR PROFILE
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Custos Gerais
+        public async Task<IActionResult> Premio()
+        {
+            //AUTH FOR PROFILE
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_salario == null);
             return View(await applicationDbContext.ToListAsync());
         }
         public IActionResult CriarPremio()
@@ -53,8 +62,33 @@ namespace Samsys_Custos.Controllers
 
         public JsonResult getRubrica(int id)
         {
-            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == id),"id_categoria","nome")));
+            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CriarPremio([Bind("id_colaborador,id_categoria,ano,mes,designacao,valor")] CUSTO cUSTO)
+        {
+            if (ModelState.IsValid)
+            {
+                if (cUSTO.designacao == null)
+                {
+                    cUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
+                }
+
+                cUSTO.data = DateTime.Now;
+                _context.Add(cUSTO);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Premio));
+            }
+           
+           
+           
+            return View(cUSTO);
+        }
+
+
+        
 
         // GET: GSM
         public async Task<IActionResult> Gsm()
