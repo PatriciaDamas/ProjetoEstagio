@@ -26,7 +26,6 @@ namespace Samsys_Custos.Controllers
         // GET: Custos Gerais
         public async Task<IActionResult> Geral()
         {
-            //AUTH FOR PROFILE
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -34,7 +33,7 @@ namespace Samsys_Custos.Controllers
         {
             //AUTH FOR PROFILE
 
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Where(c => c.id_salario != null);
             return View(await applicationDbContext.ToListAsync());
         }
         //------------------------------------------------------------------
