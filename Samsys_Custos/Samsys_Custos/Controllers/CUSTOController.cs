@@ -50,7 +50,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> Premio()
         {
             //AUTH FOR PROFILE
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_salario == null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_salario == null & c.id_phc == null);
             return View(await applicationDbContext.ToListAsync());
         }
         public IActionResult CriarPremio()
