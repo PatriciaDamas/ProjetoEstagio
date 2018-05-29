@@ -125,6 +125,7 @@ namespace Samsys_Custos.Controllers
         }
         public JsonResult getRubrica(int id)
         {
+          
             return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
         }
 
