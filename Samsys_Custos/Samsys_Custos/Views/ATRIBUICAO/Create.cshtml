@@ -4,25 +4,33 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Atribuições</h2>
 
-<h4>ATRIBUICAO</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="" id="form_atribuicao">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="id_viatura" class="control-label"></label>
-                <select asp-for="id_viatura" class ="form-control" asp-items="ViewBag.id_viatura"></select>
+
+            <div class="form-group" id="Atribuicao">
+                <label class="control-label">Atribuição</label>
+                <select class="form-control" id="tipo_atribuicao">
+                    <option>Escolha uma Atribuição</option>
+                    <option value="GSM">GSM</option>
+                    <option value="Viatura">Viatura</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="id_gsm" class="control-label"></label>
-                <select asp-for="id_gsm" class ="form-control" asp-items="ViewBag.id_gsm"></select>
+            <div class="form-group" id="atribuir_viatura" hidden>
+                <label asp-for="id_viatura" class="control-label"></label>
+                <select asp-for="id_viatura" class="form-control" asp-items="ViewBag.id_viatura"></select>
+            </div>
+            <div class="form-group" id="atribuir_GSM" hidden>
+                <label asp-for="id_gsm" class="control-label">GSM</label>
+                <select asp-for="id_gsm" class="form-control" asp-items="ViewBag.id_gsm"></select>
             </div>
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label"></label>
-                <select asp-for="id_colaborador" class ="form-control" asp-items="ViewBag.id_colaborador"></select>
+                <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
             </div>
             <div class="form-group">
                 <label asp-for="data_inicio" class="control-label"></label>
@@ -44,6 +52,9 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/cascading_select.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

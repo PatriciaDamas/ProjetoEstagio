@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Controllers
@@ -49,18 +51,18 @@ namespace Samsys_Custos.Controllers
         // GET: ATRIBUICAO/Create
         public IActionResult Create()
         {
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura");
+            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View();
         }
 
-        // POST: ATRIBUICAO/Create
+        // POST: ATRIBUICAO/Create_viatura
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id_atribuicao,id_viatura,id_gsm,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
+        public async Task<IActionResult> Atribuicao_viatura([Bind("id_atribuicao,id_viatura,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +74,34 @@ namespace Samsys_Custos.Controllers
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", aTRIBUICAO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
+        }
+        // POST: ATRIBUICAO/Create_GSM
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Atribuicao_GSM([Bind("id_atribuicao,id_gsm,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(aTRIBUICAO);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm", aTRIBUICAO.id_gsm);
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", aTRIBUICAO.id_colaborador);
+            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura", aTRIBUICAO.id_viatura);
+            return View(aTRIBUICAO);
+        }
+
+        public JsonResult getAtribuicao(String valor)
+        {
+           if (valor == "GSM")
+           {
+               return Json(JsonConvert.SerializeObject(new SelectList(_context.GSM, "id_gsm", "numero")));
+           }
+           else
+           {
+                return Json(JsonConvert.SerializeObject(new SelectList(_context.VIATURA, "id_viatura", "matricula")));
+           }
         }
 
         // GET: ATRIBUICAO/Edit/5
