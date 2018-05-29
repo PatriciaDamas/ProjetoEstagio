@@ -21,6 +21,7 @@ namespace Samsys_Custos.Controllers
         {
             _context = context;
         }
+        //------------------------------------------------------------------
 
         // GET: Custos Gerais
         public async Task<IActionResult> Geral()
@@ -29,7 +30,14 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> Salario()
+        {
+            //AUTH FOR PROFILE
 
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        //------------------------------------------------------------------
         // GET: Custos Gerais
         public async Task<IActionResult> Premios()
         {
@@ -55,7 +63,7 @@ namespace Samsys_Custos.Controllers
         {
             return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == id),"id_categoria","nome")));
         }
-
+        //------------------------------------------------------------------
         // GET: GSM
         public async Task<IActionResult> Gsm()
         {
@@ -100,6 +108,7 @@ namespace Samsys_Custos.Controllers
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
+        //------------------------------------------------------------------
         // GET: Viaturas
         public async Task<IActionResult> Viatura()
         {
@@ -121,9 +130,6 @@ namespace Samsys_Custos.Controllers
             return View();
         }
         // POST: CUSTO/viatura
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
@@ -146,7 +152,7 @@ namespace Samsys_Custos.Controllers
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View(cUSTO);
         }
-
+        //------------------------------------------------------------------
         // GET: CUSTO/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
