@@ -24,11 +24,47 @@ namespace Samsys_Custos.Controllers
         //------------------------------------------------------------------
 
         // GET: Custos Gerais
-        public async Task<IActionResult> Geral()
-        {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
-            return View(await applicationDbContext.ToListAsync());
+        public async Task<IActionResult> Geral() {
+
+            var filhos = from cst in _context.CUSTO
+                         join ut in _context.CATEGORIA on cst.id_categoria equals ut.id_categoria
+                         select new
+                         {
+                             id_pai = ut.id_categoria,
+                             id_custo = cst.id_custo
+                         };
+            var pais = from f in filhos
+                       join catg in _context.CATEGORIA on f.id_pai equals catg.id_categoria
+                       select new
+                       {
+                           id_pai = catg.id_pai,
+                           id_categoria = catg.id_categoria,
+                           id_custo = f.id_custo
+
+                       };
+
+            var result1 = from custo in _context.CUSTO
+                          join p in pais on custo.id_custo equals p.id_custo
+                          select new CUSTO
+                          {
+                              id_custo = custo.id_custo,
+                              id_gsm = custo.id_gsm,
+                              id_phc = custo.id_phc,
+                              id_viatura = custo.id_viatura,
+                              id_salario = custo.id_salario,
+                              valor = custo.valor,
+                              mes=custo.mes,
+                              ano = custo.ano,
+                              data=custo.data,
+                              designacao = custo.designacao,
+                              id_colaborador = custo.id_colaborador,
+                              id_categoria = custo.id_categoria
+                          };
+
+
+            return View(await result1.ToListAsync());
         }
+        // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
             
@@ -40,7 +76,7 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         //------------------------------------------------------------------
-        // GET: Custos Gerais
+        // GET: ECONOMATO
         public async Task<IActionResult> Economato()
         {
             //AUTH FOR PROFILE
@@ -48,7 +84,7 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Custos Gerais
+        // GET: PREMIOS
         public async Task<IActionResult> Premio()
         {
             //AUTH FOR PROFILE
@@ -72,7 +108,6 @@ namespace Samsys_Custos.Controllers
         {
             if (id != 0)
             {
-                Debug.WriteLine(id);
                 var tempID = _context.CATEGORIA.Where(a => a.id_categoria == id).FirstOrDefault();
                 int myPai = 0;
                 if (tempID != null)
@@ -109,9 +144,14 @@ namespace Samsys_Custos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Premio));
             }
-           
-           
-           
+            ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
             return View(cUSTO);
         }
 

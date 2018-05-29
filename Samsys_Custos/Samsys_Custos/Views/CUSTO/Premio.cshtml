@@ -10,14 +10,14 @@
 <p>
     <a asp-action="CriarPremio">Adicionar Custo Premio</a>
 </p>
-<table class="table" id="table_premios">
+<table id="table_premios" class="table" hidden>
     <thead>
         <tr>
             <th>
-               Data
+Data Registo
             </th>
             <th>
-               Ano
+                Ano
             </th>
             <th>
                Mês
@@ -26,7 +26,7 @@
                 Rubrica
             </th>
             <th>
-              Valor
+                Valor
             </th>
             <th>
                 Categoria
@@ -35,7 +35,7 @@
             <th>
                 Colaborador
             </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -55,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.designacao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.valor)
+                    @Html.DisplayFor(modelItem => item.valor)€
                 </td>
                 <td class="categoria">
                     @Html.DisplayFor(modelItem => item.CATEGORIA.id_categoria)
@@ -75,6 +75,6 @@
 
 </table>
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-<!--<script src="~/js/RetornaPai.js"></script>-->
+@section scripts {
+    <script src="~/js/premios.js"></script>
+}
