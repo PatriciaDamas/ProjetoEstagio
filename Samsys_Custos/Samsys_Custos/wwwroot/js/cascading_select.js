@@ -1,4 +1,4 @@
-﻿
+﻿        //PREMIOS -------------------------------------------------------------------------------------------------
         $(document).ready(function () {
             $(document.body).on('change', '#tipo_categoria', function () {
 
@@ -26,8 +26,7 @@
                 });
                 return false;
             })
-
-
+            //ATRIBUIÇÕES -------------------------------------------------------------------------------------------
             $(document.body).on('change', '#tipo_atribuicao', function () {
                 /*$("#atribuir_viatura").empty();
                 $("#atribuir_GSM").empty();*/

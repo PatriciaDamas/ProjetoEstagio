@@ -65,7 +65,26 @@ namespace Samsys_Custos.Controllers
             ViewData["ano"] = new SelectList(Years, "Value", "Value");
             return View();
         }
+        public JsonResult getPai(int id)//22
+        {
+            if (id != 0)
+            {
+                Debug.WriteLine(id);
+                var tempID = _context.CATEGORIA.Where(a => a.id_categoria == id).FirstOrDefault();
+                int myPai = 0;
+                if (tempID != null)
+                {
+                    myPai = (int)tempID.id_pai;
+                    Debug.WriteLine(myPai);
+                }
+                var tempID2 = _context.CATEGORIA.Where(a => a.id_categoria == myPai).FirstOrDefault();
 
+                return Json(tempID2.nome);
+
+            }
+            return Json("Empty");
+
+        }
         public JsonResult getRubrica(int id)
         {
             return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
