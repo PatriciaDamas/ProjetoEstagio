@@ -1,0 +1,49 @@
+﻿@model Samsys_Custos.Data.ATRIBUICAO
+
+@{
+    ViewData["Title"] = "EditGSM";
+}
+
+<h2>EditGSM</h2>
+
+<h4>ATRIBUICAO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditGSM">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id_atribuicao" />
+            <div class="form-group">
+                <label asp-for="id_gsm" class="control-label"></label>
+                <select asp-for="id_gsm" class="form-control" asp-items="ViewBag.id_gsm"></select>
+                <span asp-validation-for="id_gsm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="id_colaborador" class="control-label"></label>
+                <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
+                <span asp-validation-for="id_colaborador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data_inicio" class="control-label"></label>
+                <input asp-for="data_inicio" class="form-control" />
+                <span asp-validation-for="data_inicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data_fim" class="control-label"></label>
+                <input asp-for="data_fim" class="form-control" />
+                <span asp-validation-for="data_fim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GSM">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

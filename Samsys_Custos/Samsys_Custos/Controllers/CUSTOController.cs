@@ -60,7 +60,7 @@ namespace Samsys_Custos.Controllers
                               id_colaborador = custo.id_colaborador,
                               id_categoria = custo.id_categoria
                           };
-
+            
 
             return View(await result1.ToListAsync());
         }
