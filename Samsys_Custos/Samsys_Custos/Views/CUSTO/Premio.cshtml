@@ -14,19 +14,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.data)
+               Data
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ano)
+               Ano
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.mes)
+               Mês
             </th>
             <th>
                 Rubrica
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valor)
+              Valor
             </th>
             <th>
                 Categoria
@@ -66,8 +66,7 @@
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.id_custo">Detailhes</a> |
+                    <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a> |
                     <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
                 </td>
             </tr>
@@ -78,4 +77,4 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-<script src="~/js/RetornaPai.js"></script>
+<!--<script src="~/js/RetornaPai.js"></script>-->

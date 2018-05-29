@@ -11,37 +11,33 @@
     <a asp-action="CriarViatura">Adicionar Custo Viatura</a>
 </p>
 
-@using (Html.BeginForm())
-{
-    <p>
-        Pesquisar: @Html.TextBox("SearchString")
-        <input type="submit" value="Procurar" />
-    </p>
-}
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.data)
+                Data
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ano)
+               Ano
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.mes)
+               Mês
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valor)
+               Valor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
+               Categoria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
+              Colaborador
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VIATURA)
+               Viatura
+            </th>
+            <th>
+                Acções
             </th>
             <th></th>
         </tr>
@@ -72,9 +68,8 @@
                     @Html.DisplayFor(modelItem => item.VIATURA.matricula)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
+                    <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
                 </td>
             </tr>
         }
