@@ -1,33 +1,39 @@
 ﻿@model Samsys_Custos.Data.CUSTO
 
 @{
-    ViewData["Title"] = "CriarViatura";
+    ViewData["Title"] = "EditPremio";
 }
 
-<!-- If PErmissão != de perfil Viatura retorna à pagina de custos-->
-<h2>Viatura</h2>
+<h2>EditPremio</h2>
 
 <h4>CUSTO</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CriarViatura">
+        <form asp-action="EditPremio">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id_custo" />
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
-                <select asp-for="id_colaborador" class ="form-control" asp-items="ViewBag.id_colaborador"></select>
+                <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
+                <span asp-validation-for="id_colaborador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tipo de Categoria</label>
+                <select class="form-control tipo_categoria" id="tipo_categoria" asp-items="ViewBag.tipo_premio">
+                    <option selected="selected">
+                        Escolha uma Categoria de Prémio
+                    </option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="id_categoria" class="control-label">Categoria</label>
-                <select asp-for="id_categoria" class ="form-control" asp-items="ViewBag.id_categoria"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_viatura" class="control-label">Matrícula</label>
-                <select asp-for="id_viatura" class ="form-control" asp-items="ViewBag.id_viatura"></select>
+                <select asp-for="id_categoria" class="form-control rubrica" asp-items="ViewBag.id_categoria" ></select>
+                <span asp-validation-for="id_categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ano" class="control-label">Ano</label>
-                <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
+                <input asp-for="ano" class="form-control" />
                 <span asp-validation-for="ano" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,7 +51,6 @@
                     <option value="novembro">Novembro</option>
                     <option value="dezembro">Dezembro</option>
                 </select>
-              
                 <span asp-validation-for="mes" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,15 +59,17 @@
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="CriarViatura" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Viatura">Voltar à Lista</a>
+    <a asp-action="Premio">Voltar à Lista</a>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/cascading_select.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

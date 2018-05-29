@@ -10,69 +10,70 @@
     <!--Verificação para pessoa autorizada!!-->
     <a asp-action="CriarViatura">Adicionar Custo Viatura</a>
 </p>
+
+
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.data)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ano)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.mes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.designacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.valor)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
+                Data
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
+               Ano
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VIATURA)
+               Mês
+            </th>
+            <th>
+               Valor
+            </th>
+            <th>
+               Categoria
+            </th>
+            <th>
+              Colaborador
+            </th>
+            <th>
+               Viatura
+            </th>
+            <th>
+                Acções
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.designacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VIATURA.matricula)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                </td>
+                <td>
+                    <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/cascading_select.js"></script>
