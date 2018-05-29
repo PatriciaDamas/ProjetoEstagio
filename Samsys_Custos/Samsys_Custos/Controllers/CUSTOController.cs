@@ -21,20 +21,35 @@ namespace Samsys_Custos.Controllers
         {
             _context = context;
         }
+        //------------------------------------------------------------------
 
         // GET: Custos Gerais
         public async Task<IActionResult> Geral()
         {
-            //AUTH FOR PROFILE
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> Salario()
+        {
+            //AUTH FOR PROFILE
+
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Where(c => c.id_salario != null);
+            return View(await applicationDbContext.ToListAsync());
+        }
+        //------------------------------------------------------------------
+        // GET: Custos Gerais
+        public async Task<IActionResult> Economato()
+        {
+            //AUTH FOR PROFILE
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Custos Gerais
-        public async Task<IActionResult> Premios()
+        public async Task<IActionResult> Premio()
         {
             //AUTH FOR PROFILE
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_salario == null & c.id_phc == null);
             return View(await applicationDbContext.ToListAsync());
         }
         public IActionResult CriarPremio()
@@ -53,7 +68,29 @@ namespace Samsys_Custos.Controllers
 
         public JsonResult getRubrica(int id)
         {
-            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == id),"id_categoria","nome")));
+            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CriarPremio([Bind("id_colaborador,id_categoria,ano,mes,designacao,valor")] CUSTO cUSTO)
+        {
+            if (ModelState.IsValid)
+            {
+                if (cUSTO.designacao == null)
+                {
+                    cUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
+                }
+
+                cUSTO.data = DateTime.Now;
+                _context.Add(cUSTO);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Premio));
+            }
+           
+           
+           
+            return View(cUSTO);
         }
 
         // GET: GSM
@@ -66,6 +103,8 @@ namespace Samsys_Custos.Controllers
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
+
+        
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -100,6 +139,7 @@ namespace Samsys_Custos.Controllers
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
+        //------------------------------------------------------------------
         // GET: Viaturas
         public async Task<IActionResult> Viatura()
         {
@@ -121,9 +161,6 @@ namespace Samsys_Custos.Controllers
             return View();
         }
         // POST: CUSTO/viatura
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // "id_custo,id_colaborador,id_categoria,id_gsm,id_phc,id_viatura,id_salario,data,ano,mes,designacao,valor")
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
@@ -146,7 +183,7 @@ namespace Samsys_Custos.Controllers
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View(cUSTO);
         }
-
+        //------------------------------------------------------------------
         // GET: CUSTO/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

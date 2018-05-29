@@ -31,12 +31,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="ano" class="control-label"></label>
-                <input asp-for="ano" class="form-control" />
+                <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
                 <span asp-validation-for="ano" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="mes" class="control-label"></label>
-                <input asp-for="mes" class="form-control" />
+                <select asp-for="mes" class="form-control">
+                    <option value="janeiro">Janeiro</option>
+                    <option value="fevereiro">Fevereiro</option>
+                    <option value="março">Março</option>
+                    <option value="abril">Abril</option>
+                    <option value="junho">Junho</option>
+                    <option value="julho">Julho</option>
+                    <option value="agosto">Agosto</option>
+                    <option value="setembro">Setembro</option>
+                    <option value="outubro">Outubro</option>
+                    <option value="novembro">Novembro</option>
+                    <option value="dezembro">Dezembro</option>
+                </select>
+
                 <span asp-validation-for="mes" class="text-danger"></span>
             </div>
 
@@ -46,14 +59,14 @@
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="CriarPremio" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Premio">Back to List</a>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="~/js/cascading_select.js"></script>
