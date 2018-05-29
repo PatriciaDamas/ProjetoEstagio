@@ -7,19 +7,19 @@
 <h2>CriarPremio</h2>
 
 <h4>CUSTO</h4>
-<hr />
+<hr/>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CriarPremio">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="id_colaborador" class="control-label"></label>
+                <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                 <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
             </div>
             <div class="form-group">
                 <label class="control-label" >Tipo de Categoria</label>
-                <select class="form-control" id="tipo_categoria" asp-items="ViewBag.tipo_premio">
+                <select class="form-control tipo_categoria" id="tipo_categoria" asp-items="ViewBag.tipo_premio">
                     <option selected="selected">
                         Escolha uma Categoria de Prémio
                     </option>
@@ -27,15 +27,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="id_categoria" class="control-label" >Rubrica</label>
-                <select asp-for="id_categoria" class="form-control"  id="rubrica"></select>
+                <select asp-for="id_categoria" class="form-control rubrica"  id="rubrica"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ano" class="control-label"></label>
+                <label asp-for="ano" class="control-label">Ano</label>
                 <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
                 <span asp-validation-for="ano" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="mes" class="control-label"></label>
+                <label asp-for="mes" class="control-label">Mês</label>
                 <select asp-for="mes" class="form-control">
                     <option value="janeiro">Janeiro</option>
                     <option value="fevereiro">Fevereiro</option>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="valor" class="control-label"></label>
+                <label asp-for="valor" class="control-label">Valor</label>
                 <input asp-for="valor" class="form-control" />
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>

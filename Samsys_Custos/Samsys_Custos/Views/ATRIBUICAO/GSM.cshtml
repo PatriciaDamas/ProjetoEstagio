@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Samsys_Custos.Data.ATRIBUICAO>
+
+@{
+    ViewData["Title"] = "GSM";
+}
+
+<h2>GSM</h2>
+
+<p>
+    <a asp-action="CreateGSM">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.data_inicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.data_fim)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GSM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UTILIZADOR)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_inicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data_fim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GSM.id_gsm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
+            </td>
+            <td>
+                <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -13,28 +13,28 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.data)
+                   Data
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ano)
+                   Ano
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.mes)
+                   Mês
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.designacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.valor)
+                   Valor
                 </th>
             <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
+              Categoria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GSM)
+               GSM
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
+               Colaborador
+            </th>
+            <th>
+                Acções
             </th>
             <th></th>
         </tr>
@@ -52,9 +52,6 @@
                 @Html.DisplayFor(modelItem => item.mes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.designacao)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.valor)
             </td>
             <td>
@@ -67,8 +64,7 @@
                 @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.id_custo">Detalhes</a> |
+                <a asp-action="EditGsm" asp-route-id="@item.id_custo">Editar</a> |
                 <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
             </td>
         </tr>
