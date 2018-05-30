@@ -16,16 +16,13 @@
     <thead>
         <tr>
             <th>
-                Data
-            </th>
-            <th>
                 Ano
             </th>
             <th>
                 Mês
             </th>
             <th>
-                Valor
+                Viatura
             </th>
             <th>
                 Categoria
@@ -34,7 +31,7 @@
                 Colaborador
             </th>
             <th>
-                Viatura
+                Valor
             </th>
             <th>
                 Acções
@@ -46,16 +43,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.ano)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.mes)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.valor)€
+                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
@@ -64,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                    @Html.DisplayFor(modelItem => item.valor)€
                 </td>
                 <td>
                     <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a> |

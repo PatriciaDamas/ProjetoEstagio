@@ -6,16 +6,16 @@
         <tr>
 
             <th>
-                Equipa
+                Data de Admissão
             </th>
             <th>
                 Colaborador
             </th>
             <th>
-                Admissão
+                Número
             </th>
             <th>
-                Número
+               Equipa
             </th>
         </tr>
     </thead>
@@ -24,16 +24,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Equipa)
+                    @Html.DisplayFor(modelItem => item.Admissao)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Colaborador)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Admissao)
+                    @Html.DisplayFor(modelItem => item.id_colaborador)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.id_colaborador)
+                    @Html.DisplayFor(modelItem => item.Equipa)
                 </td>
 
             </tr>
