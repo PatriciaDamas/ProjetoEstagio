@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - Samsys_Custos</title>
 
     <environment include="Development">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css" />
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -49,20 +48,23 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Gestão
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições</a></li>
-                        <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
-                        <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
-                    </ul>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Gestão
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições</a></li>
+                            <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
+                            <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
+                        </ul>
                     </li>
                     @await Html.PartialAsync("_LoginPartial")
-</div>
+            </div>
         </div>
     </nav>
+
+    <partial name="_CookieConsentPartial" />
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -72,14 +74,12 @@
     </div>
 
     <environment include="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
-
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.js"
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
