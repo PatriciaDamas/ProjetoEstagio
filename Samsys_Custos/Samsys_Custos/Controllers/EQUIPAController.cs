@@ -19,12 +19,14 @@ namespace Samsys_Custos.Controllers
             _context = context;
         }
 
-        // GET: EQUIPA
-        public async Task<IActionResult> Index()
+        // GET Custo colaborador
+        public IActionResult CustoColaborador()
         {
-            var applicationDbContext = _context.EQUIPA.Include(e => e.UTILIZADOR);
-            return View(await applicationDbContext.ToListAsync());
+
+            var applicationDbContext = _context.COLABORADOR.ToList();
+            return View(applicationDbContext);
         }
+
 
         // GET: EQUIPA/Details/5
         public async Task<IActionResult> Details(string id)
@@ -63,7 +65,7 @@ namespace Samsys_Custos.Controllers
             {
                 _context.Add(eQUIPA);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CustoColaborador));
             }
             ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
@@ -116,7 +118,7 @@ namespace Samsys_Custos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CustoColaborador));
             }
             ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
@@ -149,7 +151,7 @@ namespace Samsys_Custos.Controllers
             var eQUIPA = await _context.EQUIPA.SingleOrDefaultAsync(m => m.id_equipa == id);
             _context.EQUIPA.Remove(eQUIPA);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(CustoColaborador));
         }
 
         private bool EQUIPAExists(string id)

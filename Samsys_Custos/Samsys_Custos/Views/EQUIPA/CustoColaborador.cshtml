@@ -1,0 +1,45 @@
+﻿@model List<Samsys_Custos.Models.COLABORADOR>
+@{ViewData["Title"] = "CustoColaborador";}
+<h2>Geral</h2>
+<table class="table" id="mytable">
+    <thead>
+        <tr>
+
+            <th>
+                Equipa
+            </th>
+            <th>
+                Colaborador
+            </th>
+            <th>
+                Admissão
+            </th>
+            <th>
+                Número
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Equipa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Colaborador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Admissao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_colaborador)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script src="~/js/table.js"></script>
+}
