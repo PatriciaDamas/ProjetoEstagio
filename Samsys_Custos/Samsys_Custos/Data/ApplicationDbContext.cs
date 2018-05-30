@@ -38,6 +38,6 @@ namespace Samsys_Custos.Data
 
         public DbSet<Samsys_Custos.Data.DADOS_PHC> DADOS_PHC { get; set; }
 
-        public DbQuery<Samsys_Custos.Models.CUSTO_EQUIPA> CUSTO_EQUIPA { get; set; }
+        public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA> CUSTOS_EQUIPA { get; set; }
     }
 }
