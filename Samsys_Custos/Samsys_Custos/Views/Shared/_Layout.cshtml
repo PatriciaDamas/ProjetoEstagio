@@ -32,10 +32,24 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Equipas</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                           Equipa
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!--<li><a asp-area="" asp-controller="" asp-action="">Horas Registadas</a></li>-->
+                            <li><a asp-area="" asp-controller="" asp-action="">Custo por Equipa</a></li>
+                            <li><a asp-area="" asp-controller="" asp-action="">Colaborador</a></li>
+
+
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Custos
+                            <span class="caret"></span>
+
                         </a>
                         <ul class="dropdown-menu">
                             <li><a asp-area="" asp-controller="CUSTO" asp-action="Geral">Gerais</a></li>
@@ -49,19 +63,20 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        Gestão
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições Geral</a></li>
-                        <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Atribuições Viatura</a></li>
-                        <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">Atribuições GSM</a></li>
-                        <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
-                        <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
-                    </ul>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Gestão
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições Geral</a></li>
+                            <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Atribuições Viatura</a></li>
+                            <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">Atribuições GSM</a></li>
+                            <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
+                            <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
+                        </ul>
                     </li>
                     @await Html.PartialAsync("_LoginPartial")
+                </ul>
             </div>
         </div>
     </nav>
