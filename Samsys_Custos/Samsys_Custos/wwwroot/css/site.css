@@ -35,16 +35,18 @@
     }
 }
 #top-nav {
-    background-color:grey;
-    height:100px;
-
+    background-color: grey;
+  
+    
 }
-#top-nav ul>li>aa{
-    margin:0;
-    padding:0;
-    height:100%;
-    float:left;
-    vertical-align:center;
+
+#top-nav ul > li > aa {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    float: left;
+    color: white!important;
+    vertical-align: center;
 }
 #top-nav>ul>li>a{
     position:relative;
