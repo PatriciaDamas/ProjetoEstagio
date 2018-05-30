@@ -1,5 +1,6 @@
 ﻿
-        $(document).ready(function () {
+$(document).ready(function () {
+    console.log("Entrei")
             $(document.body).on('change', '.tipo_categoria', function () {
 
                 $(".rubrica").empty();
