@@ -36,7 +36,6 @@
 }
 #top-nav {
     background-color:grey;
-    height:100px;
 
 }
 #top-nav ul>li>aa{
@@ -49,9 +48,8 @@
 #top-nav>ul>li>a{
     position:relative;
 }
-
 .logo-light {
-    max-height:100%;
+    WIDTH:100px;
     float: left;
     margin: 0px 15px 15px 0px;
 }

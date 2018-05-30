@@ -451,9 +451,21 @@ namespace Samsys_Custos.Controllers
             return View(custo);
         }
 
-        // GET: CUSTO/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        public static class GlobalVariables
         {
+            public static string PageServer { get; set; }
+        }
+
+        // GET: CUSTO/Delete/5
+        public async Task<IActionResult> Delete(int? id,string page)
+        {
+            Debug.WriteLine("-------------------------" + " " + page);
+
+            GlobalVariables.PageServer = page;
+
+            Debug.WriteLine("------------------------- SERVER PAGE" + " " + page);
+
             if (id == null)
             {
                 return NotFound();
@@ -471,7 +483,6 @@ namespace Samsys_Custos.Controllers
             {
                 return NotFound();
             }
-
             return View(cUSTO);
         }
 
@@ -483,6 +494,11 @@ namespace Samsys_Custos.Controllers
             var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
             _context.CUSTO.Remove(cUSTO);
             await _context.SaveChangesAsync();
+            if (GlobalVariables.PageServer == "Viatura")
+            {
+                return RedirectToAction(nameof(Viatura));
+
+            }
             return RedirectToAction(nameof(Geral));
         }
 
