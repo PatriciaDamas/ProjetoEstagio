@@ -24,45 +24,47 @@ namespace Samsys_Custos.Controllers
         //------------------------------------------------------------------
 
         // GET: Custos Gerais
-        public async Task<IActionResult> Geral() {
+        public JsonResult Geral() {
 
-            var filhos = from cst in _context.CUSTO
-                         join ut in _context.CATEGORIA on cst.id_categoria equals ut.id_categoria
-                         select new
-                         {
-                             id_pai = ut.id_categoria,
-                             id_custo = cst.id_custo
-                         };
-            var pais = from f in filhos
-                       join catg in _context.CATEGORIA on f.id_pai equals catg.id_categoria
-                       select new
-                       {
-                           id_pai = catg.id_pai,
-                           id_categoria = catg.id_categoria,
-                           id_custo = f.id_custo
-
-                       };
-
-            var result1 = from custo in _context.CUSTO
-                          join p in pais on custo.id_custo equals p.id_custo
-                          select new CUSTO
+            /* var filhos = from cst in _context.CUSTO
+                          join ut in _context.CATEGORIA on cst.id_categoria equals ut.id_categoria
+                          select new
                           {
-                              id_custo = custo.id_custo,
-                              id_gsm = custo.id_gsm,
-                              id_phc = custo.id_phc,
-                              id_viatura = custo.id_viatura,
-                              id_salario = custo.id_salario,
-                              valor = custo.valor,
-                              mes=custo.mes,
-                              ano = custo.ano,
-                              data=custo.data,
-                              designacao = custo.designacao,
-                              id_colaborador = custo.id_colaborador,
-                              id_categoria = custo.id_categoria
+                              id_pai = ut.id_categoria,
+                              id_custo = cst.id_custo
                           };
+             var pais = from f in filhos
+                        join catg in _context.CATEGORIA on f.id_pai equals catg.id_categoria
+                        select new
+                        {
+                            id_pai = catg.id_pai,
+                            id_categoria = catg.id_categoria,
+                            id_custo = f.id_custo
 
+                        };
 
-            return View(await result1.ToListAsync());
+             var result1 = from custo in _context.CUSTO
+                           join p in pais on custo.id_custo equals p.id_custo
+                           select new CUSTO
+                           {
+                               id_custo = custo.id_custo,
+                               id_gsm = custo.id_gsm,
+                               id_phc = custo.id_phc,
+                               id_viatura = custo.id_viatura,
+                               id_salario = custo.id_salario,
+                               valor = custo.valor,
+                               mes=custo.mes,
+                               ano = custo.ano,
+                   data=custo.data,
+                               designacao = custo.designacao,
+                               id_colaborador = custo.id_colaborador,
+                               id_categoria = custo.id_categoria
+                           };
+
+             */
+            var applicationDbContext = _context.CUSTO_EQUIPA;
+
+            return Json(applicationDbContext);
         }
         // GET: SALARIO
         public async Task<IActionResult> Salario()
@@ -125,6 +127,7 @@ namespace Samsys_Custos.Controllers
         }
         public JsonResult getRubrica(int id)
         {
+          
             return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
         }
 
