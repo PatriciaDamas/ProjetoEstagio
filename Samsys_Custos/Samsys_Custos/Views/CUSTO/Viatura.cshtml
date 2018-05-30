@@ -12,34 +12,33 @@
 </p>
 
 
-<table class="table">
+<table class="table" id="mytable">
     <thead>
         <tr>
             <th>
                 Data
             </th>
             <th>
-               Ano
+                Ano
             </th>
             <th>
-               Mês
+                Mês
             </th>
             <th>
-               Valor
+                Valor
             </th>
             <th>
-               Categoria
+                Categoria
             </th>
             <th>
-              Colaborador
+                Colaborador
             </th>
             <th>
-               Viatura
+                Viatura
             </th>
             <th>
                 Acções
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -75,5 +74,9 @@
         }
     </tbody>
 </table>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+@section scripts {
 <script src="~/js/cascading_select.js"></script>
+    <script src="~/js/table.js"></script>
+}

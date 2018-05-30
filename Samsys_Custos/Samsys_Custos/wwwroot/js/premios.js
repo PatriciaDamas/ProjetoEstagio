@@ -1,10 +1,9 @@
 ﻿
 $(document).ready(function () {
-    $('#table_premios').DataTable();
 
     //Vai buscar o nome da categoria nivel 1
     var catArray = new Array();
-    $('#table_premios tr').each(function () {
+    $('#mytable tr').each(function () {
         catArray.push($(this).find(".categoria").html());
     });
 
@@ -19,7 +18,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 if (ArrCount > 0) {
-                    $('#table_premios tr').eq(ArrCount).find('td').eq(5).html(data);
+                    $('#mytable tr').eq(ArrCount).find('td').eq(5).html(data);
                 }
 
                 ArrCount++;
@@ -27,7 +26,7 @@ $(document).ready(function () {
                     doAjax(ArrCount);
                 }
                 else {
-                    $("#table_premios").show();
+                    $("#mytable").show();
                 }
 
             },

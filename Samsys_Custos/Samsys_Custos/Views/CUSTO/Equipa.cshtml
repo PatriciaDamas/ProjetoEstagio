@@ -1,7 +1,7 @@
 ﻿@model List<Samsys_Custos.Models.CUSTOS_EQUIPA>
 @{ViewData["Title"] = "Equipas";}
 <h2>Geral</h2>
-<table class="table">
+<table class="table" id="mytable">
     <thead>
         <tr>
             <th>
@@ -28,9 +28,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Total)
                 </td>
-                
+
 
             </tr>
         }
     </tbody>
 </table>
+@section scripts {
+    <script src="~/js/table.js"></script>
+}
