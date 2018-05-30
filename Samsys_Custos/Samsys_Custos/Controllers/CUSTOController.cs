@@ -30,7 +30,7 @@ namespace Samsys_Custos.Controllers
             return View(applicationDbContext);
         }
 
-        public IActionResult Equipas()
+        public IActionResult Equipa()
         {
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
             return View(applicationDbContext);
