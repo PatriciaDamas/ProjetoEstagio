@@ -9,24 +9,24 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="mytable">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.data)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ano)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.mes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.designacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.valor)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.designacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CATEGORIA)
             </th>
@@ -45,51 +45,55 @@
             <th>
                 @Html.DisplayNameFor(model => model.VIATURA)
             </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.designacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA.id_categoria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DADOS_PHC.id_phc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GSM.id_gsm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SALARIO.id_salario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VIATURA.id_viatura)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.id_categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DADOS_PHC.id_phc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GSM.id_gsm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SALARIO.id_salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIATURA.id_viatura)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts {
+    <script src="~/js/table.js"></script>
+}

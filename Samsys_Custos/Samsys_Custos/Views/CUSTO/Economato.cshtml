@@ -7,61 +7,65 @@
 <h2>Economato</h2>
 
 
-<table class="table">
+<table class="table" id="mytable">
     <thead>
         <tr>
-                <th>
-                    Data
-                </th>
-                <th>
-                   Ano
-                </th>
-                <th>
-                   Mês
-                </th>
-                <th>
-                  Designação
-                </th>
-                <th>
-                  Valor
-                </th>
             <th>
-               Categoria
+                Data
             </th>
-           
             <th>
-               Utilizador
+                Ano
             </th>
-            
-            <th></th>
+            <th>
+                Mês
+            </th>
+            <th>
+                Designação
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Categoria
+            </th>
+
+            <th>
+                Utilizador
+            </th>
+
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.designacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-           
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts {
+    <script src="~/js/table.js"></script>
+}

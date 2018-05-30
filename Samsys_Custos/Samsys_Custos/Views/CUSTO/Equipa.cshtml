@@ -1,18 +1,17 @@
-﻿@model List<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>
-@{ViewData["Title"] = "Geral";}
+﻿@model List<Samsys_Custos.Models.CUSTOS_EQUIPA>
+@{ViewData["Title"] = "Equipas";}
 <h2>Geral</h2>
 <table class="table" id="mytable">
     <thead>
         <tr>
-       
             <th>
-                Categoria
+                Equipas
             </th>
             <th>
-               Mês
+                Mês
             </th>
             <th>
-                Total
+                Valor
             </th>
         </tr>
     </thead>
@@ -21,7 +20,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                    @Html.DisplayFor(modelItem => item.Equipas)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.mes)
