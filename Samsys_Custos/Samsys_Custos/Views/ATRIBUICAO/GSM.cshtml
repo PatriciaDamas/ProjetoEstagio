@@ -7,22 +7,25 @@
 <h2>GSM</h2>
 
 <p>
-    <a asp-action="CreateGSM">Create New</a>
+    <a asp-action="CreateGSM">Atribuir GSM</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.data_inicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.data_fim)
-                </th>
             <th>
-                @Html.DisplayNameFor(model => model.GSM)
+                Data Inicial
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
+                Data Final
+            </th>
+            <th>
+                Número
+            </th>
+            <th>
+                Colaborador
+            </th>
+            <th>
+                Opções
             </th>
             <th></th>
         </tr>
@@ -37,14 +40,14 @@
                 @Html.DisplayFor(modelItem => item.data_fim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GSM.id_gsm)
+                @Html.DisplayFor(modelItem => item.GSM.numero)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
+                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
             </td>
             <td>
-                <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Delete</a>
+                <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
             </td>
         </tr>
 }

@@ -7,22 +7,25 @@
 <h2>Viatura</h2>
 
 <p>
-    <a asp-action="CreateViatura">Create New</a>
+    <a asp-action="CreateViatura">Atribuir Viatura</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.data_inicio)
+                Data Inicial
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.data_fim)
+                Data Final
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VIATURA)
+                Matricula
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
+                Colaborador
+            </th>
+            <th>
+                Opções
             </th>
             <th></th>
         </tr>
@@ -37,14 +40,14 @@
                 @Html.DisplayFor(modelItem => item.data_fim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VIATURA.id_viatura)
+                @Html.DisplayFor(modelItem => item.VIATURA.matricula)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
+                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
             </td>
             <td>
-                <a asp-action="EditViatura" asp-route-id="@item.id_atribuicao">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Delete</a>
+                <a asp-action="EditViatura" asp-route-id="@item.id_atribuicao">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
             </td>
         </tr>
 }

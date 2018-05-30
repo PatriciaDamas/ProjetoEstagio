@@ -48,7 +48,7 @@ namespace Samsys_Custos.Controllers
         // GET: EQUIPA/Create
         public IActionResult Create()
         {
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador");
+            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Samsys_Custos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 
@@ -82,7 +82,7 @@ namespace Samsys_Custos.Controllers
             {
                 return NotFound();
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 
@@ -118,7 +118,7 @@ namespace Samsys_Custos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 

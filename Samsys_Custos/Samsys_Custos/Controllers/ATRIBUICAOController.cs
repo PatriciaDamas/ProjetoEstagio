@@ -211,7 +211,7 @@ namespace Samsys_Custos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(GSM));
             }
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
@@ -247,7 +247,7 @@ namespace Samsys_Custos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Viatura));
             }
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
