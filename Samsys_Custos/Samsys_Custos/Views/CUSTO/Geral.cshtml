@@ -1,40 +1,18 @@
-﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+﻿@model List<Samsys_Custos.Models.CUSTOS_EQUIPA>
 @{ViewData["Title"] = "Geral";}
 <h2>Geral</h2>
 <table class="table">
     <thead>
         <tr>
-            <th>Data Registo</th>
+            <th>Custo Equipas</th>
             <th>
-                Ano
+                Equipas
             </th>
             <th>
                 Mês
             </th>
             <th>
                 Valor
-            </th>
-            <th>
-                Designação
-            </th>
-
-            <th>
-                Categoria
-            </th>
-            <th>
-                Colaborador
-            </th>
-            <th>
-                Viatura
-            </th>
-            <th>
-                Telemóvel
-            </th>>
-            <th>
-                PHC
-            </th>
-            <th>
-                Salário
             </th>
         </tr>
     </thead>
@@ -43,40 +21,16 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
+                    @Html.DisplayFor(modelItem => item.Equipas)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.mes)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.valor)
+                    @Html.DisplayFor(modelItem => item.Total)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.designacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GSM.numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DADOS_PHC.id_phc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SALARIO.id_salario)
-                </td>
+                
 
-            
             </tr>
         }
     </tbody>
