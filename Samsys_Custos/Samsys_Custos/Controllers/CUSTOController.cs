@@ -29,6 +29,12 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
             return View(applicationDbContext);
         }
+
+        public IActionResult Equipas()
+        {
+            var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
+            return View(applicationDbContext);
+        }
         // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
