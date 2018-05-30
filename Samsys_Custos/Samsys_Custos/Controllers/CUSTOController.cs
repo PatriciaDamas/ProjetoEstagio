@@ -24,17 +24,15 @@ namespace Samsys_Custos.Controllers
         //------------------------------------------------------------------
 
         // GET: Custos Gerais
-        public async Task<IActionResult> Geral() {
+        public IActionResult Geral() {
 
-            var applicationDbContext = _context.CUSTOS_EQUIPA;
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
+            return View(applicationDbContext);
         }
         // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
-            
-            
-            
+
             //AUTH FOR PROFILE
 
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Where(c => c.id_salario != null);
