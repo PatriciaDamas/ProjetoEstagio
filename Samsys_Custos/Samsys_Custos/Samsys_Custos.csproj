@@ -2,31 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>aspnet-Samsys_Custos-2EDDE366-F515-436D-8394-2E55D038EFB2</UserSecretsId>
+    <UserSecretsId>aspnet-Samsys_Custos-D253141A-3350-41B7-B181-9A0180292DCC</UserSecretsId>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20180524102539_Classes.cs" />
-    <Compile Remove="Data\Migrations\20180524102539_Classes.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180524110337_TESTE.cs" />
-    <Compile Remove="Data\Migrations\20180524110337_TESTE.Designer.cs" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview1-final" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-preview1-final" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0-preview1-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview1-final" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Views\CUSTO\Index.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-rc1-final" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-rc1-final" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-rc1-final" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
   </ItemGroup>
 
 </Project>
