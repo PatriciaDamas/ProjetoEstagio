@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #F9F9F9;
 }
 
 /* Wrapping element */
@@ -32,4 +33,25 @@
     .carousel-caption {
         display: none;
     }
+}
+#top-nav {
+    background-color:grey;
+    height:100px;
+
+}
+#top-nav ul>li>aa{
+    margin:0;
+    padding:0;
+    height:100%;
+    float:left;
+    vertical-align:center;
+}
+#top-nav>ul>li>a{
+    position:relative;
+}
+
+.logo-light {
+    max-height:100%;
+    float: left;
+    margin: 0px 15px 15px 0px;
 }
