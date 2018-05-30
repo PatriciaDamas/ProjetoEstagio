@@ -6,7 +6,7 @@ $(document).ready(function () {
                 $(".rubrica").empty();
                 $.ajax({
                     type: 'POST',
-                    url: 'https://localhost:44339/CUSTO/getrubrica',
+                    url: 'https://localhost:44363/CUSTO/getrubrica',
                     dataType: 'json',
                     data: { id: $(".tipo_categoria").val() },
 
