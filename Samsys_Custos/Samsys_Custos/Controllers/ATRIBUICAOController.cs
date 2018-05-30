@@ -59,15 +59,7 @@ namespace Samsys_Custos.Controllers
 
             return View(aTRIBUICAO);
         }
-        /*
-        // GET: ATRIBUICAO/Create
-        public IActionResult Create()
-        {
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
-            return View();
-        }*/
+       
 
         // GET: ATRIBUICAO/Create
         public IActionResult CreateViatura()
@@ -152,36 +144,7 @@ namespace Samsys_Custos.Controllers
             return View(aTRIBUICAO);
         }
 
-        /*public JsonResult getAtribuicao(String valor)
-        {
-           if (valor == "GSM")
-           {
-               return Json(JsonConvert.SerializeObject(new SelectList(_context.GSM, "id_gsm", "numero")));
-           }
-           else
-           {
-                return Json(JsonConvert.SerializeObject(new SelectList(_context.VIATURA, "id_viatura", "matricula")));
-           }
-        }*/
-        /*
-        // GET: ATRIBUICAO/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var aTRIBUICAO = await _context.ATRIBUICAO.SingleOrDefaultAsync(m => m.id_atribuicao == id);
-            if (aTRIBUICAO == null)
-            {
-                return NotFound();
-            }
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
-            return View(aTRIBUICAO);
-        }*/
+        
         // GET: ATRIBUICAO/Edit/5
         public async Task<IActionResult> EditGSM(int? id)
         {
@@ -216,44 +179,7 @@ namespace Samsys_Custos.Controllers
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
         }
-        /*
-        // POST: ATRIBUICAO/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id_atribuicao,id_viatura,id_gsm,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
-        {
-            if (id != aTRIBUICAO.id_atribuicao)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(aTRIBUICAO);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ATRIBUICAOExists(aTRIBUICAO.id_atribuicao))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
-            return View(aTRIBUICAO);
-        }*/
+      
 
         // POST: ATRIBUICAO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
