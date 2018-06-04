@@ -42,6 +42,21 @@ namespace Samsys_Custos.Controllers
             return Json(applicationDbContext);
         }
 
+        public IActionResult GraficoCustoEquipa()
+        {
+
+
+            return View();
+        }
+
+        public JsonResult CustoRubricaJson()
+        {
+
+            var applicationDbContext = _context.CUSTOS_EQUIPA_RUBRICA;
+            return Json(applicationDbContext);
+        }
+
+
         public IActionResult Equipa()
         {
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();

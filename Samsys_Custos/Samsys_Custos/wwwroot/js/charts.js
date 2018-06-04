@@ -92,4 +92,15 @@
         }
     });
 
+
+    //custos por equipa de cada rubrica
+    let saveDataCustosEquipa = $.ajax({
+        type: 'get',
+        url: 'https://localhost:44363/CUSTO/CustoRubricaJson',
+        dataType: "json",
+        success: function (data) {
+
+        }
+    });
+
 });

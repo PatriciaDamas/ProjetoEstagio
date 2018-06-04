@@ -43,5 +43,7 @@ namespace Samsys_Custos.Data
         public DbQuery<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA> DASHBOARD_CUSTOS_CATEGORIA { get; set; }
 
         public DbQuery<Samsys_Custos.Models.COLABORADOR> COLABORADOR { get; set; }
+
+        public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_RUBRICA> CUSTOS_EQUIPA_RUBRICA { get; set; }
     }
 }
