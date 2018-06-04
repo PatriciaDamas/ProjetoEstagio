@@ -36,12 +36,28 @@ namespace Samsys_Custos.Controllers
         // GET: Custos Gerais Grafico
         public IActionResult Grafico()
         {
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
             return View();
         }        
-        public JsonResult GeralJson()
+        public JsonResult GeralJson(int? ano)
         {
-            var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
-            return Json(applicationDbContext);
+
+            if(ano==null)
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
+            
         }
         
         

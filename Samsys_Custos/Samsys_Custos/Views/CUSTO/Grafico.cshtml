@@ -4,8 +4,11 @@
 }
 
 <h2>Gráfico Teste - Custos Gerais</h2>
-
-<div id="chartdiv" sstyle="width: 100%;height: 500px"></div>
+<label class="control-label">Ano</label>
+<select class="form-control" asp-items="ViewBag.ano" id="select_ano">
+    <option value=null>Selecione um ano</option>
+</select>
+<span  class="text-danger"></span><div id="chartdiv" sstyle="width: 100%;height: 500px"></div>
 @section scripts {
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
