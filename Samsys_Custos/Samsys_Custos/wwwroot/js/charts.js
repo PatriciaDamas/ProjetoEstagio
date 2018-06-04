@@ -99,4 +99,23 @@
     })
    
 
+
+
+    // grafico colaborador
+    let saveDataColaborador = $.ajax({
+        type: 'get',
+        url: 'https://localhost:44363/CUSTO/ColaboradorJson',
+        dataType: "json",
+        success: function (data) {
+
+            
+
+
+
+
+                let sets = '';
+            var chart = AmCharts.makeChart("chartColaborador", sets)
+        }
+    });
+
 });

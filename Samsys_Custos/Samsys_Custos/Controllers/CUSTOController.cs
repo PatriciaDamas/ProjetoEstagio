@@ -30,10 +30,6 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
             return View(applicationDbContext);
         }
-        
-        
-        //------------------------------------------------------------------
-        // GET: Custos Gerais Grafico
         public IActionResult Grafico()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -69,9 +65,26 @@ namespace Samsys_Custos.Controllers
             return View(applicationDbContext);
         }
 
+        //get Custos Colaborador  ???
+        public IActionResult Colaborador()
+        {
+            var applicationDbContext = _context.CUSTOS_COLABORADOR.ToList();
+            return View(applicationDbContext);
+        }
+         // get Json custos colaborador
+        public JsonResult ColaboradorJson()
+        {
+            var applicationDbContext = _context.CUSTOS_COLABORADOR.ToList();
+            return Json(applicationDbContext);
+        }
 
-        //------------------------------------------------------------------
-        // GET: SALARIO (CUSTO)
+
+        public IActionResult Colaborador_grafico()
+        {
+            return View();
+        }
+
+        // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
             //AUTH FOR PROFILE
