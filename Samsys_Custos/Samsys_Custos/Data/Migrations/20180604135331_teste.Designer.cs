@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 //using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180604135331_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,6 +248,8 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int?>("id_phc");
 
+                    b.Property<int?>("id_salario");
+
                     b.Property<int?>("id_viatura");
 
                     b.Property<string>("mes");
@@ -261,6 +265,8 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasIndex("id_gsm");
 
                     b.HasIndex("id_phc");
+
+                    b.HasIndex("id_salario");
 
                     b.HasIndex("id_viatura");
 
@@ -282,23 +288,6 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasIndex("id_fornecedor");
 
                     b.ToTable("DADOS_PHC");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
-                {
-                    b.Property<string>("id_equipa")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("id_lider");
-
-                    b.Property<string>("nome");
-
-                    b.HasKey("id_equipa");
-
-                    b.HasIndex("id_lider")
-                        .IsUnique();
-
-                    b.ToTable("EQUIPA");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>
@@ -335,43 +324,11 @@ namespace Samsys_Custos.Data.Migrations
                     b.ToTable("GSM");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.PERFIL", b =>
-                {
-                    b.Property<int>("id_perfil")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("nome");
-
-                    b.Property<bool>("premio");
-
-                    b.Property<bool>("salario");
-
-                    b.HasKey("id_perfil");
-
-                    b.ToTable("PERFIL");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.PERMISSAO", b =>
-                {
-                    b.Property<int>("id_permissao")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("nome");
-
-                    b.HasKey("id_permissao");
-
-                    b.ToTable("PERMISSAO");
-                });
-
             modelBuilder.Entity("Samsys_Custos.Data.SALARIO", b =>
                 {
                     b.Property<int>("id_salario")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("id_custo");
 
                     b.Property<decimal>("irs");
 
@@ -389,12 +346,76 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.HasKey("id_salario");
 
-                    b.HasIndex("id_custo");
-
                     b.ToTable("SALARIO");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR", b =>
+            modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR_PERMISSAO", b =>
+                {
+                    b.Property<int>("id_utilizador_permissao")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("id_colaborador");
+
+                    b.Property<int>("id_permissao");
+
+                    b.HasKey("id_utilizador_permissao");
+
+                    b.HasIndex("id_colaborador");
+
+                    b.HasIndex("id_permissao");
+
+                    b.ToTable("UTILIZADOR_PERMISSAO");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.EQUIPA", b =>
+                {
+                    b.Property<string>("id_equipa")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("id_lider");
+
+                    b.Property<string>("nome");
+
+                    b.HasKey("id_equipa");
+
+                    b.HasIndex("id_lider")
+                        .IsUnique();
+
+                    b.ToTable("EQUIPA");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.PERFIL", b =>
+                {
+                    b.Property<int>("id_perfil")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nome");
+
+                    b.Property<bool>("premio");
+
+                    b.Property<bool>("salario");
+
+                    b.HasKey("id_perfil");
+
+                    b.ToTable("PERFIL");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.PERMISSAO", b =>
+                {
+                    b.Property<int>("id_permissao")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("nome");
+
+                    b.HasKey("id_permissao");
+
+                    b.ToTable("PERMISSAO");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.UTILIZADOR", b =>
                 {
                     b.Property<int>("id_colaborador")
                         .ValueGeneratedOnAdd()
@@ -417,26 +438,7 @@ namespace Samsys_Custos.Data.Migrations
                     b.ToTable("UTILIZADOR");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR_PERMISSAO", b =>
-                {
-                    b.Property<int>("id_utilizador_permissao")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("id_colaborador");
-
-                    b.Property<int>("id_permissao");
-
-                    b.HasKey("id_utilizador_permissao");
-
-                    b.HasIndex("id_colaborador");
-
-                    b.HasIndex("id_permissao");
-
-                    b.ToTable("UTILIZADOR_PERMISSAO");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.VIATURA", b =>
+            modelBuilder.Entity("Samsys_Custos.Models.VIATURA", b =>
                 {
                     b.Property<int>("id_viatura")
                         .ValueGeneratedOnAdd()
@@ -500,7 +502,7 @@ namespace Samsys_Custos.Data.Migrations
 
             modelBuilder.Entity("Samsys_Custos.Data.ATRIBUICAO", b =>
                 {
-                    b.HasOne("Samsys_Custos.Data.UTILIZADOR", "UTILIZADOR")
+                    b.HasOne("Samsys_Custos.Models.UTILIZADOR", "UTILIZADOR")
                         .WithMany()
                         .HasForeignKey("id_colaborador")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -509,7 +511,7 @@ namespace Samsys_Custos.Data.Migrations
                         .WithMany()
                         .HasForeignKey("id_gsm");
 
-                    b.HasOne("Samsys_Custos.Data.VIATURA", "VIATURA")
+                    b.HasOne("Samsys_Custos.Models.VIATURA", "VIATURA")
                         .WithMany()
                         .HasForeignKey("id_viatura");
                 });
@@ -521,7 +523,7 @@ namespace Samsys_Custos.Data.Migrations
                         .HasForeignKey("id_categoria")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Samsys_Custos.Data.UTILIZADOR", "UTILIZADOR")
+                    b.HasOne("Samsys_Custos.Models.UTILIZADOR", "UTILIZADOR")
                         .WithMany()
                         .HasForeignKey("id_colaborador")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -534,7 +536,11 @@ namespace Samsys_Custos.Data.Migrations
                         .WithMany()
                         .HasForeignKey("id_phc");
 
-                    b.HasOne("Samsys_Custos.Data.VIATURA", "VIATURA")
+                    b.HasOne("Samsys_Custos.Data.SALARIO", "SALARIO")
+                        .WithMany()
+                        .HasForeignKey("id_salario");
+
+                    b.HasOne("Samsys_Custos.Models.VIATURA", "VIATURA")
                         .WithMany()
                         .HasForeignKey("id_viatura");
                 });
@@ -547,14 +553,6 @@ namespace Samsys_Custos.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.UTILIZADOR", "UTILIZADOR")
-                        .WithOne()
-                        .HasForeignKey("Samsys_Custos.Data.EQUIPA", "id_lider")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>
                 {
                     b.HasOne("Samsys_Custos.Data.CATEGORIA", "CATEGORIA")
@@ -562,35 +560,36 @@ namespace Samsys_Custos.Data.Migrations
                         .HasForeignKey("sugestao_categoria");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.SALARIO", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.CUSTO", "CUSTO")
-                        .WithMany()
-                        .HasForeignKey("id_custo");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.EQUIPA", "EQUIPA")
-                        .WithMany()
-                        .HasForeignKey("id_equipa");
-
-                    b.HasOne("Samsys_Custos.Data.PERFIL", "PERFIL")
-                        .WithMany()
-                        .HasForeignKey("id_perfil")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Samsys_Custos.Data.UTILIZADOR_PERMISSAO", b =>
                 {
-                    b.HasOne("Samsys_Custos.Data.UTILIZADOR", "UTILIZADOR")
+                    b.HasOne("Samsys_Custos.Models.UTILIZADOR", "UTILIZADOR")
                         .WithMany()
                         .HasForeignKey("id_colaborador")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Samsys_Custos.Data.PERMISSAO", "PERMISSAO")
+                    b.HasOne("Samsys_Custos.Models.PERMISSAO", "PERMISSAO")
                         .WithMany()
                         .HasForeignKey("id_permissao")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.EQUIPA", b =>
+                {
+                    b.HasOne("Samsys_Custos.Models.UTILIZADOR", "UTILIZADOR")
+                        .WithOne()
+                        .HasForeignKey("Samsys_Custos.Models.EQUIPA", "id_lider")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Models.UTILIZADOR", b =>
+                {
+                    b.HasOne("Samsys_Custos.Models.EQUIPA", "EQUIPA")
+                        .WithMany()
+                        .HasForeignKey("id_equipa");
+
+                    b.HasOne("Samsys_Custos.Models.PERFIL", "PERFIL")
+                        .WithMany()
+                        .HasForeignKey("id_perfil")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -1,0 +1,104 @@
+﻿@model List<Samsys_Custos.Models.CUSTO_COLABORADOR>
+@{ViewData["Title"] = "Colaborador";}
+<h2>Geral</h2>
+<table class="table" id="mytable">
+    <thead>
+        <tr>
+            <th>
+                Equipas
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Janeiro
+            </th>
+            <th>
+                Fevereiro
+            </th>
+            <th>
+                Março
+            </th>
+            <th>
+                Abril
+            </th>
+            <th>
+                Maio
+            </th>
+            <th>
+                Junho
+            </th>
+            <th>
+                Julho
+            </th>
+            <th>
+                Agosto
+            </th>
+            <th>
+                Setembro
+            </th>
+            <th>
+                Outubro
+            </th>
+            <th>
+                Novembro
+            </th>
+            <th>
+                Dezembro
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Janeiro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fevereiro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Março)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Abril)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Junho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Julho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agosto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Setembro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Outubro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Novembro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dezembro)
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script src="~/js/table.js"></script>
+}

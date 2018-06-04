@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 //using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180604142415_test3")]
+    partial class test3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,6 +248,8 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int?>("id_phc");
 
+                    b.Property<int?>("id_salario");
+
                     b.Property<int?>("id_viatura");
 
                     b.Property<string>("mes");
@@ -261,6 +265,8 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasIndex("id_gsm");
 
                     b.HasIndex("id_phc");
+
+                    b.HasIndex("id_salario");
 
                     b.HasIndex("id_viatura");
 
@@ -533,6 +539,10 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasOne("Samsys_Custos.Data.DADOS_PHC", "DADOS_PHC")
                         .WithMany()
                         .HasForeignKey("id_phc");
+
+                    b.HasOne("Samsys_Custos.Data.SALARIO", "SALARIO")
+                        .WithMany()
+                        .HasForeignKey("id_salario");
 
                     b.HasOne("Samsys_Custos.Data.VIATURA", "VIATURA")
                         .WithMany()

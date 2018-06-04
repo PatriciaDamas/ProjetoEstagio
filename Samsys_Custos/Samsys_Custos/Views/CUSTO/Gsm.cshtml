@@ -4,17 +4,15 @@
     ViewData["Title"] = "Gsm";
 }
 
-<h2>Custo de Gsm</h2>
+<h2>Custos de Gsm</h2>
 
 <p>
-    <a asp-action="CriarGsm">Adicionar Custo Gsm</a>
+    <a asp-action="CriarGsm">Adicionar custo de Gsm</a>
 </p>
 <table class="table" id="mytable">
     <thead>
         <tr>
-            <th>
-                Data
-            </th>
+            
             <th>
                 Ano
             </th>
@@ -42,9 +40,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.ano)
                 </td>
@@ -64,8 +60,8 @@
                     @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
                 </td>
                 <td>
-                    <a asp-action="EditGsm" asp-route-id="@item.id_custo">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
+                    <a asp-action="EditGsm" asp-route-id="@item.id_custo">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Gsm">Remover</a>
                 </td>
             </tr>
         }

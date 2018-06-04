@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Samsys_Custos.Models
+namespace Samsys_Custos.Data
 {
     public class VIATURA
     {
