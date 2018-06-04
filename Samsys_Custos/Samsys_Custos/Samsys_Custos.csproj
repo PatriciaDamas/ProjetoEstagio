@@ -19,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\CUSTO\CriarSalario.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CUSTO\DeleteSalario.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\CUSTO\Equipa.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

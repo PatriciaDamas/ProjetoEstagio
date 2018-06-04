@@ -13,9 +13,7 @@
 <table id="mytable" class="table" hidden>
     <thead>
         <tr>
-            <th>
-Data Registo
-            </th>
+           
             <th>
                 Ano
             </th>
@@ -42,9 +40,7 @@ Data Registo
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.ano)
                 </td>
@@ -66,8 +62,8 @@ Data Registo
                 </td>
 
                 <td>
-                    <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
+                    <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Premio">Remover</a>
                 </td>
             </tr>
         }

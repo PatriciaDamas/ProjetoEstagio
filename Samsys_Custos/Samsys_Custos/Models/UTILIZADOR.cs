@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Samsys_Custos.Models
+namespace Samsys_Custos.Data
 {
     public class UTILIZADOR
     {

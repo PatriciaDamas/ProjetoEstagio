@@ -1,0 +1,64 @@
+﻿@model Samsys_Custos.Data.SALARIO
+
+@{
+    ViewData["Title"] = "DeleteSalario";
+}
+
+<h2>Apagar Salário</h2>
+
+<h3>Tem a certeza que quer apagar este registo?</h3>
+<div>
+    <h4>Salário</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.ano)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.ano)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.mes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.mes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.designacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.designacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.valor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.valor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.CATEGORIA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.CATEGORIA.id_categoria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CUSTO.UTILIZADOR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CUSTO.UTILIZADOR.id_colaborador)
+        </dd>
+    
+    </dl>
+    
+    <form asp-action="DeleteSalario">
+        <input type="hidden" asp-for="id_salario" />
+        <input type="submit" value="DeleteSalario" class="btn btn-default" /> |
+        <a asp-action="Index">Voltar para a lista</a>
+    </form>
+</div>
