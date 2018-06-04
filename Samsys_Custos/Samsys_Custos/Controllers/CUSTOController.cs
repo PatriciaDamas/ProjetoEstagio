@@ -29,6 +29,13 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
             return View(applicationDbContext);
         }
+        // GET: Custos Gerais Grafico
+        public JsonResult GeralJson()
+        {
+
+            var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
+            return Json(applicationDbContext);
+        }
 
         public IActionResult Equipa()
         {
