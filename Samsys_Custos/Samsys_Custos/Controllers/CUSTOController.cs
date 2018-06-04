@@ -21,8 +21,9 @@ namespace Samsys_Custos.Controllers
         {
             _context = context;
         }
+      
+        
         //------------------------------------------------------------------
-
         // GET: Custos Gerais
         public IActionResult Geral() {
 
@@ -32,14 +33,16 @@ namespace Samsys_Custos.Controllers
         public IActionResult Grafico()
         {
             return View();
-        }        // GET: Custos Gerais Grafico
+        }        
         public JsonResult GeralJson()
         {
-
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
             return Json(applicationDbContext);
         }
-
+        
+        
+        //------------------------------------------------------------------
+        // GET: Custos Equipa
         public IActionResult Equipa()
         {
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
@@ -68,12 +71,52 @@ namespace Samsys_Custos.Controllers
         // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
-
             //AUTH FOR PROFILE
-
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Where(c => c.id_salario != null);
+            var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR);
             return View(await applicationDbContext.ToListAsync());
         }
+        // GET: Criar SALARIO (CUSTO)
+        public IActionResult CriarSalario()
+        {
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
+            return View();
+        }
+        // POST: Criar Salario
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+            public async Task<IActionResult> CriarSalario(Samsys_Custos.Data.SALARIO sALARIO)
+            {
+                if (ModelState.IsValid)
+            {
+               
+                if (sALARIO.CUSTO.designacao == null)
+                {
+                    sALARIO.CUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == 16).FirstOrDefault().nome;
+                }
+                sALARIO.CUSTO.id_categoria = 16;
+                sALARIO.CUSTO.valor = sALARIO.irs + sALARIO.liquido + sALARIO.outras_despesas + sALARIO.outras_regalias + sALARIO.outros + sALARIO.seguranca_social + sALARIO.subsidio_alimentacao;
+                sALARIO.CUSTO.data = DateTime.Now;
+                _context.SALARIO.Add(sALARIO);
+                var id = sALARIO.id_salario;
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Salario));
+            }
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
+            return View(sALARIO);
+        }
+        
         //------------------------------------------------------------------
         // GET: ECONOMATO
         public async Task<IActionResult> Economato()
@@ -87,7 +130,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> Premio()
         {
             //AUTH FOR PROFILE
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_salario == null & c.id_phc == null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_phc == null);
             return View(await applicationDbContext.ToListAsync());
         }
         public IActionResult CriarPremio()
@@ -213,7 +256,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> Viatura()
         {
 
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.SALARIO).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
             return View(await applicationDbContext.ToListAsync());
         }
         public IActionResult CriarViatura()
@@ -276,7 +319,6 @@ namespace Samsys_Custos.Controllers
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "id_categoria", cUSTO.id_categoria);
             ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc", cUSTO.id_phc);
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm", cUSTO.id_gsm);
-            ViewData["id_salario"] = new SelectList(_context.SALARIO, "id_salario", "id_salario", cUSTO.id_salario);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", cUSTO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura", cUSTO.id_viatura);
             return View(cUSTO);
@@ -487,15 +529,10 @@ namespace Samsys_Custos.Controllers
             public static string PageServer { get; set; }
         }
 
-        // GET: CUSTO/Delete/5
+        // GET: CUSTO/Delete
         public async Task<IActionResult> Delete(int? id,string page)
         {
-            Debug.WriteLine("-------------------------" + " " + page);
-
             GlobalVariables.PageServer = page;
-
-            Debug.WriteLine("------------------------- SERVER PAGE" + " " + page);
-
             if (id == null)
             {
                 return NotFound();
@@ -505,7 +542,6 @@ namespace Samsys_Custos.Controllers
                 .Include(c => c.CATEGORIA)
                 .Include(c => c.DADOS_PHC)
                 .Include(c => c.GSM)
-                .Include(c => c.SALARIO)
                 .Include(c => c.UTILIZADOR)
                 .Include(c => c.VIATURA)
                 .SingleOrDefaultAsync(m => m.id_custo == id);
@@ -528,6 +564,60 @@ namespace Samsys_Custos.Controllers
             {
                 return RedirectToAction(nameof(Viatura));
 
+            }
+            if (GlobalVariables.PageServer == "Salario")
+            {
+                return RedirectToAction(nameof(Salario));
+
+            }
+            if (GlobalVariables.PageServer == "Gsm")
+            {
+                return RedirectToAction(nameof(Gsm));
+
+            }
+            if (GlobalVariables.PageServer == "Premio")
+            {
+                return RedirectToAction(nameof(Premio));
+
+            }
+            return RedirectToAction(nameof(Geral));
+        }
+
+        // GET: CUSTO/Delete
+        public async Task<IActionResult> DeleteSalario(int? id, string page)
+        {
+            GlobalVariables.PageServer = page;
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sALARIO = await _context.SALARIO
+                .Include(c => c.CUSTO)
+                .Include(c => c.CUSTO.CATEGORIA)
+                .Include(c => c.CUSTO.UTILIZADOR)
+                .SingleOrDefaultAsync(m => m.id_salario == id);
+            if (sALARIO == null)
+            {
+                return NotFound();
+            }
+            return View(sALARIO);
+        }
+
+        // POST: CUSTO/Delete/5
+        [HttpPost, ActionName("DeleteSalario")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSalarioConfimed(int id)
+        {
+            var sALARIO = await _context.SALARIO.SingleOrDefaultAsync(m => m.id_salario == id);
+            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == sALARIO.id_custo);
+            _context.SALARIO.Remove(sALARIO);
+            _context.CUSTO.Remove(cUSTO);
+            await _context.SaveChangesAsync();
+            
+            if (GlobalVariables.PageServer == "Salario")
+            {
+                return RedirectToAction(nameof(Salario));
             }
             return RedirectToAction(nameof(Geral));
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+﻿@model IEnumerable<Samsys_Custos.Data.SALARIO>
 
 @{
     ViewData["Title"] = "Salario";
@@ -7,44 +7,25 @@
 <h2>Salario</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CriarSalario">Adicionar custo de Salário</a>
 </p>
 <table class="table" id="mytable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.data)
-            </th>
+Ano            </th>
             <th>
-                @Html.DisplayNameFor(model => model.ano)
-            </th>
+Mês            </th>
+            
             <th>
-                @Html.DisplayNameFor(model => model.mes)
-            </th>
+Total            </th>
             <th>
-                @Html.DisplayNameFor(model => model.designacao)
-            </th>
+Categoria            </th>
+           
+           
             <th>
-                @Html.DisplayNameFor(model => model.valor)€
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DADOS_PHC)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GSM)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SALARIO)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VIATURA)
-            </th>
+Colaborador            </th>
+            
             <th>Ações</th>
         </tr>
     </thead>
@@ -52,43 +33,29 @@
         @foreach (var item in Model)
         {
             <tr>
+               
                 <td>
-                    @Html.DisplayFor(modelItem => item.data)
+                    @Html.DisplayFor(modelItem => item.CUSTO.ano)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ano)
+                    @Html.DisplayFor(modelItem => item.CUSTO.mes)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTO.valor)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.mes)
+                    @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
                 </td>
+             
+                
                 <td>
-                    @Html.DisplayFor(modelItem => item.designacao)
+                    @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
                 </td>
+              
                 <td>
-                    @Html.DisplayFor(modelItem => item.valor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CATEGORIA.id_categoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DADOS_PHC.id_phc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GSM.id_gsm)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SALARIO.id_salario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UTILIZADOR.id_colaborador)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VIATURA.id_viatura)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_custo">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id_custo">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_custo">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a>
+                    <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
                 </td>
             </tr>
         }

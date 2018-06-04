@@ -31,11 +31,7 @@ namespace Samsys_Custos.Data
 
         [ForeignKey("VIATURA")]
         public int? id_viatura { get; set; }
-        public VIATURA VIATURA { get; set; }
-
-        [ForeignKey("SALARIO")]
-        public int? id_salario { get; set; }
-        public SALARIO SALARIO { get; set; }
+        public VIATURA VIATURA { get; set; } 
 
         public DateTime data { get; set; }
         public int ano { get; set; }
