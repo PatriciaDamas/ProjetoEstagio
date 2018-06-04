@@ -31,8 +31,6 @@ namespace Samsys_Custos.Controllers
         }
         public IActionResult Grafico()
         {
-
-            
             return View();
         }        // GET: Custos Gerais Grafico
         public JsonResult GeralJson()
@@ -47,6 +45,26 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
             return View(applicationDbContext);
         }
+
+        //get Custos Colaborador  ???
+        public IActionResult Colaborador()
+        {
+            var applicationDbContext = _context.CUSTOS_COLABORADOR.ToList();
+            return View(applicationDbContext);
+        }
+         // get Json custos colaborador
+        public JsonResult ColaboradorJson()
+        {
+            var applicationDbContext = _context.CUSTOS_COLABORADOR.ToList();
+            return Json(applicationDbContext);
+        }
+
+
+        public IActionResult Colaborador_grafico()
+        {
+            return View();
+        }
+
         // GET: SALARIO
         public async Task<IActionResult> Salario()
         {

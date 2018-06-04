@@ -29,7 +29,7 @@
                 if (Object.keys(tempdata).length > 1) {
                     dataprovider.push(tempdata);
                 }
-
+               // console.log(tempdata)
             }
 
 
@@ -86,9 +86,28 @@
                 });
             }
             settings.dataProvider = dataprovider;
-            console.log(settings);
+            //console.log(settings);
 
             var chart = AmCharts.makeChart("chartdiv", settings)
+        }
+    });
+
+
+
+    // grafico colaborador
+    let saveDataColaborador = $.ajax({
+        type: 'get',
+        url: 'https://localhost:44363/CUSTO/ColaboradorJson',
+        dataType: "json",
+        success: function (data) {
+
+            
+
+
+
+
+                let sets = '';
+            var chart = AmCharts.makeChart("chartColaborador", sets)
         }
     });
 
