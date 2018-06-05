@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Samsys_Custos.Models
 {
-    public class DASHBOARD_CUSTOS_CATEGORIA
+    public class CUSTOS_EQUIPA_RUBRICA
     {
-        public string NomeCompleto { get; set; }
+        public string Equipas { get; set; }
         public decimal Total { get; set; }
         public string mes { get; set; }
-        public int ano { get; set; }
+        public string NomeCompleto { get; set; }
     }
 }
