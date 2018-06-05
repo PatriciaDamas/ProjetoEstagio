@@ -80,6 +80,8 @@
                     });
                 }
                 settings.dataProvider = dataprovider;
+                var chart = AmCharts.makeChart("chartdiv", settings);
+
                 console.log(settings);
 
                
