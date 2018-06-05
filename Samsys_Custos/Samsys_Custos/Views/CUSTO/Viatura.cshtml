@@ -2,75 +2,72 @@
 
 @{
     ViewData["Title"] = "Viatura";
+    ViewBag.TitlePage = "Custos de Viaturas";
+    ViewBag.Class = "fa-table";
 }
-
-<h2>Custo de Viaturas</h2>
-
 <p>
     <!--Verificação para pessoa autorizada!!-->
     <a asp-action="CriarViatura">Adicionar Custo Viatura</a>
 </p>
-
-
-<table class="table" id="mytable">
-    <thead>
-        <tr>
-            <th>
-                Ano
-            </th>
-            <th>
-                Mês
-            </th>
-            <th>
-                Viatura
-            </th>
-            <th>
-                Categoria
-            </th>
-            <th>
-                Colaborador
-            </th>
-            <th>
-                Valor
-            </th>
-            <th>
-                Acções
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.mes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.valor)€
-                </td>
-                <td>
-                    <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Viatura">Remover</a>
-                </td>
+                <th>
+                    Ano
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Viatura
+                </th>
+                <th>
+                    Categoria
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Acções
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valor)€
+                    </td>
+                    <td>
+                        <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Viatura">Remover</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
 
-
-@section scripts {
-<script src="~/js/cascading_select.js"></script>
-    <script src="~/js/table.js"></script>
-}
+    @section scripts {
+        <script src="~/js/cascading_select.js"></script>
+    }

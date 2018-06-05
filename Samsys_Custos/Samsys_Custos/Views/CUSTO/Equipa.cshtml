@@ -1,39 +1,43 @@
 ﻿@model List<Samsys_Custos.Models.CUSTOS_EQUIPA>
 @{ViewData["Title"] = "Equipa";}
-<h2>Geral</h2>
-<table class="table" id="mytable">
-    <thead>
-        <tr>
-            <th>
-                Equipas
-            </th>
-            <th>
-                Mês
-            </th>
-            <th>
-                Valor
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Equipas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.mes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)€
-                </td>
 
-
-            </tr>
-        }
-    </tbody>
-</table>
-@section scripts {
-    <script src="~/js/table.js"></script>
+@{
+    ViewBag.TitlePage = "Custos Equipas";
+    ViewBag.Class = "fa-table";
 }
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    Equipas
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Valor
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Equipas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)€
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

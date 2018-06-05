@@ -30,7 +30,7 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
             return View(applicationDbContext);
         }
-        public IActionResult Grafico()
+        public IActionResult Grafico_Gerais()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -79,7 +79,7 @@ namespace Samsys_Custos.Controllers
         }
 
 
-        public IActionResult Colaborador_grafico()
+        public IActionResult Grafico_Colaborador()
         {
             return View();
         }

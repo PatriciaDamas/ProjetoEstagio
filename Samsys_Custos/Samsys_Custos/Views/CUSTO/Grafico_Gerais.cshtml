@@ -1,14 +1,15 @@
 ﻿
 @{
-    ViewData["Title"] = "CustosGrafico";
+    ViewData["Title"] = "Grafico";
+    ViewBag.TitlePage = "Custos Gerais";
+    ViewBag.Class = "fa-bar-chart";
 }
 
-<h2>Gráfico Teste - Custos Gerais</h2>
 <label class="control-label">Ano</label>
-<select class="form-control" asp-items="ViewBag.ano" id="select_ano">
+<select class="form-control col-sm-4" asp-items="ViewBag.ano" id="select_ano">
     <option value=null>Selecione um ano</option>
 </select>
-<span  class="text-danger"></span><div id="chartdiv" sstyle="width: 100%;height: 500px"></div>
+<span class="text-danger"></span><div id="chartdiv" style="width: 100%;height: 500px"></div>
 @section scripts {
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>

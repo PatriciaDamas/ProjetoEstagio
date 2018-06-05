@@ -48,16 +48,7 @@
                         "axisAlpha": 1,
                         "gridAlpha": 0
                     }],
-                    "graphs": [
-                        {
-                            "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
-                            "fillAlphas": 1,
-                            "id": "AmGraph",
-                            "title": "Viaturas",
-                            "type": "column",
-                            "valueField": "Viaturas"
-                        }
-                    ],
+                    "graphs": [],
                     "categoryField": "Mês",
                     "categoryAxis": {
                         "gridPosition": "start",
@@ -80,6 +71,7 @@
                         "fillAlphas": 1,
                         "id": "AmGraph-" + k,
                         "title": keys[k],
+                        "labelText":"[[value]]€" + " - " + keys[k], 
                         "type": "column",
                         "valueField": keys[k]
                     });
