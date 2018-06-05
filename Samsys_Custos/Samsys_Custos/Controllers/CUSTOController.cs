@@ -53,8 +53,39 @@ namespace Samsys_Custos.Controllers
                 var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == ano);
                 return Json(applicationDbContext);
             }
+
+        }
+
+        
+
+        // get Json custos colaborador
+        public JsonResult CustoEquipaJson(int? ano)
+        {
+            if (ano == null)
+            {
+                var applicationDbContext = _context.CUSTOS_EQUIPA.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTOS_EQUIPA.ToList().Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
             
         }
+
+        public IActionResult GraficoCustoEquipa()
+        {
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Value");
+            return View();
+            
+        }
+
         
         
         //------------------------------------------------------------------
@@ -80,7 +111,8 @@ namespace Samsys_Custos.Controllers
             if (ano == null)
             {
                 var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == DateTime.Now.Year.ToString());
-                return View(applicationDbContext.ToList());
+                return View(applicationDbContext.ToList());   
+
             }
             else
             {
