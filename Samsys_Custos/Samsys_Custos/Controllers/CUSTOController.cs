@@ -97,7 +97,7 @@ namespace Samsys_Custos.Controllers
         }
         //------------------------------------------------------------------
         //get Custos Colaborador ???
-        public IActionResult Colaborador(int? ano)
+        public IActionResult Colaborador(int? ano, int? id)
         {   
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -110,7 +110,8 @@ namespace Samsys_Custos.Controllers
 
             if (ano == null)
             {
-                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == DateTime.Now.Year.ToString());
+                Debug.WriteLine("-----------------------------------"+id);
+                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == DateTime.Now.Year.ToString() && a.Colaborador.Equals(id.ToString()));
                 return View(applicationDbContext.ToList());   
 
             }

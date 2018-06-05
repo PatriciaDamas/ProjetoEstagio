@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace Samsys_Custos.Models
 {
-    public class CUSTO_COLABORADOR
+    public class CUSTOS_COLABORADOR
     {
-        public String Nome { get; set; }
-        public String Categoria { get; set; }
+        public string Colaborador { get; set; }
+        public string Categoria { get; set; }
+        public string Ano { get; set; }
+
         public decimal Janeiro { get; set; }
         public decimal Fevereiro { get; set; }
         public decimal Março { get; set; }
@@ -21,6 +23,5 @@ namespace Samsys_Custos.Models
         public decimal Outubro { get; set; }
         public decimal Novembro { get; set; }
         public decimal Dezembro { get; set; }
-        public String Ano { get; set; }
     }
 }
