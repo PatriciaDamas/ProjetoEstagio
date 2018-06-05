@@ -9,6 +9,9 @@
                 var dataprovider = new Array();
                 var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 var keys;
+                var ano = $("#select_ano").val();
+
+                
                 for (var j = 0; j < meses.length; j++) {
 
                     var tempdata = {};
@@ -73,7 +76,7 @@
 
 
                 keys = Object.keys(dataprovider[0]);
-                var graphs = new Array();
+
                 for (var k = 1; k < keys.length; k++) {
                     settings.graphs.push({
                         "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -87,7 +90,8 @@
                 settings.dataProvider = dataprovider;
                 console.log(settings);
 
-                var chart = AmCharts.makeChart("chartdiv", settings)
+               
+               
             }
         });
     }
@@ -97,36 +101,5 @@
         getchart();
 
     })
-   
-
-
-
-    // grafico colaborador
-    let saveDataColaborador = $.ajax({
-        type: 'get',
-        url: 'https://localhost:44363/CUSTO/ColaboradorJson',
-        dataType: "json",
-        success: function (data) {
-
-            
-
-
-
-
-                let sets = '';
-            var chart = AmCharts.makeChart("chartColaborador", sets)
-        }
-    });
-
-
-    //custos por equipa de cada rubrica
-    let saveDataCustosEquipa = $.ajax({
-        type: 'get',
-        url: 'https://localhost:44363/CUSTO/CustoRubricaJson',
-        dataType: "json",
-        success: function (data) {
-
-        }
-    });
 
 });
