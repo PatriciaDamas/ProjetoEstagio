@@ -13,7 +13,7 @@ namespace Samsys_Custos.Data
         public int id_phc { get; set; }
 
         [ForeignKey("FORNECEDOR")]
-        public int id_fornecedor { get; set; }
+        public string id_fornecedor { get; set; }
         public FORNECEDOR FORNECEDOR { get; set; }
 
         public Boolean custo_interno { get; set; }

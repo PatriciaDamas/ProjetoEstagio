@@ -24,11 +24,12 @@ namespace Samsys_Custos.Data
 
         public DbSet<Samsys_Custos.Data.PERMISSAO> PERMISSAO { get; set; }
 
+
+        public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
+
         public DbSet<Samsys_Custos.Data.PERFIL> PERFIL { get; set; }
 
         public DbSet<Samsys_Custos.Data.CATEGORIA> CATEGORIA { get; set; }
-
-        public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
 
         public DbSet<Samsys_Custos.Data.UTILIZADOR> UTILIZADOR { get; set; }
 

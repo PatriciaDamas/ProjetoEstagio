@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 //using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180605163346_DropFornecedores")]
+    partial class DropFornecedores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,11 +277,7 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<bool>("custo_interno");
 
-                    b.Property<string>("id_fornecedor");
-
                     b.HasKey("id_phc");
-
-                    b.HasIndex("id_fornecedor");
 
                     b.ToTable("DADOS_PHC");
                 });
@@ -299,24 +297,6 @@ namespace Samsys_Custos.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("EQUIPA");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>
-                {
-                    b.Property<string>("id_fornecedor")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("nome");
-
-                    b.Property<int?>("sugestao_categoria");
-
-                    b.Property<bool?>("sugestao_custo");
-
-                    b.HasKey("id_fornecedor");
-
-                    b.HasIndex("sugestao_categoria");
-
-                    b.ToTable("FORNECEDOR");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.GSM", b =>
@@ -538,26 +518,12 @@ namespace Samsys_Custos.Data.Migrations
                         .HasForeignKey("id_viatura");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.DADOS_PHC", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.FORNECEDOR", "FORNECEDOR")
-                        .WithMany()
-                        .HasForeignKey("id_fornecedor");
-                });
-
             modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
                 {
                     b.HasOne("Samsys_Custos.Data.UTILIZADOR", "UTILIZADOR")
                         .WithOne()
                         .HasForeignKey("Samsys_Custos.Data.EQUIPA", "id_lider")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.CATEGORIA", "CATEGORIA")
-                        .WithMany()
-                        .HasForeignKey("sugestao_categoria");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.SALARIO", b =>
