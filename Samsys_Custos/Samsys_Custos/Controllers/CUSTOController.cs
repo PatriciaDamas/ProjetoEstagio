@@ -30,6 +30,10 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
             return View(applicationDbContext);
         }
+        
+        
+        //------------------------------------------------------------------
+        // GET: Custos Gerais Grafico
         public IActionResult Grafico()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -64,6 +68,17 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
             return View(applicationDbContext);
         }
+        //------------------------------------------------------------------
+        //get Custos Colaborador ???
+        public IActionResult Colaborador(int? ano)
+        {   
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+            }
+            ViewData["ano"] = new SelectList(Years, "Value", "Text");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "nome", "nome");
 
 
         // get Json custos colaborador
@@ -113,6 +128,7 @@ namespace Samsys_Custos.Controllers
             return View();
         }
 
+        //------------------------------------------------------------------
         // GET: SALARIO
         public async Task<IActionResult> Salario()
         {
@@ -318,6 +334,8 @@ namespace Samsys_Custos.Controllers
             ViewData["ano"] = new SelectList(Years, "Value", "Value");
             return View();
         }
+
+
         // POST: CUSTO/viatura
         [HttpPost]
         [ValidateAntiForgeryToken]

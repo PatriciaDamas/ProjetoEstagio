@@ -21,5 +21,6 @@ namespace Samsys_Custos.Models
         public decimal Outubro { get; set; }
         public decimal Novembro { get; set; }
         public decimal Dezembro { get; set; }
+        public String Ano { get; set; }
     }
 }
