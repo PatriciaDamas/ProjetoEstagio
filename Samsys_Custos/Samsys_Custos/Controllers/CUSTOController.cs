@@ -84,7 +84,8 @@ namespace Samsys_Custos.Controllers
             if (ano == null)
             {
                 var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == DateTime.Now.Year.ToString());
-                return View(applicationDbContext.ToList());
+                return View(applicationDbContext.ToList());   
+
             }
             else
             {
