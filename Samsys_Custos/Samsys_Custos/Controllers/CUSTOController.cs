@@ -74,7 +74,7 @@ namespace Samsys_Custos.Controllers
             
         }
 
-        public IActionResult GraficoCustoEquipa()
+        public IActionResult Grafico_Equipa()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 1990; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)

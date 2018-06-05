@@ -28,7 +28,7 @@
     <Content Update="Views\CUSTO\Equipa.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\CUSTO\GraficoCustoEquipa.cshtml">
+    <Content Update="Views\CUSTO\Grafico_Equipa.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\EQUIPA\CustoColaborador.cshtml">
