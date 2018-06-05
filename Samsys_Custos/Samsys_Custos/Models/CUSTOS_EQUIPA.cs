@@ -10,5 +10,6 @@ namespace Samsys_Custos.Models
         public string Equipas { get; set; }
         public decimal Total{ get; set; }
         public string mes { get; set; }
+        public int ano { get; set; }
     }
 }
