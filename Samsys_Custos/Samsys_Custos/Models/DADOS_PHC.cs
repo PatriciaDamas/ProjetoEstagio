@@ -10,7 +10,7 @@ namespace Samsys_Custos.Data
     public class DADOS_PHC
     {
         [Key]
-        public int id_phc { get; set; }
+        public string id_phc { get; set; }
 
         [ForeignKey("FORNECEDOR")]
         public string id_fornecedor { get; set; }
