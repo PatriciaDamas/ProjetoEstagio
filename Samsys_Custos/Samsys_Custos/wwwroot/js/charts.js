@@ -6,12 +6,11 @@
             dataType: "json",
             data: { ano: $("#select_ano").val() },
             success: function (data) {
+                console.log(data)
                 if (!jQuery.isEmptyObject(data)) {
 
                     var dataprovider = new Array();
                     var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-                    var keys;
-                    var ano = $("#select_ano").val();
 
 
                     for (var j = 0; j < meses.length; j++) {
@@ -22,7 +21,7 @@
                         });
 
                         for (var i = 0; i < data.length; i++) {
-                            if (data[i].mes.toLowerCase() === meses[j].toLowerCase()) {
+                            if (data[i].mes.toLowerCase() == meses[j].toLowerCase()) {
                                 var Categoria = data[i].nomeCompleto;
                                 var Total = data[i].total;
                                 Object.assign(tempdata, {
@@ -68,7 +67,7 @@
                     };
 
 
-                    keys = Object.keys(dataprovider[0]);
+                   var keys = Object.keys(dataprovider[0]);
 
                     for (var k = 1; k < keys.length; k++) {
                         settings.graphs.push({
@@ -78,6 +77,7 @@
                             "title": keys[k],
                             "labelText": "[[value]]€" + " - " + keys[k],
                             "type": "column",
+                            "color": "#000000",
                             "valueField": keys[k]
                         });
                     }

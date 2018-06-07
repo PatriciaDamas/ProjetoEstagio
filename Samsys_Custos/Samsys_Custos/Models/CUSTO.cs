@@ -25,8 +25,8 @@ namespace Samsys_Custos.Data
         public int? id_gsm { get; set; }
         public GSM GSM { get; set; }
 
-        [ForeignKey("DADOS_PHC")]
-        public int? id_phc { get; set; }
+       [ForeignKey("DADOS_PHC")]
+        public string id_phc { get; set; }
         public DADOS_PHC DADOS_PHC { get; set; }
 
         [ForeignKey("VIATURA")]
