@@ -2,7 +2,7 @@
     function getchart() {
         let saveData = $.ajax({
             type: 'get',
-            url: 'https://localhost:44363/CUSTO/CustoEquipaJson',
+            url: 'https://localhost:44382/CUSTO/CustoEquipaJson',
             dataType: "json",
             data: { ano: $("#select_ano").val() },
             success: function (data) {

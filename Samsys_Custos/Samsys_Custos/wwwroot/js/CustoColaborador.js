@@ -7,7 +7,7 @@
         console.log($("#filtro_Ano").val())
         $.ajax({
             type: 'POST',
-            url: 'https://localhost:44363/custo/colaborador',
+            url: 'https://localhost:44382/custo/colaborador',
             data: {
                 nome: $("#filtro_Nome").val(),
                 id: $("#filtro_Ano").val()
