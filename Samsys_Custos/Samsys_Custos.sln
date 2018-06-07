@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27705.2000
+VisualStudioVersion = 15.0.27729.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samsys_Custos", "Samsys_Custos\Samsys_Custos.csproj", "{62991D57-7E9C-49F1-9D01-1307A1E04D55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samsys_Custos", "Samsys_Custos\Samsys_Custos.csproj", "{BEE0F8DA-433C-4EC2-AC06-A67DC4A436C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{62991D57-7E9C-49F1-9D01-1307A1E04D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62991D57-7E9C-49F1-9D01-1307A1E04D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62991D57-7E9C-49F1-9D01-1307A1E04D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62991D57-7E9C-49F1-9D01-1307A1E04D55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE0F8DA-433C-4EC2-AC06-A67DC4A436C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE0F8DA-433C-4EC2-AC06-A67DC4A436C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE0F8DA-433C-4EC2-AC06-A67DC4A436C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE0F8DA-433C-4EC2-AC06-A67DC4A436C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0361F218-EAB3-403C-9D00-C955E6319112}
+		SolutionGuid = {441B7C88-BB5C-4FBC-A714-ECBF99E7D217}
 	EndGlobalSection
 EndGlobal

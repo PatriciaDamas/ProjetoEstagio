@@ -11,7 +11,7 @@ $(document).ready(function () {
         var e_id = catArray[ArrCount];
         $.ajax({
             type: 'POST',
-            url: 'https://localhost:44363/CUSTO/getpai',
+            url: 'https://localhost:44382/CUSTO/getpai',
             dataType: 'json',
             data: { id: e_id },
 
