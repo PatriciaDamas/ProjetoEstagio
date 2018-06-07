@@ -23,7 +23,7 @@
                         "Mês": meses[i]
                     });
                     for (var j = 0; j < data.length; j++) {
-                        if (meses[i].toLowerCase() == data[j].mes.toLowerCase()) {
+                        if (meses[i].toLowerCase() === data[j].mes.toLowerCase()) {
                             var equipa = data[j].equipas;
                             var total = data[j].total
                             //Adicionar o resto dos campos ao objeto tempdata

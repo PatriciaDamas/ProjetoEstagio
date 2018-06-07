@@ -71,7 +71,7 @@ namespace Samsys_Custos
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Custo}/{action=Grafico_Gerais}/{id?}");
             });
         }
     }

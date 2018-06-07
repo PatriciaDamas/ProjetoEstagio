@@ -148,18 +148,20 @@
     <div class="content-wrapper">
         <partial name="_CookieConsentPartial" />
         <div class="container-fluid">
-          
+
             <div class="card mb-3">
                 <div class="card-header">
-                    <p  hidden id="cName">@ViewBag.Class</p>
+                    <p hidden id="cName">@ViewBag.Class</p>
                     <i class="fa" id="boxIcon"></i> @ViewBag.TitlePage
 
                 </div>
                 <div class="card-body">
-                        @RenderBody()
+                    @RenderBody()
                 </div>
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
+
+           
         </div>
     </div>
     <footer class="sticky-footer">

@@ -26,7 +26,7 @@
                             "Equipa": equipas[k]
                         });
                         for (var j = 0; j < data.length; j++) {
-                            if (meses[i].toLowerCase() == data[j].mes.toLowerCase() && equipas[k].toLowerCase()==data[j].equipas.toLowerCase()) {
+                            if (meses[i].toLowerCase() == data[j].mes.toLowerCase() && equipas[k].toLowerCase() ==data[j].equipas.toLowerCase()) {
                                 var total = data[j].total
                                 //Adicionar o resto dos campos ao objeto tempdata
                                 Object.assign(tempdata, {

@@ -48,5 +48,7 @@ namespace Samsys_Custos.Data
         public DbQuery<Samsys_Custos.Models.CUSTOS_COLABORADOR> CUSTOS_COLABORADOR { get; set; }
 
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_RUBRICA> CUSTOS_EQUIPA_RUBRICA { get; set; }
+
+        public DbQuery<Samsys_Custos.Models.CUSTOS_TOTAIS_ANO> CUSTOS_TOTAIS_ANO { get; set; }
     }
 }
