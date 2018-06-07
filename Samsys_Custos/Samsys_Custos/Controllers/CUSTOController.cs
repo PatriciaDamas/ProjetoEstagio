@@ -418,7 +418,7 @@ namespace Samsys_Custos.Controllers
         {
             if (id != custo.id_custo)
             {
-                return NotFound();
+                return NotFound();   // DEIXOU DE FUNCIONAR COM ISTO AQUI PORQUE O ID AGORA OU VEM NULL OU VEM COM UM 0 , FAZ MAL REMOVER??
             }
 
             if (ModelState.IsValid)
