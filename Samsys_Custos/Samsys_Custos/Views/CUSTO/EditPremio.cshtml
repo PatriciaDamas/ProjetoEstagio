@@ -13,7 +13,6 @@
         <form asp-action="EditPremio">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id_custo"/>
-            <input type="hidden" asp-for="id" />
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                 <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
