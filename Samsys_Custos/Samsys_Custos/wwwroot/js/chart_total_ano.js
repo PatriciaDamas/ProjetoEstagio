@@ -4,9 +4,9 @@
             type: 'get',
             url: 'https://localhost:44382/CUSTO/CustoTotalAnoJson',
             dataType: "json",
-            data: { ano: $("#select_ano").val() },
+            data: { ano: $("#select_ano_custos").val() },
             success: function (data) {
-                var ano = $("#select_ano").val() 
+                var ano = $("#select_ano_custos").val() 
                 console.log(ano)
                 var dataprovider = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -55,7 +55,7 @@
     }
     
     getchart();
-    $(document.body).on('change', '#select_ano', function () {
+    $(document.body).on('change', '#select_ano_custos', function () {
         getchart();
 
     })
