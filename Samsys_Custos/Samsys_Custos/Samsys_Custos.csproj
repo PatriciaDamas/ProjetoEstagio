@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\CUSTO\Custos_Filtro.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\CUSTO\Grafico_Custo_Total.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

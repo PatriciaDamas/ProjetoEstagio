@@ -26,6 +26,40 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.UTILIZADOR).Include(a => a.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }
+
+        //Obter json das atribuições de gsm e obter json das atribuições de gsm de um determinado colaborador
+        public JsonResult AtribuicaoGsmJson(int? id)
+        {
+            if(id != null)
+            {
+                var applicationDbContext = _context.ATRIBUICAO.ToList().Where(a => a.id_gsm == id & a.data_fim == null);
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.ATRIBUICAO.ToList().Where(a => a.id_gsm != null);
+                return Json(applicationDbContext);
+            }
+            
+           
+        }
+
+        //Obter json das atribuições de viaturas e obter json das atribuições de uma viatura de um determinado colaborador
+        public JsonResult AtribuicaoViaturaJson(int? id)
+        {
+            if (id != null)
+            {
+                var applicationDbContext = _context.ATRIBUICAO.ToList().Where(a => a.id_viatura == id & a.data_fim == null);
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.ATRIBUICAO.ToList().Where(a => a.id_viatura != null);
+                return Json(applicationDbContext);
+            }
+
+
+        }
         // GET: ATRIBUICAO
         public async Task<IActionResult> GSM()
         {

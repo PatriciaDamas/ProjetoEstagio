@@ -81,7 +81,7 @@
                         grafico.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                             "fillAlphas": 0.8,
-                            "labelText": "[[value]]€" + " - " + key[i],
+                            /*"labelText": "[[value]]€" + " - " + key[i],*/
                             "lineAlpha": 0.3,
                             "title": key[i],
                             "type": "column",

@@ -30,6 +30,14 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
             return View(applicationDbContext);
         }
+
+        // GET: Custos Gerais por categoria/ano
+        public IActionResult Custos_Filtro(string categoria, int ano)
+        {
+
+            var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano).ToList();
+            return View(applicationDbContext);
+        }
         public IActionResult Grafico_Gerais()
         {
             List<SelectListItem> Years = new List<SelectListItem>();

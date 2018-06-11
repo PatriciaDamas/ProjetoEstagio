@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+//using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
