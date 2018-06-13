@@ -75,21 +75,21 @@
                 //Obter o tamanho do primeiro objeto
                 var key = Object.keys(dataprovider[0]);
             
-                for (var i = key.length - 1; i >= 1; i--) {
+                for (var k = key.length - 1; k >= 1; k--) {
 
                    console.log(i)
                         grafico.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                             "fillAlphas": 0.8,
-                            "labelText": "[[value]]€" + " - " + key[i],
+                            "labelText": "[[value]]€" + " - " + key[k],
                             "lineAlpha": 0.3,
-                            "title": key[i],
+                            "title": key[k],
                             "type": "column",
                             "color": "#000000",
-                            "valueField": key[i]
+                            "valueField": key[k]
                         })
                     
-                    console.log(key[i])
+                    console.log(key[k])
                 }
                 grafico.dataProvider = dataprovider;
                 var chart = AmCharts.makeChart("chartdiv", grafico);
