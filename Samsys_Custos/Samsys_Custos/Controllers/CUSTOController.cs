@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,6 +65,8 @@ namespace Samsys_Custos.Controllers
 
         }
 
+           /* var testo = _context.Database.ExecuteSqlCommand( "exec dbo.ANALISES_TO_CUSTO");*/
+
 
 
         //------------------------------------------------------------------
@@ -91,6 +94,7 @@ namespace Samsys_Custos.Controllers
          
 
     }
+
 
         public IActionResult Grafico_Custo_Total()
         {
@@ -139,6 +143,8 @@ namespace Samsys_Custos.Controllers
         // GET: Custos Equipa
         public IActionResult Equipa()
         {
+
+            
             var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
             return View(applicationDbContext);
         }
@@ -465,7 +471,7 @@ namespace Samsys_Custos.Controllers
         {
             if (id != custo.id_custo)
             {
-                return NotFound();   // DEIXOU DE FUNCIONAR COM ISTO AQUI PORQUE O ID AGORA OU VEM NULL OU VEM COM UM 0 , FAZ MAL REMOVER??
+                return NotFound();   
             }
 
             if (ModelState.IsValid)
@@ -564,6 +570,8 @@ namespace Samsys_Custos.Controllers
         // GET: CUSTO/Edit/5
         public async Task<IActionResult> EditViatura(int? id)
         {
+
+            
             if (id == null)
             {
                 return NotFound();
