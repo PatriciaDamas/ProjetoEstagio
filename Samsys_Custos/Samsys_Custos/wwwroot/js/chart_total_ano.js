@@ -8,9 +8,13 @@
             success: function (data) {
                 var ano = $("#select_ano_custos").val() 
                 console.log(ano)
+                var total = 0;
                 var dataprovider = new Array();
                 for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].nomeCompleto)
+                   
+                    var total = total + data[i].valor;
+                    
+
                     var tempdata = {};
                     Object.assign(tempdata, {
                         "Categoria": data[i].nomeCompleto,
@@ -23,6 +27,10 @@
                 var grafico = {
                     "type": "pie",
                     "theme": "light",
+                    "titles": [{
+                        "text": total + "€",
+                        "size": 30,
+                    }],
                     "dataProvider": [],
                     "valueField": "value",
                     "titleField": "Categoria",
@@ -45,6 +53,7 @@
                 }
                 grafico.dataProvider = dataprovider;
                 var chart = AmCharts.makeChart("chartdiv2", grafico);
+               
 
             
 

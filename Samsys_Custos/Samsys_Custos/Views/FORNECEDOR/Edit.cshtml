@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar Fornecedores</h2>
 
 <h4>FORNECEDOR</h4>
 <hr />
@@ -14,24 +14,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id_fornecedor" />
             <div class="form-group">
+                <label asp-for="nome" class="control-label"></label>
+                <input asp-for="nome" class="form-control"/>
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="sugestao_categoria" class="control-label"></label>
                 <select asp-for="sugestao_categoria" class="form-control" asp-items="ViewBag.sugestao_categoria"></select>
                 <span asp-validation-for="sugestao_categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="sugestao_custo" /> @Html.DisplayNameFor(model => model.sugestao_custo)
-                    </label>
-                </div>
+                <label asp-for="sugestao_custo" class="control-label">Custo Interno</label>
+                <select asp-for="sugestao_custo" class="form-control">
+                    <option value="False">Sim</option>
+                    <option value="True">Não</option>
+                </select>
+                <span asp-validation-for="sugestao_custo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="nome" class="control-label"></label>
-                <input asp-for="nome" class="form-control" />
-                <span asp-validation-for="nome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Gravar" class="btn btn-default" />
             </div>
         </form>
     </div>

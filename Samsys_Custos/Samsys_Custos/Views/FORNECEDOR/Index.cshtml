@@ -2,46 +2,44 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewBag.Class = "fa-table";
 }
 
-<h2>Index</h2>
+<h2>Fornecedores Samsys</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.sugestao_custo)
+                    Fornecedor
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.nome)
+                    Categoria
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.sugestao_custo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA.id_categoria)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_fornecedor">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id_fornecedor">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_fornecedor">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id_fornecedor">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
