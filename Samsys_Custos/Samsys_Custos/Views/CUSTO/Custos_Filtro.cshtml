@@ -1,0 +1,44 @@
+﻿@model List<Samsys_Custos.Models.CUSTOS_TOTAIS>
+@{ViewData["Title"] = "Custos Totais por Categoria";}
+
+@{
+    ViewBag.TitlePage = "Custos por Categoria";
+    ViewBag.Class = "fa-table";
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+               
+                <th>
+                    Sub-Categoria
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)€
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

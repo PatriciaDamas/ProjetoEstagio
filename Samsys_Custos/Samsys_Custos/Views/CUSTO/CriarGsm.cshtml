@@ -13,17 +13,25 @@
         <form asp-action="CriarGsm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="id_gsm" class="control-label">Número</label>
+                <select asp-for="id_gsm" id="gsm" class="form-control" asp-items="ViewBag.id_gsm" required >
+                    <option selected="selected">
+                        Seleccione o Número
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
-                <select asp-for="id_colaborador" class ="form-control" asp-items="ViewBag.id_colaborador"></select>
+                <select asp-for="id_colaborador" id="colaborador" class="form-control" asp-items="ViewBag.id_colaborador">
+                    <option selected="selected">
+                    </option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="id_categoria" class="control-label">Categoria</label>
-                <select asp-for="id_categoria" class ="form-control" asp-items="ViewBag.id_categoria"></select>
+                <select asp-for="id_categoria" class="form-control" asp-items="ViewBag.id_categoria"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="id_gsm" class="control-label">Número</label>
-                <select asp-for="id_gsm" class ="form-control" asp-items="ViewBag.id_gsm"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="ano" class="control-label">Ano</label>
                 <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
@@ -31,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="mes" class="control-label">Mês</label>
-                <select asp-for="mes" class="form-control" >
+                <select asp-for="mes" class="form-control">
                     <option value="janeiro">Janeiro</option>
                     <option value="fevereiro">Fevereiro</option>
                     <option value="março">Março</option>
@@ -45,14 +53,14 @@
                     <option value="dezembro">Dezembro</option>
                 </select>
                 <span asp-validation-for="mes" class="text-danger"></span>
-            </div>          
+            </div>
             <div class="form-group">
                 <label asp-for="valor" class="control-label">Valor</label>
                 <input asp-for="valor" class="form-control" />
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="CriarGsm" class="btn btn-default" />
+                <input type="submit" value="Inserir" class="btn btn-default">
             </div>
         </form>
     </div>
@@ -61,6 +69,8 @@
 <div>
     <a asp-action="Gsm">Voltar à Lista</a>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/atribuicao_gsm.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
