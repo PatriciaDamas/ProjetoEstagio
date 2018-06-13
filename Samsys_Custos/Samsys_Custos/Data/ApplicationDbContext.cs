@@ -13,7 +13,7 @@ namespace Samsys_Custos.Data
             : base(options)
         {
         }
-        public DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
         public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
