@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180613143232_appuser")]
+    partial class appuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -456,7 +458,7 @@ namespace Samsys_Custos.Data.Migrations
                     b.ToTable("VIATURA");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.AspNetUsers", b =>
+            modelBuilder.Entity("Samsys_Custos.Data.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -466,9 +468,9 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int>("id_colaborador");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("ApplicationUser");
 
-                    b.HasDiscriminator().HasValue("AspNetUsers");
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
