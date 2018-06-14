@@ -6,11 +6,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20180604135331_teste.cs" />
+    <Compile Remove="Data\Migrations\20180604135331_teste.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180604135605_Teste2.cs" />
+    <Compile Remove="Data\Migrations\20180604135605_Teste2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180604142415_test3.cs" />
+    <Compile Remove="Data\Migrations\20180604142415_test3.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180604154321_Custos.cs" />
+    <Compile Remove="Data\Migrations\20180604154321_Custos.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180605163346_DropFornecedores.cs" />
+    <Compile Remove="Data\Migrations\20180605163346_DropFornecedores.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180605163613_Fornecedor.cs" />
+    <Compile Remove="Data\Migrations\20180605163613_Fornecedor.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180607185239_IDPHC.cs" />
+    <Compile Remove="Data\Migrations\20180607185239_IDPHC.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180607185917_dropPHC.cs" />
+    <Compile Remove="Data\Migrations\20180607185917_dropPHC.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180607190039_ADDEDPHC.cs" />
+    <Compile Remove="Data\Migrations\20180607190039_ADDEDPHC.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180607190237_foreignPHC.cs" />
+    <Compile Remove="Data\Migrations\20180607190237_foreignPHC.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180613143232_appuser.cs" />
+    <Compile Remove="Data\Migrations\20180613143232_appuser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180613150309_users2.cs" />
+    <Compile Remove="Data\Migrations\20180613150309_users2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180614191910_userv3.cs" />
+    <Compile Remove="Data\Migrations\20180614191910_userv3.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180614221409_userv4.cs" />
+    <Compile Remove="Data\Migrations\20180614221409_userv4.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180614223950_applicationuser.cs" />
+    <Compile Remove="Data\Migrations\20180614223950_applicationuser.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180614233614_appusers2.cs" />
+    <Compile Remove="Data\Migrations\20180614233614_appusers2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
