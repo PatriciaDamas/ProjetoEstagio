@@ -26,9 +26,14 @@
                         if (meses[i].toLowerCase() === data[j].mes.toLowerCase()) {
                             var equipa = data[j].equipas;
                             var total = data[j].total
+                            var url = "https://localhost:44382/CUSTO/CustoEquipaDetalhe?ano=" + data[j].ano + "&mes=" + data[j].mes + "&equipa=" + data[j].equipas;
+                            
                             //Adicionar o resto dos campos ao objeto tempdata
                             Object.assign(tempdata, {
-                                [equipa]: total
+                                [equipa]: {
+                                    "total": total,
+                                    "url": url
+                                }
                             });
                           
                         }
@@ -84,13 +89,15 @@
                             "labelText": "[[value]]€" + " - " + key[k],
                             "lineAlpha": 0.3,
                             "title": key[k],
+                            "urlField": url,
                             "type": "column",
                             "color": "#000000",
                             "valueField": key[k]
                         })
                     
                     console.log(key[k])
-                }
+                    }
+                    
                 grafico.dataProvider = dataprovider;
                 var chart = AmCharts.makeChart("chartdiv", grafico);
                     console.log(grafico)
