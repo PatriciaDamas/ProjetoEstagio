@@ -24,8 +24,11 @@
                             if (data[i].mes.toLowerCase() == meses[j].toLowerCase()) {
                                 var Categoria = data[i].nomeCompleto;
                                 var Total = data[i].total;
+                                console.log(data[i].mes)
+                                console.log(data[i].ano)
                                 Object.assign(tempdata, {
-                                    [Categoria]: Total
+                                    [Categoria]: Total,
+                                    url: "https://localhost:44382/custo/custos_filtro?categoria=" + data[i].nomeCompleto + "&ano=" + data[i].ano + "&mes=" + data[i].mes
                                 });
                             }
                         }
@@ -73,6 +76,7 @@
                         settings.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                             "fillAlphas": 1,
+                            "urlField": "url",
                             "id": "AmGraph-" + k,
                             "title": keys[k],
                             "labelText": "[[value]]€" + " - " + keys[k],
