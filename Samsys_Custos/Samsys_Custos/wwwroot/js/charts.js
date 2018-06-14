@@ -21,7 +21,7 @@
                         });
 
                         for (var i = 0; i < data.length; i++) {
-                            if (data[i].mes.toLowerCase() == meses[j].toLowerCase()) {
+                            if (data[i].mes.toLowerCase() === meses[j].toLowerCase()) {
                                 var Categoria = data[i].nomeCompleto;
                                 var Total = data[i].total;
                                 console.log(data[i].mes)

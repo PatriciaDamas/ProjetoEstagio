@@ -6,7 +6,7 @@
             dataType: "json",
             data: { ano: $("#select_ano").val() },
             success: function (data) {
-               
+                if (!jQuery.isEmptyObject(data)) {
                 var dataprovider = new Array();
                 var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
                 var equipas = ["SAGE", "PHC", "Comunicação", "Comercial", "Desenvolvimento", "Gerência", "Direção", "Sistemas", "Planeamento e Suporte", "Dep. Técnico Interno", "Logística & Compras", "Consultores Externos", "Financeiro e Administrativo"]
@@ -93,7 +93,14 @@
                 }
                 grafico.dataProvider = dataprovider;
                 var chart = AmCharts.makeChart("chartdiv", grafico);
-                console.log(grafico)
+                    console.log(grafico)
+
+
+                } else {
+                    alert("Não existem custos associados ao ano selecionado");
+                }
+            }, error: function (err) {
+                console.log(err);
             }
         });
     }

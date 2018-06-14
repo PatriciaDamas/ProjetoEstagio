@@ -48,6 +48,23 @@ namespace Samsys_Custos.Controllers
             }
            
         }
+        // get: Filtro equipas por ano, mes, e equipa
+        public IActionResult CustoEquipaDetalhe(int? ano, string mes, string equipa)
+        {
+            if(mes == null)
+            {
+                var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.ToList();
+                return View(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.Where(a => a.Equipas == equipa & a.ano == ano & a.mes == mes).ToList();
+                return View(applicationDbContext);
+            }
+            
+
+        }
+
         public IActionResult Grafico_Gerais()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -116,7 +133,7 @@ namespace Samsys_Custos.Controllers
             return View();
 
         }
-
+        
 
         // get Json custos colaborador
         public JsonResult CustoEquipaJson(int? ano)
@@ -150,12 +167,11 @@ namespace Samsys_Custos.Controllers
         
         //------------------------------------------------------------------
         // GET: Custos Equipa
-        public IActionResult Equipa()
+        public IActionResult Equipa(string equipa, string mes, int ano)
         {
-
-            
-            var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
-            return View(applicationDbContext);
+                var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
+                return View(applicationDbContext);
+           
         }
         //------------------------------------------------------------------
         //get Custos Colaborador ???
