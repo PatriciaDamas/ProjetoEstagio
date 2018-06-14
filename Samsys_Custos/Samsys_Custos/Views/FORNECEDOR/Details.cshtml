@@ -11,6 +11,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.CATEGORIA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORIA.id_categoria)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.sugestao_custo)
         </dt>
         <dd>
@@ -21,12 +27,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CATEGORIA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CATEGORIA.id_categoria)
         </dd>
     </dl>
 </div>
