@@ -27,13 +27,12 @@
                             var equipa = data[j].equipas;
                             var total = data[j].total
                             var url = "https://localhost:44382/CUSTO/CustoEquipaDetalhe?ano=" + data[j].ano + "&mes=" + data[j].mes + "&equipa=" + data[j].equipas;
-                            
+                            var urlname = "url" + equipa;
                             //Adicionar o resto dos campos ao objeto tempdata
                             Object.assign(tempdata, {
-                                [equipa]: {
-                                    "total": total,
-                                    "url": url
-                                }
+
+                                [equipa]:total,
+                                [urlname]:url
                             });
                           
                         }
@@ -80,19 +79,19 @@
                 //Obter o tamanho do primeiro objeto
                 var key = Object.keys(dataprovider[0]);
             
-                for (var k = key.length - 1; k >= 1; k--) {
-
-                   console.log(i)
+                for (var k = equipas.length - 1; k >= 1; k--) {
+                    console.log(i);
+                    var myurl = "url" + equipas[k];
                         grafico.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                             "fillAlphas": 0.8,
-                            "labelText": "[[value]]€" + " - " + key[k],
+                            "labelText": "[[value]]€" + " - " + equipas[k],
                             "lineAlpha": 0.3,
-                            "title": key[k],
-                            "urlField": url,
+                            "title": equipas[k],
+                            "urlField": myurl,
                             "type": "column",
                             "color": "#000000",
-                            "valueField": key[k]
+                            "valueField": equipas[k]
                         })
                     
                     console.log(key[k])
