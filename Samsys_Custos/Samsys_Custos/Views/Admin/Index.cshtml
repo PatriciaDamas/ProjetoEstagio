@@ -1,87 +1,59 @@
-﻿@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.ViewModels.ListUsersViewModel>
+﻿@model IEnumerable<Samsys_Custos.ViewModels.ListUsersViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Utilizadores Back-Office</h2>
+<h2>Index</h2>
+
 <p>
-    <a asp-action="CreateUser">Novo Utilizador</a>
+    <a asp-action="Create">Create New</a>
 </p>
-
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Pesquisa por nome: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Procurar" class="btn btn-default" /> |
-            <a asp-action="Index">Voltar a Lista</a>
-        </p>
-    </div>
-</form>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                Nome
+                @Html.DisplayNameFor(model => model.id_colaborador)
             </th>
             <th>
-                ID Colaborador
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                Email
+                @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                SegSocial
+                @Html.DisplayNameFor(model => model.Segsocial)
             </th>
             <th>
-                Grupo
+                @Html.DisplayNameFor(model => model.Roles)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_colaborador)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Segsocial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Roles)
-                </td>
-                <td>
-                    <a asp-action="EditUser" asp-route-id="@item.Id">Editar</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_colaborador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Segsocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
-    Next
-</a>
-
