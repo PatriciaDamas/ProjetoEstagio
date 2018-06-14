@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Samsys_Custos.Data
 {
-    public class ApplicationUser : IdentityUser
+    public class AspNetUser : IdentityUser
     {
         public string Name { get; set; }
         public int Segsocial { get; set; }
-        public int id_colaborador {get;set;}
+        public int? id_colaborador { get; set; }
     }
 }
