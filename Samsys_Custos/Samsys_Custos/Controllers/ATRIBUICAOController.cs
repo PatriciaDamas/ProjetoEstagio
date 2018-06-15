@@ -132,13 +132,13 @@ namespace Samsys_Custos.Controllers
                     // criar atribuição
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Viatura));
                 }
                 else
                 {
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Viatura));
                 }
             }
 
@@ -164,13 +164,13 @@ namespace Samsys_Custos.Controllers
                     // criar atribuição
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(GSM));
                 }
                 else
                 {
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(GSM));
                 }
             }
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);

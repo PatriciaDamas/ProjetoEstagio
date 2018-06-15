@@ -1,55 +1,65 @@
 ﻿@model IEnumerable<Samsys_Custos.Data.ATRIBUICAO>
 
 @{
-    ViewData["Title"] = "GSM";
+    ViewData["Title"] = "Atribuições GSM";
 }
 
-<h2>GSM</h2>
+<br />
+<center><h2>Atribuições GSM</h2></center>
+<br />
+<div>
+    <button type="button" class="btn btnActionCreate" id="btnCriarGsm">Atribuir GSM</button>
+</div>
+<hr />
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    Data Inicial
+                </th>
+                <th>
+                    Data Final
+                </th>
+                <th>
+                    Número
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Opções
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_inicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_fim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GSM.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    </td>
+                    <td>
+                        <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts {
 
-<p>
-    <a asp-action="CreateGSM">Atribuir GSM</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Data Inicial
-            </th>
-            <th>
-                Data Final
-            </th>
-            <th>
-                Número
-            </th>
-            <th>
-                Colaborador
-            </th>
-            <th>
-                Opções
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data_inicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.data_fim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GSM.numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-            <td>
-                <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
-            </td>
-        </tr>
+    <script src="~/js/site.js"></script>
+
 }
-    </tbody>
-</table>
