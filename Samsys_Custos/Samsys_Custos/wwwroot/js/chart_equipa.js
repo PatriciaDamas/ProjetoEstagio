@@ -9,7 +9,7 @@
                 if (!jQuery.isEmptyObject(data)) {
                 var dataprovider = new Array();
                 var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-                var equipas = ["SAGE", "PHC", "Comunicação", "Comercial", "Desenvolvimento", "Gerência", "Direção", "Sistemas", "Planeamento e Suporte", "Dep. Técnico Interno", "Logística & Compras", "Consultores Externos", "Financeiro e Administrativo"]
+                var equipas = ["SAGE", "PHC", "Comunicação", "Comercial", "Desenvolvimento", "Gerência", "Direção", "Sistemas", "Planeamento e Suporte", "Dep. Técnico Interno", "Logistica e Compras", "Consultores Externos", "Financeiro e Administrativo"]
 
                 //Definir um objeto para guardar os dados que queremos ter no dataprovider
            
@@ -79,8 +79,9 @@
                 //Obter o tamanho do primeiro objeto
                 var key = Object.keys(dataprovider[0]);
             
-                for (var k = equipas.length - 1; k >= 1; k--) {
-                    console.log(i);
+                for (var k = equipas.length - 1 ; k >= 0; k--) {
+                    console.log(k);
+
                     var myurl = "url" + equipas[k];
                         grafico.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",

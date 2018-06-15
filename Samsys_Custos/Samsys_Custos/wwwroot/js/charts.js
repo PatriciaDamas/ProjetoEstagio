@@ -11,7 +11,7 @@
 
                     var dataprovider = new Array();
                     var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-
+                    var categorias = ["Viaturas", "Pessoal", "Infraestrutura", "Serviços Externos","Comunicações","Merchandising"];
 
                     for (var j = 0; j < meses.length; j++) {
 
@@ -24,11 +24,13 @@
                             if (data[i].mes.toLowerCase() === meses[j].toLowerCase()) {
                                 var Categoria = data[i].nomeCompleto;
                                 var Total = data[i].total;
+                                var url = "https://localhost:44382/custo/custos_filtro?categoria=" + data[i].nomeCompleto + "&ano=" + data[i].ano + "&mes=" + data[i].mes
+                                var urlName = "url" + Categoria;
                                 console.log(data[i].mes)
                                 console.log(data[i].ano)
                                 Object.assign(tempdata, {
                                     [Categoria]: Total,
-                                    url: "https://localhost:44382/custo/custos_filtro?categoria=" + data[i].nomeCompleto + "&ano=" + data[i].ano + "&mes=" + data[i].mes
+                                    [urlName]: url
                                 });
                             }
                         }
@@ -72,17 +74,19 @@
 
                    var keys = Object.keys(dataprovider[0]);
 
-                    for (var k = 1; k < keys.length; k++) {
+                    for (var k = 0; k < categorias.length; k++) {
+                        console.log(keys[k])
+                        var myUrl = "url" + categorias[k];
                         settings.graphs.push({
                             "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
                             "fillAlphas": 1,
-                            "urlField": "url",
+                            "urlField": myUrl,
                             "id": "AmGraph-" + k,
-                            "title": keys[k],
-                            "labelText": "[[value]]€" + " - " + keys[k],
+                            "title": categorias[k],
+                            "labelText": "[[value]]€" + " - " + categorias[k],
                             "type": "column",
                             "color": "#000000",
-                            "valueField": keys[k]
+                            "valueField": categorias[k]
                         });
                     }
                     settings.dataProvider = dataprovider;
