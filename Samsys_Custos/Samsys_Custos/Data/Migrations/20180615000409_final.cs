@@ -2,21 +2,9 @@
 
 namespace Samsys_Custos.Data.Migrations
 {
-    public partial class userv3 : Migration
+    public partial class final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-           
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Segsocial",
-                table: "AspNetUsers",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldNullable: true);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<int>(
                 name: "Segsocial",
@@ -24,7 +12,25 @@ namespace Samsys_Custos.Data.Migrations
                 nullable: true,
                 oldClrType: typeof(int));
 
-           
+            migrationBuilder.AddColumn<string>(
+                name: "Discriminator",
+                table: "AspNetUsers",
+                nullable: false,
+                defaultValue: "");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Discriminator",
+                table: "AspNetUsers");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Segsocial",
+                table: "AspNetUsers",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldNullable: true);
         }
     }
 }

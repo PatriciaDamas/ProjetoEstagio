@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-//using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180607190039_ADDEDPHC")]
-    partial class ADDEDPHC
+    [Migration("20180615000409_final")]
+    partial class final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rc1-32029")
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -75,6 +75,9 @@ namespace Samsys_Custos.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -114,6 +117,8 @@ namespace Samsys_Custos.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -246,6 +251,8 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int?>("id_gsm");
 
+                    b.Property<string>("id_phc");
+
                     b.Property<int?>("id_viatura");
 
                     b.Property<string>("mes");
@@ -260,9 +267,27 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.HasIndex("id_gsm");
 
+                    b.HasIndex("id_phc");
+
                     b.HasIndex("id_viatura");
 
                     b.ToTable("CUSTO");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Data.DADOS_PHC", b =>
+                {
+                    b.Property<string>("id_phc")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("custo_interno");
+
+                    b.Property<string>("id_fornecedor");
+
+                    b.HasKey("id_phc");
+
+                    b.HasIndex("id_fornecedor");
+
+                    b.ToTable("DADOS_PHC");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
@@ -433,6 +458,21 @@ namespace Samsys_Custos.Data.Migrations
                     b.ToTable("VIATURA");
                 });
 
+            modelBuilder.Entity("Samsys_Custos.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Segsocial");
+
+                    b.Property<int?>("id_colaborador");
+
+                    b.ToTable("ApplicationUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -510,9 +550,20 @@ namespace Samsys_Custos.Data.Migrations
                         .WithMany()
                         .HasForeignKey("id_gsm");
 
+                    b.HasOne("Samsys_Custos.Data.DADOS_PHC", "DADOS_PHC")
+                        .WithMany()
+                        .HasForeignKey("id_phc");
+
                     b.HasOne("Samsys_Custos.Data.VIATURA", "VIATURA")
                         .WithMany()
                         .HasForeignKey("id_viatura");
+                });
+
+            modelBuilder.Entity("Samsys_Custos.Data.DADOS_PHC", b =>
+                {
+                    b.HasOne("Samsys_Custos.Data.FORNECEDOR", "FORNECEDOR")
+                        .WithMany()
+                        .HasForeignKey("id_fornecedor");
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
