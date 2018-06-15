@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Samsys_Custos.Data
+namespace Samsys_Custos.Models
 {
-    public class AspNetUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
         public int Segsocial { get; set; }

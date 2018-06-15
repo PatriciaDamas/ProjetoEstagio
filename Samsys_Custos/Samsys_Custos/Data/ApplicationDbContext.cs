@@ -4,17 +4,18 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Models;
 using Samsys_Custos.ViewModels;
 
 namespace Samsys_Custos.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AspNetUser>
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<AspNetUser>AspNetUser{ get; set; }
+        public DbSet<ApplicationUser>ApplicationUser{ get; set; }
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
         public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
