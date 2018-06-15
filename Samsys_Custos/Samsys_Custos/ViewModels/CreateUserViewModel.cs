@@ -17,7 +17,6 @@ namespace Samsys_Custos.ViewModels
         [Display(Name = "Nº Colaborador")]
         [Required]
         public int? id_colaborador { get; set; }
-        [Phone]
         [Display(Name = "Contribuinte")]
         public int Segsocial { get; set; }
         [Required]
@@ -31,7 +30,7 @@ namespace Samsys_Custos.ViewModels
         [Display(Name = "Confirme Password")]
         public string ConfirmedPassword { get; set; }
         [Display(Name = "Tipo de Utilizador")]
-        [Required]
+      
         public string[] SelectedRoles { get; set; }
         public SelectList RolesList { get; set; }
     }

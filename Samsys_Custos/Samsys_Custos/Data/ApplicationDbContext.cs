@@ -9,13 +9,13 @@ using Samsys_Custos.ViewModels;
 
 namespace Samsys_Custos.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<ApplicationUser>ApplicationUser{ get; set; }
+     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
         public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
