@@ -1,60 +1,53 @@
 ﻿@model IEnumerable<Samsys_Custos.Data.ATRIBUICAO>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Atribuições";
 }
-
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-Atribuido em:
-            </th>
-            <th>
-                Até
-            </th>
-            <th>
-                Número
-            </th>
-            <th>
-                Colaborador
-            </th>
-            <th>
-                Matricula
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<br />
+<center><h2>Atribuições Gerais</h2></center>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data_inicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data_fim)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GSM.numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VIATURA.matricula)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_atribuicao">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id_atribuicao">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Delete</a>
-                </td>
+                <th>
+                    Atribuido em
+                </th>
+                <th>
+                    Até
+                </th>
+                <th>
+                    Número
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Matrícula
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_inicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_fim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GSM.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

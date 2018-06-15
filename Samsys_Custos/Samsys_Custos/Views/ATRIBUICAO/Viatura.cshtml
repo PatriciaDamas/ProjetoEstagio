@@ -3,53 +3,62 @@
 @{
     ViewData["Title"] = "Viatura";
 }
+<br />
+<center><h2>Atribuições Viaturas</h2></center>
+<br />
+<div>
+    <button type="button" class="btn btnActionCreate" id="btnCriarViatura">Atribuir Viatura</button>
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    Data Inicial
+                </th>
+                <th>
+                    Data Final
+                </th>
+                <th>
+                    Matrícula
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Opções
+                </th>
 
-<h2>Viatura</h2>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_inicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data_fim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VIATURA.matricula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    </td>
+                    <td>
+                        <a asp-action="EditViatura" asp-route-id="@item.id_atribuicao">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts {
 
-<p>
-    <a asp-action="CreateViatura">Atribuir Viatura</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Data Inicial
-            </th>
-            <th>
-                Data Final
-            </th>
-            <th>
-                Matricula
-            </th>
-            <th>
-                Colaborador
-            </th>
-            <th>
-                Opções
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.data_inicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.data_fim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VIATURA.matricula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-            <td>
-                <a asp-action="EditViatura" asp-route-id="@item.id_atribuicao">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_atribuicao">Eliminar</a>
-            </td>
-        </tr>
+    <script src="~/js/site.js"></script>
+
 }
-    </tbody>
-</table>
