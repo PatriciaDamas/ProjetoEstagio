@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Samsys_Custos.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Samsys_Custos
 {
@@ -40,14 +41,17 @@ namespace Samsys_Custos
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Add application services.
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +76,32 @@ namespace Samsys_Custos
                     name: "default",
                     template: "{controller=CUSTO}/{action=Grafico_Gerais}/{id?}");
             });
+
+            CreateUserRoles(serviceProvider).Wait();
+        }
+
+        private async Task CreateUserRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            IdentityResult roleResult;
+          
+            //Adding Admin Role 
+            var roleCheck = await RoleManager.RoleExistsAsync("Administrador");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Administrador"));
+            }
+            var roleUtilizadorCheck = await RoleManager.RoleExistsAsync("Utilizador");
+            if (!roleUtilizadorCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Utilizador"));
+            }
+
         }
     }
 }
+
