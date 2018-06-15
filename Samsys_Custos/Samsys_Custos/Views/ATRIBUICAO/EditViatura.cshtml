@@ -1,13 +1,17 @@
 ﻿@model Samsys_Custos.Data.ATRIBUICAO
 
 @{
-    ViewData["Title"] = "EditViatura";
+    ViewData["Title"] = "Editar Viatura";
 }
 
-<h2>Editar Viatura</h2>
-
+<br />
+<center><h2>Editar Atribuição de Viatura</h2></center>
+<br />
 <hr />
+<br />
 <div class="row">
+    <div class="col-md-4">
+    </div>
     <div class="col-md-4">
         <form asp-action="EditViatura">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,22 +31,23 @@
                 <input asp-for="data_inicio" class="form-control" />
                 <span asp-validation-for="data_inicio" class="text-danger"></span>
             </div>
+            <!--<div class="form-group">
+            <label asp-for="data_fim" class="control-label">Data Final</label>
+            <input asp-for="data_fim" class="form-control" />
+            <span asp-validation-for="data_fim" class="text-danger"></span>
+        </div>-->
             <div class="form-group">
-                <label asp-for="data_fim" class="control-label">Data Final</label>
-                <input asp-for="data_fim" class="form-control" />
-                <span asp-validation-for="data_fim" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+                <input type="submit" value="Guardar" class="btn btn-default btnCriarAtribuicao" />
             </div>
         </form>
+        <a asp-action="Viatura">Voltar</a>
+    </div>
+    <div class="col-md-4">
     </div>
 </div>
 
-<div>
-    <a asp-action="Viatura">Voltar</a>
-</div>
+    
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
