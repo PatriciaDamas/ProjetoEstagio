@@ -47,6 +47,8 @@ namespace Samsys_Custos
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Add application services.
+              services.AddTransient<IEmailSender, EmailSender>();
+
 
         }
 
