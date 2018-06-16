@@ -74,7 +74,7 @@ namespace Samsys_Custos
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-          
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

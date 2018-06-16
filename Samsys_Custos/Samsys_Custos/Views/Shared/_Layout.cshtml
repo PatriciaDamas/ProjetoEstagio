@@ -11,7 +11,8 @@
         <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="~/css/dataTables.bootstrap4.css" rel="stylesheet">
         <link href="~/css/sb-admin.css" rel="stylesheet">
-        <link href="~/css/button.css" rel="stylesheet">
+        <link href="~/css/site.css" rel="stylesheet">
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,7 +24,7 @@
 </head>
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer " id="page-top" style="background-color:white">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Gerais" class="navbar-brand"><img src="~/images/Samsys logo.png" style="width:100px" /></a>
@@ -120,9 +121,6 @@
 
                     </ul>
                 </li>
-
-
-
             </ul>
             <ul class="navbar-nav sidenav-toggler">
                 <li class="nav-item">
@@ -133,125 +131,26 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 @await Html.PartialAsync("_LoginPartial")
-
-
             </ul>
         </div>
     </nav>
-
-
-
-
     <div class="content-wrapper">
         <div class="container-fluid">
             @RenderBody()
-
         </div>
     </div>
-    <footer class="sticky-footer">
+    <footer class="sticky-footer" style="background-color:#">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © Your Website 2018</small>
+                <small style="color:white">Copyright © Samsys - Analise de Custos</small>
             </div>
         </div>
     </footer>
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
+    <a class="scroll-to-top rounded" href="#page-top" style="margin:auto;left:0;right:0;background-color:red">
         <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-
-
-    <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="top-nav">
-              <div class="container">
-                  <div class="navbar-header">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                      </button>
-                      <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/Samsys logo.png" class="logo-light"/></a>
-                  </div>
-                  <div class="navbar-collapse collapse">
-                      <ul class="nav navbar-nav">
-                          <li><a asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a></li>
-                          <li class="dropdown">
-                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                 Equipa
-                                  <span class="caret"></span>
-                              </a>
-                              <ul class="dropdown-menu">
-                                  <!--<li><a asp-area="" asp-controller="" asp-action="">Horas Registadas</a></li>
-        <li><a asp-area="" asp-controller="CUSTO" asp-action="Equipa">Custo por Equipa</a></li>
-        <li><a asp-area="" asp-controller="EQUIPA" asp-action="CustoColaborador">Colaborador</a></li>
-
-
-        </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Custos
-                <span class="caret"></span>
-
-            </a>
-            <ul class="dropdown-menu">
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Geral">Gerais</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Viatura">Viaturas</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Gsm">GSM</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Premio">Prémios</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Salario">Salários</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Economato">Economato</a></li>
-                <li><a asp-area="" asp-controller="CUSTO" asp-action="Validacao">Validação PHC</a></li>
-
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                Gestão
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições Geral</a></li>
-                <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Atribuições Viatura</a></li>
-                <li><a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">Atribuições GSM</a></li>
-                <li><a asp-area="" asp-controller="" asp-action="">Utilizadores</a></li>
-                <li><a asp-area="" asp-controller="" asp-action="">Perfis</a></li>
-            </ul>
-        </li>
-        @await Html.PartialAsync("_LoginPartial")
-        </ul>
-    </div>
-    </div>
-    </nav>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - Samsys_Custos</p>
-        </footer>
-    </div>-->
 
     <environment include="Development">
         <script src="~/js/jquery.min.js"></script>
@@ -261,7 +160,6 @@
         <script src="~/js/dataTables.bootstrap4.js"></script>
         <script src="~/js/sb-admin.min.js"></script>
         <script src="~/js/sb-admin-datatables.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
         <script>
             var str = $("#cName").text();
             console.log(str);

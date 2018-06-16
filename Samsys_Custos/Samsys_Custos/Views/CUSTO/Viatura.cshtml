@@ -10,7 +10,7 @@
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
 {
 <p>
-    <a asp-action="CriarViatura">Adicionar Custo Viatura</a>
+    <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
 </p>
 }
 

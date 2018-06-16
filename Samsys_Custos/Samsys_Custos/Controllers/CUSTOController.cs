@@ -12,8 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Samsys_Custos.Data;
 
-namespace Samsys_Custos.Controllers
-{
+namespace Samsys_Custos.Controllers { 
     public class CUSTOController : Controller
     {
         private readonly ApplicationDbContext _context;

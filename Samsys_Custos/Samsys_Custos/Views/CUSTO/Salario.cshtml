@@ -8,14 +8,14 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
-@if (User.IsInRole("SuperAdmin,Salários,Gestor"))
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
     <p>
-        <a asp-action="CriarSalario">Adicionar custo de Salário</a>
+        <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
     </p>
 }
     <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="dataTable" cellspacing="0">
             <thead>
                 <tr>
                     <th>
