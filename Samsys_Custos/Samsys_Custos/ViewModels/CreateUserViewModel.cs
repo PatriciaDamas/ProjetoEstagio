@@ -11,13 +11,14 @@ namespace Samsys_Custos.ViewModels
     {
         [Key]
         public string Id { get; set; }
-        [Display(Name = "Nome")]
+
+       [Display(Name = "Nome")]
         [Required]
         public string Name { get; set; }
         [Display(Name = "Nº Colaborador")]
         [Required]
         public int? id_colaborador { get; set; }
-        [Display(Name = "Contribuinte")]
+        [Display(Name  = "Segurança Social")]
         public int Segsocial { get; set; }
         [Required]
         public string Email { get; set; }

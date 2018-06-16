@@ -4,6 +4,7 @@
     ViewData["Title"] = "CriarViatura";
 }
 
+
 <!-- If PErmissão != de perfil Viatura retorna à pagina de custos-->
 <h2>Viatura</h2>
 
@@ -22,11 +23,10 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="id_colaborador"  class="control-label">Colaborador</label>
+                <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                 <select asp-for="id_colaborador" id="colaborador" class="form-control" asp-items="ViewBag.id_colaborador">
-                    <option selected="selected">
-                    </option>
-</select>
+                    <option selected="selected"></option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="id_categoria" class="control-label">Categoria</label>

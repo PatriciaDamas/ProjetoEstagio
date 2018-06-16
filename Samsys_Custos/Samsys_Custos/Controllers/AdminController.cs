@@ -10,11 +10,15 @@ using System.Linq;
 using System;
 using Samsys_Custos.Models;
 using Samsys_Custos.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Controllers
 {
+    //[Authorize(Roles ="SuperAdmin,Gestor")]
     public class AdminController : Controller
     {
+      
         private UserManager<ApplicationUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
@@ -36,17 +40,21 @@ namespace Samsys_Custos.Controllers
                   Email = n.Email,
                   Id = n.Id,
                   Name = n.Name,
+                  id_colaborador=n.id_colaborador,
+                  Segsocial = n.Segsocial
+                  
                  
               });
-
-            foreach (var u in usersWRoles)
+            var newusersWRoles = usersWRoles.ToList();
+           foreach (var u in newusersWRoles)
             {
                 var tusr = await _userManager.FindByIdAsync(u.Id);
                 var ru = await _userManager.GetRolesAsync(tusr);
                 u.Roles = string.Join(", ", ru);
+                
             }
 
-            return View(usersWRoles);
+            return View(newusersWRoles);
         }    
 
         //GET : /Admin/CreateUser
@@ -57,7 +65,8 @@ namespace Samsys_Custos.Controllers
             //var teste = await _roleManager.Roles.ToListAsync();
             CreateUserViewModel vmUser = new CreateUserViewModel
             {
-             RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
+                //RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
+                  RolesList = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name")
             };
 
             return View(vmUser);
@@ -75,7 +84,7 @@ namespace Samsys_Custos.Controllers
                     UserName = vmUser.Email,
                     Email = vmUser.Email,
                      id_colaborador = vmUser.id_colaborador,
-                      Segsocial = vmUser.Segsocial,                      
+                      Segsocial = vmUser.Segsocial,      
 
                   
                   
@@ -111,14 +120,16 @@ namespace Samsys_Custos.Controllers
             if (user == null)
                 return NotFound();
 
-        
-        
+
+
 
             EditUserViewModel editUserViewModel = new EditUserViewModel()
             {
-           
+
                 Email = user.Email,
                 Name = user.Name,
+                id_colaborador = user.id_colaborador,
+                Segsocial = user.Segsocial,
              
                 SelectedRoles = (await _userManager.GetRolesAsync(user)).ToArray(),
                 RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
@@ -136,7 +147,9 @@ namespace Samsys_Custos.Controllers
                 if (user == null)
                     return NotFound();                
             
-                user.Name = editUserViewModel.Name;             
+                user.Name = editUserViewModel.Name;
+                user.Segsocial = editUserViewModel.Segsocial;
+                user.id_colaborador = editUserViewModel.id_colaborador;
 
                 var userupdateresult = await _userManager.UpdateAsync(user);
                 if (userupdateresult.Succeeded)

@@ -5,66 +5,72 @@
     ViewBag.TitlePage = "Custos de Salários";
     ViewBag.Class = "fa-table";
 }
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 
-<p>
-    <a asp-action="CriarSalario">Adicionar custo de Salário</a>
-</p>
-<div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th>
-                    Ano
-                </th>
-                <th>
-                    Mês
-                </th>
-
-                <th>
-                    Total
-                </th>
-                <th>
-                    Categoria
-                </th>
-
-
-                <th>
-                    Colaborador
-                </th>
-
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+@if (User.IsInRole("SuperAdmin,Salários,Gestor"))
+{
+    <p>
+        <a asp-action="CriarSalario">Adicionar custo de Salário</a>
+    </p>
+}
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
                 <tr>
+                    <th>
+                        Ano
+                    </th>
+                    <th>
+                        Mês
+                    </th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.ano)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.mes)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
-                    </td>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
 
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
-                    </td>
+                    <th>
+                        Colaborador
+                    </th>
 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a>
-                        <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
-                    </td>
+                    <th>Ações</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUSTO.ano)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUSTO.mes)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUSTO.valor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
+                        </td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a>
+                            <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+

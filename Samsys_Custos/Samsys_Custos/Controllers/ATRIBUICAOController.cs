@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Samsys_Custos.Data;
-
 namespace Samsys_Custos.Controllers
 {
     public class ATRIBUICAOController : Controller
@@ -93,9 +93,10 @@ namespace Samsys_Custos.Controllers
 
             return View(aTRIBUICAO);
         }
-       
+
 
         // GET: ATRIBUICAO/Create
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public IActionResult CreateViatura()
         {
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -104,6 +105,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: ATRIBUICAO/Create
+        [Authorize(Roles = "Gsm")]
         public IActionResult CreateGSM()
         {
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
@@ -117,6 +119,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public async Task<IActionResult> CreateViatura([Bind("id_atribuicao,id_viatura,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
         {
             if (ModelState.IsValid)
@@ -149,6 +152,7 @@ namespace Samsys_Custos.Controllers
         // POST: ATRIBUICAO/Create_GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> CreateGSM([Bind("id_atribuicao,id_gsm,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
         {
             if (ModelState.IsValid)
@@ -178,8 +182,9 @@ namespace Samsys_Custos.Controllers
             return View(aTRIBUICAO);
         }
 
-        
+
         // GET: ATRIBUICAO/Edit/5
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditGSM(int? id)
         {
             if (id == null)
@@ -197,6 +202,7 @@ namespace Samsys_Custos.Controllers
             return View(aTRIBUICAO);
         }
         // GET: ATRIBUICAO/Edit/5
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditViatura(int? id)
         {
             if (id == null)
@@ -220,6 +226,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditGSM(int id, [Bind("id_atribuicao,id_gsm,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
         {
             if (id != aTRIBUICAO.id_atribuicao)
@@ -256,6 +263,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditViatura(int id, [Bind("id_atribuicao,id_viatura,id_colaborador,data_inicio,data_fim")] ATRIBUICAO aTRIBUICAO)
         {
             if (id != aTRIBUICAO.id_atribuicao)
@@ -289,6 +297,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: ATRIBUICAO/Delete/5
+        [Authorize(Roles = "Viaturas,Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -312,6 +321,7 @@ namespace Samsys_Custos.Controllers
         // POST: ATRIBUICAO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viaturas,Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var aTRIBUICAO = await _context.ATRIBUICAO.SingleOrDefaultAsync(m => m.id_atribuicao == id);
