@@ -68,7 +68,7 @@ namespace Samsys_Custos.Controllers
                 //RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
                   RolesList = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name")
             };
-
+           
             return View(vmUser);
         }
        
