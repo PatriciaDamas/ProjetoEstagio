@@ -9,11 +9,15 @@
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
 {
-<p>
-    <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
-</p>
+    <br />
+    <center><h2>Custos de Viaturas</h2></center>
+    <br />
+    <div>
+        <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
+    </div>
+    <hr />
 }
-
+    <br />
 
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
