@@ -264,11 +264,10 @@ namespace Samsys_Custos.Controllers {
 
         // GET: PREMIOS
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
-        public async Task<IActionResult> Premio()
+        public IActionResult Premio()
         {
-            //AUTH FOR PROFILE
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_phc == null);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.CUSTOS_PREMIOS.ToList();
+            return View(applicationDbContext);
         }
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public IActionResult CriarPremio()

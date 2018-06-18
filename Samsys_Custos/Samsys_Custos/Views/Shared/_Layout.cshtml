@@ -40,11 +40,11 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEquipa" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-sitemap"></i>
                         <span class="nav-link-text">Equipa</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <ul class="sidenav-second-level collapse" id="collapseEquipa">
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Equipa">Custos por Equipa</a>
                         </li>
@@ -54,11 +54,11 @@
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCusto" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-eur"></i>
                         <span class="nav-link-text">Custos</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                    <ul class="sidenav-second-level collapse" id="collapseCusto">
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Geral">Gerais</a>
                         </li>
@@ -91,36 +91,56 @@
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAtri" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-plus-square"></i>
+                        <span class="nav-link-text">Atribuições</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseAtri">
+                        <li>
+                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Todas</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Viaturas</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">GSM</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseGestao" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-list"></i>
                         <span class="nav-link-text">Gestão</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseMulti">
-                        @if (User.IsInRole("Gestor") || User.IsInRole("SuperAdmin"))
-                        {
-                            <li>
-                                <a asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
-                            </li>
-                        }
-                        <li>
-                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Index">Atribuições Geral</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Atribuições Viaturas</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">Atribuições GSM</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="EQUIPA" asp-action="CustoColaborador">Colaboradores</a>
-                        </li>
-
+                    <ul class="sidenav-second-level collapse" id="collapseGestao">
                         <li>
                             <a asp-area="" asp-controller="FORNECEDOR" asp-action="Index">Fornecedores</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="VIATURA" asp-action="Index">Viaturas</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="GSM" asp-action="Index">GSM</a>
                         </li>
 
                     </ul>
                 </li>
+                @if (User.IsInRole("Gestor") || User.IsInRole("SuperAdmin"))
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAdmin" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-list"></i>
+                            <span class="nav-link-text">Administrador</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseAdmin">
+
+                            <li>
+                                <a asp-area="" asp-controller="Admin" asp-action="Index">Utilizadores</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
             </ul>
             <ul class="navbar-nav sidenav-toggler">
                 <li class="nav-item">

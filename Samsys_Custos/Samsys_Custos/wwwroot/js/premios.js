@@ -3,9 +3,10 @@ $(document).ready(function () {
 
     //Vai buscar o nome da categoria nivel 1
     var catArray = new Array();
-    $('#mytable tr').each(function () {
+    $('#dataTable tr').each(function () {
         catArray.push($(this).find(".categoria").html());
     });
+    console.log(catArray);
 
     function doAjax(ArrCount) {
         var e_id = catArray[ArrCount];
@@ -18,7 +19,7 @@ $(document).ready(function () {
 
             success: function (data) {
                 if (ArrCount > 0) {
-                    $('#mytable tr').eq(ArrCount).find('td').eq(5).html(data);
+                    $('#dataTable tr').eq(ArrCount).find('td').eq(4).html(data);
                 }
 
                 ArrCount++;
@@ -26,7 +27,7 @@ $(document).ready(function () {
                     doAjax(ArrCount);
                 }
                 else {
-                    $("#mytable").show();
+                    $("#dataTable").show();
                 }
 
             },
