@@ -14,8 +14,7 @@ namespace Samsys_Custos.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }
-     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        }     
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
         public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }

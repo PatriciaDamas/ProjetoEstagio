@@ -12,8 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Samsys_Custos.Data;
 
-namespace Samsys_Custos.Controllers
-{
+namespace Samsys_Custos.Controllers { 
     public class CUSTOController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -203,6 +202,7 @@ namespace Samsys_Custos.Controllers
 
         //------------------------------------------------------------------
         // GET: SALARIO
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro")]
         public async Task<IActionResult> Salario()
         {
             //AUTH FOR PROFILE
@@ -210,6 +210,7 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: Criar SALARIO (CUSTO)
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
         public IActionResult CriarSalario()
         {
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -224,7 +225,8 @@ namespace Samsys_Custos.Controllers
         // POST: Criar Salario
         [HttpPost]
         [ValidateAntiForgeryToken]
-            public async Task<IActionResult> CriarSalario(Samsys_Custos.Data.SALARIO sALARIO)
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
+        public async Task<IActionResult> CriarSalario(Samsys_Custos.Data.SALARIO sALARIO)
             {
                 if (ModelState.IsValid)
             {
@@ -261,12 +263,14 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: PREMIOS
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
         public async Task<IActionResult> Premio()
         {
             //AUTH FOR PROFILE
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_gsm == null && c.id_viatura == null && c.id_phc == null);
             return View(await applicationDbContext.ToListAsync());
         }
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public IActionResult CriarPremio()
         {
             
@@ -307,6 +311,7 @@ namespace Samsys_Custos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public async Task<IActionResult> CriarPremio([Bind("id_colaborador,id_categoria,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -358,6 +363,7 @@ namespace Samsys_Custos.Controllers
         // POST: GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> CriarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -393,6 +399,7 @@ namespace Samsys_Custos.Controllers
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
             return View(await applicationDbContext.ToListAsync());
         }
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public IActionResult CriarViatura()
         {
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
@@ -412,6 +419,8 @@ namespace Samsys_Custos.Controllers
         // POST: CUSTO/viatura
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+
         public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -462,6 +471,7 @@ namespace Samsys_Custos.Controllers
 
         //EDITAR PRÉMIOS ------------------------
         // GET: CUSTO/Edit/5
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditPremio(int? id)
         {
             if (id == null)
@@ -492,6 +502,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditPremio(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -525,6 +536,7 @@ namespace Samsys_Custos.Controllers
 
         //EDITAR GSM ------------------------
         // GET: CUSTO/Edit/5
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditGsm(int? id)
         {
             if (id == null)
@@ -558,6 +570,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditGsm(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -593,6 +606,7 @@ namespace Samsys_Custos.Controllers
 
         //EDITAR VIATURA ------------------------
         // GET: CUSTO/Edit/5
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditViatura(int? id)
         {
 
@@ -628,6 +642,7 @@ namespace Samsys_Custos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditViatura(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -722,6 +737,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: CUSTO/Delete
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> DeleteSalario(int? id, string page)
         {
             GlobalVariables.PageServer = page;
@@ -745,6 +761,7 @@ namespace Samsys_Custos.Controllers
         // POST: CUSTO/Delete/5
         [HttpPost, ActionName("DeleteSalario")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> DeleteSalarioConfimed(int id)
         {
             var sALARIO = await _context.SALARIO.SingleOrDefaultAsync(m => m.id_salario == id);

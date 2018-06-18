@@ -5,11 +5,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Grafico_Gerais", "CUSTO", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
 
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
-                Ola @UserManager.GetUserName(User) !
+                Ola @User.Identity.Name !
             </a>
          
             <li>
@@ -22,9 +22,11 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
 
-        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
-            <i class="fa fa-fw fa-user-plus"></i>Register
-        </a>
+        <!--
+       <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+         <i class="fa fa-fw fa-user-plus"></i>Register
+     </a>
+    -->
         <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
             <i class="fa fa-fw fa-sign-in"></i>Login
         </a>

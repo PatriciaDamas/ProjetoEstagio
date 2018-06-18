@@ -5,10 +5,16 @@
     ViewBag.TitlePage = "Custos de Viaturas";
     ViewBag.Class = "fa-table";
 }
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
+{
 <p>
-    <!--Verificação para pessoa autorizada!!-->
-    <a asp-action="CriarViatura">Adicionar Custo Viatura</a>
+    <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
 </p>
+}
+
+
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -66,6 +72,6 @@
             }
         </tbody>
     </table>
-    </div>
+</div>
 
-  
+

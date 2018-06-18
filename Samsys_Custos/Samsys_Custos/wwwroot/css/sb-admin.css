@@ -456,23 +456,24 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 }
 
 footer.sticky-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 56px;
-  background-color: #e9ecef;
-  line-height: 55px;
+    position: fixed;
+
+    width: 100%;
+    background-color: #212529;
+    color: white;
+    text-align: center;
+    line-height: 56px;
+   
 }
 
 @media (min-width: 992px) {
   footer.sticky-footer {
-    width: calc(100% - 250px);
+    width: calc(100%);
   }
 }
 
 @media (min-width: 992px) {
   body.sidenav-toggled footer.sticky-footer {
-    width: calc(100% - 55px);
+    width: calc(100%);
   }
 }

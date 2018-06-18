@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Samsys_Custos.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Samsys_Custos.Services;
 
 namespace Samsys_Custos
 {
@@ -45,8 +46,12 @@ namespace Samsys_Custos
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthenticationCore();
 
             // Add application services.
+
+              services.AddTransient<IEmailSender, EmailSender>();
+
 
         }
 
@@ -69,7 +74,7 @@ namespace Samsys_Custos
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -86,19 +91,73 @@ namespace Samsys_Custos
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             IdentityResult roleResult;
-          
+
+            var roleSUCheck = await RoleManager.RoleExistsAsync("SuperAdmin");
+            if (!roleSUCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+            }
             //Adding Admin Role 
-            var roleCheck = await RoleManager.RoleExistsAsync("Administrador");
+            var roleCheck = await RoleManager.RoleExistsAsync("Gestor");
             if (!roleCheck)
             {
                 //create the roles and seed them to the database 
-                roleResult = await RoleManager.CreateAsync(new IdentityRole("Administrador"));
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Gestor"));
             }
-            var roleUtilizadorCheck = await RoleManager.RoleExistsAsync("Utilizador");
-            if (!roleUtilizadorCheck)
+            var roleAdministrativoCheck = await RoleManager.RoleExistsAsync("Administrativo");
+            if (!roleAdministrativoCheck)
             {
                 //create the roles and seed them to the database 
-                roleResult = await RoleManager.CreateAsync(new IdentityRole("Utilizador"));
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Administrativo"));
+            }
+            var roleFinanceiroCheck = await RoleManager.RoleExistsAsync("Financeiro");
+            if (!roleFinanceiroCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Financeiro"));
+            }
+            var roleLiderCheck = await RoleManager.RoleExistsAsync("Lider");
+            if (!roleLiderCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Lider"));
+            }
+            var roleColaboradorCheck = await RoleManager.RoleExistsAsync("Colaborador");
+            if (!roleColaboradorCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Colaborador"));
+            }
+            var roleViaturasCheck = await RoleManager.RoleExistsAsync("Viaturas");
+            if (!roleViaturasCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Viaturas"));
+            }
+            var roleGsmCheck = await RoleManager.RoleExistsAsync("Gsm");
+            if (!roleGsmCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Gsm"));
+            }
+            var roleAtribCheck = await RoleManager.RoleExistsAsync("Atribuições");
+            if (!roleAtribCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Atribuições"));
+            }
+            var roleSalarioCheck = await RoleManager.RoleExistsAsync("Salários");
+            if (!roleSalarioCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Salários"));
+            }
+            var rolePremioCheck = await RoleManager.RoleExistsAsync("Prémios");
+            if (!rolePremioCheck)
+            {
+                //create the roles and seed them to the database 
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Prémios"));
             }
 
         }
