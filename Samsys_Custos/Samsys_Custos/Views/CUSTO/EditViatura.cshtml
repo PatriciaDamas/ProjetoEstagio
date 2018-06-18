@@ -6,10 +6,14 @@
     ViewBag.Class = "fa-pencil-square-o";
 }
 
-
-
+<br />
+<center><h2>Editar Custo de Viatura</h2></center>
+<br />
 <hr />
+<br />
 <div class="row">
+    <div class="col-md-4">
+    </div>
     <div class="col-md-4">
         <form asp-action="EditViatura">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,7 +28,7 @@
                 <select asp-for="id_categoria" class="form-control" asp-items="ViewBag.id_categoria"></select>
                 <span asp-validation-for="id_categoria" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="id_viatura" class="control-label">Matrícula</label>
                 <select asp-for="id_viatura" class="form-control" asp-items="ViewBag.id_viatura"></select>
@@ -52,22 +56,26 @@
                 </select>
                 <span asp-validation-for="mes" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="valor" class="control-label">Valor</label>
                 <input asp-for="valor" class="form-control" />
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <center><input type="submit" value="Save" class="btn btnCreate" /></center>
             </div>
         </form>
+        <div>
+            <center> <a asp-action="Viatura">Voltar</a></center>
+        </div>
+
+    </div>
+    <div class="col-md-4">
     </div>
 </div>
 
-<div>
-    <a asp-action="Viatura">Voltar à Lista</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
