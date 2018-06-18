@@ -4,17 +4,20 @@
     ViewData["Title"] = "CriarGsm";
 }
 
-<h2>Gsm</h2>
-
-<h4>CUSTO</h4>
+<br />
+<center><h2>Criar Custo de GSM</h2></center>
+<br />
 <hr />
+<br />
 <div class="row">
+    <div class="col-md-4">
+    </div>
     <div class="col-md-4">
         <form asp-action="CriarGsm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="id_gsm" class="control-label">Número</label>
-                <select asp-for="id_gsm" id="gsm" class="form-control" asp-items="ViewBag.id_gsm" required >
+                <select asp-for="id_gsm" id="gsm" class="form-control" asp-items="ViewBag.id_gsm" required>
                     <option selected="selected">
                         Seleccione o Número
                     </option>
@@ -23,8 +26,7 @@
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                 <select asp-for="id_colaborador" id="colaborador" class="form-control" asp-items="ViewBag.id_colaborador">
-                    <option selected="selected">
-                    </option>
+                    <option selected="selected"></option>
                 </select>
             </div>
             <div class="form-group">
@@ -60,15 +62,18 @@
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Inserir" class="btn btn-default">
+                <center>    <input type="submit" value="Criar Registo" class="btn btnCreate"></center>
             </div>
         </form>
+        <div>
+            <center> <a asp-action="Gsm">Voltar</a></center>
+        </div>
+    </div>
+    <div class="col-md-4">
     </div>
 </div>
 
-<div>
-    <a asp-action="Gsm">Voltar à Lista</a>
-</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="~/js/atribuicao_gsm.js"></script>
 

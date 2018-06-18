@@ -63,9 +63,23 @@
     font-size: 16px;
     border: none;
     margin-left: 15px;
+    border-radius: 0px;
 }
 
     .btnActionCreate:hover {
         background-color: rgb(255,181,15) ;
+        color: white;
+    }
+.btnCreate {
+    background-color: rgb(255,158,53);
+    color: white;
+    width: 200px;
+    font-size: 16px;
+    border: none;
+     text-align:center;
+  
+}
+    .btnCreate:hover {
+        background-color: rgb(255,181,15);
         color: white;
     }
