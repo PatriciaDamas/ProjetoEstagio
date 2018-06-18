@@ -57,9 +57,10 @@ namespace Samsys_Custos.Controllers
             //var teste = await _roleManager.Roles.ToListAsync();
             CreateUserViewModel vmUser = new CreateUserViewModel
             {
-          //      RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
-            };
+                RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
 
+            };
+           
             return View(vmUser);
         }
        
