@@ -4,41 +4,36 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Gestão de Utilizadores</h2>
 
 <p>
-    <a asp-action="CreateUser">Create New</a>
+    <a class=" btn btnActionCreate" asp-action="CreateUser">Novo utilizador</a>
 </p>
-<table class="table">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+            Nº Colaborador
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.id_colaborador)
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+               Segurança Social
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Segsocial)
+               Perfil
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roles)
-            </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.id_colaborador)
             </td>
