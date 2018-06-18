@@ -18,8 +18,9 @@ $(document).ready(function () {
 
 
             success: function (data) {
+                console.log(e_id)
                 if (ArrCount > 0) {
-                    $('#dataTable tr').eq(ArrCount).find('td').eq(4).html(data);
+                    $('#dataTable tr').eq(ArrCount).find('td').eq(2).html(data);
                 }
 
                 ArrCount++;

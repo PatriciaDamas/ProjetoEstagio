@@ -10,67 +10,72 @@
 
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
-    <p>
+    <br />
+    <center><h2>Custos de Salários</h2></center>
+    <br />
+    <div>
         <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
-    </p>
-}
-    <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>
-                        Ano
-                    </th>
-                    <th>
-                        Mês
-                    </th>
-
-                    <th>
-                        Total
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
-
-
-                    <th>
-                        Colaborador
-                    </th>
-
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CUSTO.ano)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CUSTO.mes)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CUSTO.valor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
-                        </td>
-
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
-                        </td>
-
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a>
-                            <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     </div>
+    <hr />
+}
+    <br />
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    Ano
+                </th>
+                <th>
+                    Mês
+                </th>
+
+                <th>
+                    Total
+                </th>
+                <th>
+                    Categoria
+                </th>
+
+
+                <th>
+                    Colaborador
+                </th>
+
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CUSTO.ano)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CUSTO.mes)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CUSTO.valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id_custo">Editar</a>
+                        <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 

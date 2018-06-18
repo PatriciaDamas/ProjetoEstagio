@@ -1,18 +1,21 @@
 ﻿@model Samsys_Custos.Data.CUSTO
 
 @{
-    ViewData["Title"] = "EditPremio";
+    ViewData["Title"] = "Editar Custo Prémios";
 }
 
-<h2>EditPremio</h2>
-
-<h4>CUSTO</h4>
+<br />
+<center><h2>Editar Custo de Prémios</h2></center>
+<br />
 <hr />
+<br />
 <div class="row">
+    <div class="col-md-4">
+    </div>
     <div class="col-md-4">
         <form asp-action="EditPremio">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id_custo"/>
+            <input type="hidden" asp-for="id_custo" />
             <div class="form-group">
                 <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                 <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
@@ -59,15 +62,18 @@
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <center> <input type="submit" value="Save" class="btn btnCreate" /></center>
             </div>
         </form>
+        <div>
+            <center>  <a asp-action="Premio">Voltar</a></center>
+        </div>
+    </div>
+    <div class="col-md-4">
     </div>
 </div>
 
-<div>
-    <a asp-action="Premio">Voltar à Lista</a>
-</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="~/js/cascading_select.js"></script>
 
