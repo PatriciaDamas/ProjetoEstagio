@@ -513,6 +513,8 @@ namespace Samsys_Custos.Controllers {
             {
                 try
                 {
+                    var catname = _context.CATEGORIA.Where(a => a.id_categoria == custo.id_categoria).FirstOrDefault();
+                    custo.designacao =catname.nome;
                     _context.Update(custo);
                     await _context.SaveChangesAsync();
                 }
