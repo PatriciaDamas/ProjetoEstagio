@@ -391,6 +391,14 @@ namespace Samsys_Custos.Controllers {
         }
 
         //------------------------------------------------------------------
+        // GET: dados_phc
+        public async Task<IActionResult> Validacao()
+        {
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        //------------------------------------------------------------------
         // GET: Viaturas
         public async Task<IActionResult> Viatura()
         {
