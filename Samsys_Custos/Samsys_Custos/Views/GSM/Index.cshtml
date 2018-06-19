@@ -3,38 +3,42 @@
 @{
     ViewData["Title"] = "Index";
 }
+<br />
+<center><h2>GSM</h2></center>
+<hr />
+<br />
+<div>
+    <a class="btn btnActionCreate" asp-action="Create">Criar GSM</a>
+</div>
 
-<h2>GSM</h2>
-
-<p>
-    <a asp-action="Create">Criar GSM</a>
-</p>
+<br />
 <table class="table table-bordered" id="dataTable" cellspacing="0">
     <thead>
         <tr>
-                <th>
-                    Número
-                </th>
-                <th>
-                    Equipamento
-                </th>
+            <th>
+                Número
+            </th>
+            <th>
+                Equipamento
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.equipamento)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_gsm">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_gsm">Eliminar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.equipamento)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id_gsm">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id_gsm">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
