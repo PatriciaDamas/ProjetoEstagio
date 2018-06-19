@@ -1,10 +1,36 @@
 ﻿@model List<Samsys_Custos.Models.CUSTOS_COLABORADOR>
 @{ViewData["Title"] = "Colaborador";}
-<h2>Custo Colaborador</h2>
+<br />
+<center>
+    <h2>Custo por Colaborador</h2>
+</center>
+<hr />
+<br />
 
 <div class="row">
-    <hr />
-    <table class="table" id="mytable">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+
+        <label class="control-label">Ano</label>
+        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos">
+            <option value=null>Selecione um ano</option>
+        </select>
+        <br />
+        <label class="control-label">Colaborador</label>
+        <select class="form-control" asp-items="ViewBag.id_colaborador" id="select_colaborador">
+            <option value=null>Selecione um colaborador</option>
+        </select>
+        <br />
+        <center><input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltro" /></center>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+<hr />
+<div class="table-responsive" id="table">
+   
+    <table class="table table-bordered" id="mytable" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>
@@ -12,6 +38,9 @@
                 </th>
                 <th>
                     Categoria
+                </th>
+                <th>
+                    Ano
                 </th>
                 <th>
                     Janeiro
@@ -49,13 +78,11 @@
                 <th>
                     Dezembro
                 </th>
-                <th>
-                    Ano
-                </th>
+
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
+        <tbody id="tableColaborador">
+           <!-- @foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -104,7 +131,7 @@
                         @Html.DisplayFor(modelItem => item.Ano)
                     </td>
                 </tr>
-            }
+            }-->
         </tbody>
     </table>
 </div>

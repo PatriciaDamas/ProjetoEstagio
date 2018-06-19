@@ -28,24 +28,7 @@ $(document).ready(function () {
                 });
                 return false;
             })
-            //ATRIBUIÇÕES -------------------------------------------------------------------------------------------
-            $(document.body).on('change', '#tipo_atribuicao', function () {
-                /*$("#atribuir_viatura").empty();
-                $("#atribuir_GSM").empty();*/
-                if (($("#tipo_atribuicao").val() == "GSM") || ($("#tipo_atribuicao").val() == "Viatura")) {
-
-                            if ($("#tipo_atribuicao").val() == "GSM") {
-                                $("#form_atribuicao").attr('action', 'Atribuicao_GSM')
-                                $("#atribuir_viatura").hide();
-                                $("#atribuir_GSM").show();
-                            }
-                            else {
-                                $("#form_atribuicao").attr('action', 'Atribuicao_viatura')
-                                $("#atribuir_viatura").show();
-                                $("#atribuir_GSM").hide();
-                            }
-
-                }
-            })
+           
+            
         });
   

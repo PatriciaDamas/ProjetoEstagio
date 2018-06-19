@@ -1,40 +1,44 @@
-﻿@model IEnumerable<Samsys_Custos.Data.EQUIPA>
+﻿@model List<Samsys_Custos.Data.EQUIPA>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Custo Colaborador";
+    ViewBag.Class = "fa-table";
 }
 
-<h2>Equipas</h2>
-
-<p>
-    <a asp-action="Create"> Nova Equipa</a>
-</p>
-<table class="table table-bordered" id="dataTable" cellspacing="0">
-    <thead>
-        <tr>
+<br />
+<center><h2>EQUIPAS</h2></center>
+<br />
+<hr />
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
                 <th>
                     Nome
                 </th>
-            <th>
-                Colaborador Líder
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id_equipa">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.id_equipa">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th>
+                    Colaborador Lider
+                </th>
+                <th>Opções</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id_lider)
+                    </td>
+                    <td>
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

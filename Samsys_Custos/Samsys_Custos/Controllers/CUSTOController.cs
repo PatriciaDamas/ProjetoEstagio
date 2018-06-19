@@ -182,7 +182,7 @@ namespace Samsys_Custos.Controllers {
                 Years.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
             }
             ViewData["ano"] = new SelectList(Years, "Value", "Text");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "nome", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
 
 
             if (ano == null)
@@ -194,11 +194,22 @@ namespace Samsys_Custos.Controllers {
             }
             else
             {
-                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() );
+                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
                 return View( applicationDbContext.ToList());
             }
             
         }
+
+        //------------------------------------------------------------------
+        // GET: CUSTO COLABOADOR JSON
+        public JsonResult CustoColaboradorJson(int? ano, int? id)
+        {
+            var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
+            return Json(applicationDbContext);
+            
+
+        }
+
 
         //------------------------------------------------------------------
         // GET: SALARIO
