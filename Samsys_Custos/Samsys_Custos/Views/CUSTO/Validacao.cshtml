@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+
+@{
+    ViewData["Title"] = "Validacao";
+}
+
+<center><h2>Validação PHC</h2></center>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UTILIZADOR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CATEGORIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ano)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.designacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.designacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
