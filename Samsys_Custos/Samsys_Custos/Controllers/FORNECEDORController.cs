@@ -81,7 +81,7 @@ namespace Samsys_Custos.Controllers
             {
                 return NotFound();
             }
-            ViewData["sugestao_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome", fORNECEDOR.sugestao_categoria);
+            ViewData["sugestao_categoria"] = new SelectList(_context.CATEGORIA.Where(a=>a.id_pai != null), "id_categoria", "nome", fORNECEDOR.sugestao_categoria);
            
             return View(fORNECEDOR);
         }
