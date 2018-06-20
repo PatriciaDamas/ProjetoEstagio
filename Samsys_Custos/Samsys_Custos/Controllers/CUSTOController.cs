@@ -187,8 +187,8 @@ namespace Samsys_Custos.Controllers {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == ano);
                 return Json(applicationDbContext);
             }
-           
 
+           
         }
 
         public IActionResult Grafico_Equipa_Media()
