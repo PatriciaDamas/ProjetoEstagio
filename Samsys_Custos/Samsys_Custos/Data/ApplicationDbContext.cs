@@ -37,6 +37,7 @@ namespace Samsys_Custos.Data
         public DbQuery<Samsys_Custos.Models.CUSTOS_TOTAIS> CUSTOS_TOTAIS { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_DETALHE> CUSTOS_EQUIPA_DETALHE { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_PREMIOS> CUSTOS_PREMIOS { get; set; }
+        public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_MEDIA> CUSTOS_EQUIPA_MEDIA { get; set; }
 
     }
 }

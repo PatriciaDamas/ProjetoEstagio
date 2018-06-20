@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     console.log($("#select_colaborador").val());
-    $("#table").hide();
+    $("#mytable").hide();
     $("#btnFiltro").click(function () {
         var ano = $("#select_ano_custos").val();
         var colaborador = $("#select_colaborador").val();
@@ -18,7 +18,7 @@
                 if ($("#select_colaborador").val() != 'null' && $("#select_ano_custos").val() != 'null') {
 
 
-                    $("#table").show();
+                    $("#mytable").show();
                     $("#tableColaborador").empty();
                     var table = '';
                     console.log(data.length);
@@ -43,8 +43,10 @@
                         table += '<td>' + data[i].dezembro + '</td>';
                         table += '<tr>';
                     }
-
+                    
+                    $("#nomeColaborador").append($("#select_colaborador :selected").text())
                     $("#tableColaborador").append(table)
+
 
                 } else {
                     alert("Por favor, preencha as caixas de filtro corretamente")
