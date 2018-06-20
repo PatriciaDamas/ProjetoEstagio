@@ -38,11 +38,13 @@ namespace Samsys_Custos.Controllers {
             if(mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano).ToList();
+                ViewBag.nomeCategoria = categoria;
                 return View(applicationDbContext);
             }
             else
             {
                 var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano & a.mes == mes).ToList();
+                ViewBag.nomeCategoria = categoria;
                 return View(applicationDbContext);
 
             }
@@ -54,11 +56,13 @@ namespace Samsys_Custos.Controllers {
             if(mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.ToList();
+                ViewBag.nomeEquipa = equipa;
                 return View(applicationDbContext);
             }
             else
             {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.Where(a => a.Equipas == equipa & a.ano == ano & a.mes == mes).ToList();
+                ViewBag.nomeEquipa = equipa;
                 return View(applicationDbContext);
             }
             
