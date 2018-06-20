@@ -276,7 +276,7 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
         }
         // POST: Criar Salario
@@ -404,10 +404,17 @@ namespace Samsys_Custos.Controllers {
         }
 
         // GET: GSM
-        public async Task<IActionResult> Gsm()
+        public async Task<IActionResult> Gsm(int? page)
         {
+        
+           
+            //Definir Paginação
+            int pageSize = 10;
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
-            return View(await applicationDbContext.ToListAsync());
+            var count = applicationDbContext.Count();
+            var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            /*return View(await applicationDbContext.ToListAsync());*/
+            return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
         }
         public IActionResult CriarGsm()
         {
@@ -471,11 +478,18 @@ namespace Samsys_Custos.Controllers {
 
         //------------------------------------------------------------------
         // GET: Viaturas
-        public async Task<IActionResult> Viatura()
+        public async Task<IActionResult> Viatura(int? page)
         {
-
+            
+  
+           
+            //Definir Paginação
+            int pageSize = 10;
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
-            return View(await applicationDbContext.ToListAsync());
+            var count = applicationDbContext.Count();
+            var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            /*return View(await applicationDbContext.ToListAsync());*/
+            return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
         }
         [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public IActionResult CriarViatura()

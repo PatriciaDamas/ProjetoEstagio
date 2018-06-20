@@ -1,9 +1,12 @@
-﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+﻿
+@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.Data.CUSTO>
 
 @{
     ViewData["Title"] = "Gsm";
     ViewBag.TitlePage = "Custos de GSM";
     ViewBag.Class = "fa-table";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Gsm") || User.IsInRole("Gestor"))
 {
@@ -75,4 +78,16 @@
             }
         </tbody>
     </table>
+    <a asp-action="Gsm"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Gsm"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
 </div>
