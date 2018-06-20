@@ -42,14 +42,7 @@
                     "export": {
                         "enabled": true
                     }
-                    /*"listeners": [{
-                        "event": "clickSlice",
-                        "method": function (event) {
-                            var chart = event.chart;
-                            console.log(event.dataItem.dataContext.Categoria);
-
-                        }
-                    }]*/
+                    
                 }
                 grafico.dataProvider = dataprovider;
                 var chart = AmCharts.makeChart("chartdiv2", grafico);

@@ -38,11 +38,13 @@ namespace Samsys_Custos.Controllers {
             if(mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano).ToList();
+                ViewBag.nomeCategoria = categoria;
                 return View(applicationDbContext);
             }
             else
             {
                 var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano & a.mes == mes).ToList();
+                ViewBag.nomeCategoria = categoria;
                 return View(applicationDbContext);
 
             }
@@ -54,11 +56,13 @@ namespace Samsys_Custos.Controllers {
             if(mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.ToList();
+                ViewBag.nomeEquipa = equipa;
                 return View(applicationDbContext);
             }
             else
             {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.Where(a => a.Equipas == equipa & a.ano == ano & a.mes == mes).ToList();
+                ViewBag.nomeEquipa = equipa;
                 return View(applicationDbContext);
             }
             
@@ -139,7 +143,7 @@ namespace Samsys_Custos.Controllers {
         }
         
 
-        // get Json custos colaborador
+        // get Json custos equipa
         public JsonResult CustoEquipaJson(int? ano)
         {
             if (ano == null)
@@ -168,9 +172,39 @@ namespace Samsys_Custos.Controllers {
             return View();
             
         }
+        //------------------------------------------------------------------
+        // GET Json MEDIA CUSTOS EQUIPA
+        public JsonResult CustoEquipaMediaJson(int? ano)
+        {
+            if (ano == null)
+            {
+         
+                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
+           
 
-        
-        
+        }
+
+        public IActionResult Grafico_Equipa_Media()
+        {
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+            return View();
+
+        }
+
         //------------------------------------------------------------------
         // GET: Custos Equipa
         public IActionResult Equipa(string equipa, string mes, int ano)
@@ -186,14 +220,13 @@ namespace Samsys_Custos.Controllers {
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
-                Years.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Text");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "nome", "nome");
-            ViewData["ano"] = new SelectList(Years, "Value", "Text");
+            ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Value");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+           
 
 
             if (ano == null)
