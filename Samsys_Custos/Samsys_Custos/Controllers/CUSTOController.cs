@@ -686,6 +686,27 @@ namespace Samsys_Custos.Controllers {
             return View(custo);
         }
 
+        // Editar validação
+        // GET: custo/Edit
+        [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
+        public async Task<DADOS_PHC> EditValidacao(int? id)
+        {
+
+            
+            var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
+            try
+            {
+                validaçao.custo_interno = true; // parte onde devia fazer commit devia mudar de 0 para 1, está sempre a mudar para 1 porque é para teste
+                _context.Update(validaçao);
+                return validaçao;
+            }
+            catch
+            {
+                return validaçao;
+            }
+            
+
+        }
 
         //EDITAR VIATURA ------------------------
         // GET: CUSTO/Edit/5
@@ -718,9 +739,6 @@ namespace Samsys_Custos.Controllers {
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", viatura.id_viatura);
             return View(viatura);
         }
-
-     
-
 
         // POST: VIATURASEdit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

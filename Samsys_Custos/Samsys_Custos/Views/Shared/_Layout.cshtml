@@ -85,9 +85,12 @@
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Economato">Economato</a>
                         </li>
-                        <li>
-                            <a asp-area="" asp-controller="CUSTO" asp-action="Validacao">Validação PHC</a>
-                        </li>
+                        @if (User.IsInRole("Salários") || User.IsInRole("SuperAdmin") || User.IsInRole("Atribuições") || User.IsInRole("Gestor"))
+                        {
+                            <li>
+                                <a asp-area="" asp-controller="CUSTO" asp-action="Validacao">Validação PHC</a>
+                            </li>
+                        }
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Atribuições">
