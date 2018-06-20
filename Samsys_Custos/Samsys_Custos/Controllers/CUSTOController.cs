@@ -465,7 +465,7 @@ namespace Samsys_Custos.Controllers {
         // GET: dados_phc
         public async Task<IActionResult> Validacao()
         {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null).Where(c=> c.DADOS_PHC.custo_interno == false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -698,11 +698,14 @@ namespace Samsys_Custos.Controllers {
 
             
             var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
+
             try
             {
                 validaçao.custo_interno = true; // parte onde devia fazer commit devia mudar de 0 para 1, está sempre a mudar para 1 porque é para teste
                 _context.Update(validaçao);
-                return validaçao;
+                await _context.SaveChangesAsync();
+                var validaçao2 = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
+                return validaçao2;
             }
             catch
             {
