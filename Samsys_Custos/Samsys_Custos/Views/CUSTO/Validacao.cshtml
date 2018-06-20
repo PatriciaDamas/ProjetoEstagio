@@ -2,63 +2,83 @@
 
 @{
     ViewData["Title"] = "Validacao";
+    ViewBag.TitlePage = "Validação PHC";
+    ViewBag.Class = "fa-table";
 }
-
 <center><h2>Validação PHC</h2></center>
 <br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UTILIZADOR)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CATEGORIA)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ano)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.mes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.designacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.valor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ano)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.designacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor)
-            </td>
-        </tr>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th hidden>
+                   id
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Categoria
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Ano
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Designação
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                   Validar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.id_phc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    <!--<a asp-action="EditValidacao" asp-route-id="@item.id_custo">Editar</a>-->
+                    <center> <input id="checkbox" type="checkbox" name="validacao_box" value="1"></center>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts {
+    <script src="~/js/Validação_check_mark.js"></script>
 }
-    </tbody>
-</table>
+
