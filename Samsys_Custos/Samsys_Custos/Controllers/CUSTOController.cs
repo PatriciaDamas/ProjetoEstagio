@@ -786,6 +786,76 @@ namespace Samsys_Custos.Controllers {
             return View(custo);
         }
 
+        //EDITAR SALÁRIO
+        // GET: CUSTO/Edit/5
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        public async Task<IActionResult> EditSalario(int? id)
+        {
+
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var salario = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
+            if (salario == null)
+            {
+                return NotFound();
+            }
+
+            /*var viatura_categoria = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura_categoria.id_categoria), "id_categoria", "nome", viatura.id_categoria);*/
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.nome == "Salários"), "id_categoria", "nome", salario.id_categoria);
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", salario.ano);
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", salario.id_colaborador);
+            return View(salario);
+        }
+
+        // POST: SalariosEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        public async Task<IActionResult> EditSalario(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
+        {
+            if (id != custo.id_custo)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    custo.data = DateTime.Now;
+                    _context.Update(custo);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CUSTOExists(custo.id_custo))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Salario));
+            }
+
+
+            return View(custo);
+        }
 
         public static class GlobalVariables
         {
