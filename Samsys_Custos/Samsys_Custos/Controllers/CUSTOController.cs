@@ -226,20 +226,16 @@ namespace Samsys_Custos.Controllers {
 
             ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Value");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-           
-
-
-            if (ano == null)
+        
+            if(id!=null && ano!=null)
             {
-                Debug.WriteLine("-----------------------------------"+id);
-                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == DateTime.Now.Year.ToString() && a.Colaborador.Equals(id.ToString()));
-                return View(applicationDbContext.ToList());   
 
+                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
+                return View( applicationDbContext.ToList());
             }
             else
             {
-                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
-                return View( applicationDbContext.ToList());
+                return View();
             }
             
         }
@@ -249,6 +245,7 @@ namespace Samsys_Custos.Controllers {
         public JsonResult CustoColaboradorJson(int? ano, int? id)
         {
             var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
+ 
             return Json(applicationDbContext);
             
 
@@ -472,7 +469,9 @@ namespace Samsys_Custos.Controllers {
         // GET: dados_phc
         public async Task<IActionResult> Validacao()
         {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null).Where(c=> c.DADOS_PHC.custo_interno == false);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -707,7 +706,7 @@ namespace Samsys_Custos.Controllers {
         // Editar validação
         // GET: custo/Edit
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
-        public async Task<DADOS_PHC> EditValidacao(int? id)
+        public async Task<DADOS_PHC> EditValidacao(int? id , bool flag, int? cat)
         {
 
             
@@ -715,7 +714,12 @@ namespace Samsys_Custos.Controllers {
 
             try
             {
-                validaçao.custo_interno = true; // parte onde devia fazer commit devia mudar de 0 para 1, está sempre a mudar para 1 porque é para teste
+                validaçao.custo_interno = flag;
+                if (cat != null)
+                {
+                   var custo = _context.CUSTO.Where(a => a.id_phc == validaçao.id_phc).FirstOrDefault();
+                    custo.id_categoria =(int) cat;
+                }
                 _context.Update(validaçao);
                 await _context.SaveChangesAsync();
                 var validaçao2 = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());

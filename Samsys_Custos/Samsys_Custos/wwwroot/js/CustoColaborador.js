@@ -44,7 +44,7 @@
                         table += '<tr>';
                     }
                     
-                    $("#nomeColaborador").append($("#select_colaborador :selected").text())
+                    $("#nomeColaborador").text($("#select_colaborador :selected").text())
                     $("#tableColaborador").append(table)
 
 

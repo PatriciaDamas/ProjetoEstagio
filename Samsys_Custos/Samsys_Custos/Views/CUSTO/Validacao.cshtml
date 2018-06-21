@@ -37,13 +37,16 @@
                     Valor
                 </th>
                 <th>
-                   Validar
+                   Custo Interno
                 </th>
             </tr>
         </thead>
         <tbody>
+            
             @foreach (var item in Model)
-            {
+                {
+                  
+
             <tr>
                 <td hidden>
                     @Html.DisplayFor(modelItem => item.id_phc)
@@ -53,6 +56,13 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    <select class="form-control" asp-items="ViewBag.id_categoria">
+                        <option selected="selected" value="vazio">
+                            Atribuir Categoria
+                        </option>
+                    </select>
+                  
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.data)
@@ -70,11 +80,21 @@
                     @Html.DisplayFor(modelItem => item.valor)
                 </td>
                 <td>
-                    <!--<a asp-action="EditValidacao" asp-route-id="@item.id_custo">Editar</a>-->
-                    <center> <input id="checkbox" type="checkbox" name="validacao_box" value="1"></center>
-                </td>
-            </tr>
-            }
+                    @if (item.DADOS_PHC.custo_interno == false)
+                    {
+                        <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
+                        <p hidden>False</p>
+                    }
+                    else
+                    {
+                    <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
+                    <p hidden>True</p>
+
+                }
+                    </td>
+                </tr>
+                    }
+                
         </tbody>
     </table>
 </div>
