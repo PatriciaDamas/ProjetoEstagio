@@ -836,13 +836,15 @@ namespace Samsys_Custos.Controllers {
             return View(salario);
         }
 
+        
+
         // POST: SalariosEdit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
-        public async Task<IActionResult> EditSalario(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
+        public async Task<IActionResult> EditSalario(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
             {
@@ -952,6 +954,7 @@ namespace Samsys_Custos.Controllers {
             if (sALARIO == null)
             {
                 return NotFound();
+
             }
             return View(sALARIO);
         }
