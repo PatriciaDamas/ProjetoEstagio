@@ -174,17 +174,19 @@ namespace Samsys_Custos.Controllers {
         }
         //------------------------------------------------------------------
         // GET Json MEDIA CUSTOS EQUIPA
-        public JsonResult CustoEquipaMediaJson(int? ano)
+        public JsonResult CustoEquipaMediaJson(string ano)
         {
+            //chamar o stored proc para a tabela MEDIA_CUSTOS
+            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
             if (ano == null)
             {
          
-                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == DateTime.Now.Year.ToString());
                 return Json(applicationDbContext);
             }
             else
             {
-                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == ano);
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == ano);
                 return Json(applicationDbContext);
             }
 
@@ -194,7 +196,7 @@ namespace Samsys_Custos.Controllers {
         public IActionResult Grafico_Equipa_Media()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
-            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            for (int i = 2018; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
                 Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
