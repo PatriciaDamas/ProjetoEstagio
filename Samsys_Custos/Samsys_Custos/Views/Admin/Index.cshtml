@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<Samsys_Custos.ViewModels.ListUsersViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Utilizadores";
 }
 
-<h2>Gestão de Utilizadores</h2>
-
-<p>
+<br />
+<center><h2>Gestão de Utilizadores</h2></center>
+<br />
+<div>
     <a class=" btn btnActionCreate" asp-action="CreateUser">Novo utilizador</a>
-</p>
+</div>
+<hr />
+<br />
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
         <tr>
             <th>
-            Nº Colaborador
+                Nº Colaborador
             </th>
             <th>
                 Nome
@@ -22,39 +25,40 @@
                 Email
             </th>
             <th>
-               Segurança Social
+                Segurança Social
             </th>
             <th>
-               Perfil
+                Perfil
             </th>
-            <th>Ações</th>
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.id_colaborador)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Segsocial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Roles)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditUser", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_colaborador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Segsocial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roles)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                    <!--@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |-->
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

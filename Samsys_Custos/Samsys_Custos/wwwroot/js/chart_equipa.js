@@ -13,7 +13,7 @@
 
                 //Definir um objeto para guardar os dados que queremos ter no dataprovider
            
-                console.log(data);
+                //console.log(data);
                 //Definir os doze meses de um determinado ano no gráfico
                 for (var i = 0; i < meses.length; i++) {
                     //console.log(data[i].mes)

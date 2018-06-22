@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Samsys_Custos.Data.CUSTO>
+﻿@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.Data.CUSTO>
 
 @{
     ViewData["Title"] = "Viatura";
     ViewBag.TitlePage = "Custos de Viaturas";
     ViewBag.Class = "fa-table";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
@@ -17,7 +19,7 @@
     </div>
     <hr />
 }
-    <br />
+<br />
 
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -75,6 +77,19 @@
             }
         </tbody>
     </table>
+    <a asp-action="Viatura"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Viatura"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+
 </div>
 
 

@@ -20,9 +20,21 @@
                         Object.assign(tempdata, {
                             "Mês": meses[i]
                         });
+                        for (var j = 0; j < data.length; j++) {
+                            if (meses[i].toLowerCase() === data[j].mes.toLowerCase()) {
 
-                        dataprovider.push(tempdata);
+                                var equipa = data[j].equipas;
+                                var total = data[j].total;
+                                Object.assign(tempdata, {
+                                    [equipa]: total
 
+                                });
+                            }
+                        }
+
+                        if (Object.keys(tempdata).length >= 2) {
+                            dataprovider.push(tempdata);
+                        }
                     }
                 
                
