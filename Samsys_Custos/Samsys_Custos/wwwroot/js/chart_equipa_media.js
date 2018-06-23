@@ -21,10 +21,12 @@
                             "Mês": meses[i]
                         });
                         for (var j = 0; j < data.length; j++) {
-                            if (meses[i].toLowerCase() === data[j].mes.toLowerCase()) {
 
-                                var equipa = data[j].equipas;
-                                var total = data[j].total;
+                            if (meses[i].toLowerCase() === data[j].mes.toLowerCase()) {
+                               
+                                var equipa = data[j].nome;
+                                console.log(equipa)
+                                var total = data[j].total / data[j].qtd_colaboradores;
                                 Object.assign(tempdata, {
                                     [equipa]: total
 

@@ -173,17 +173,19 @@ namespace Samsys_Custos.Controllers {
         }
         //------------------------------------------------------------------
         // GET Json MEDIA CUSTOS EQUIPA
-        public JsonResult CustoEquipaMediaJson(int? ano)
+        public JsonResult CustoEquipaMediaJson(string ano)
         {
+            //chamar o stored proc para a tabela MEDIA_CUSTOS
+            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
             if (ano == null)
             {
          
-                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == DateTime.Now.Year.ToString());
                 return Json(applicationDbContext);
             }
             else
             {
-                var applicationDbContext = _context.CUSTOS_EQUIPA_MEDIA.ToList().Where(a => a.ano == ano);
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == ano);
                 return Json(applicationDbContext);
             }
 
@@ -193,7 +195,7 @@ namespace Samsys_Custos.Controllers {
         public IActionResult Grafico_Equipa_Media()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
-            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            for (int i = 2018; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
                 Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
@@ -262,6 +264,7 @@ namespace Samsys_Custos.Controllers {
         }
         // GET: Criar SALARIO (CUSTO)
         [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
+
         public IActionResult CriarSalario()
         {
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -758,7 +761,7 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value", viatura.ano);
+            ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Value", viatura.ano);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", viatura.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", viatura.id_viatura);
             return View(viatura);
@@ -797,9 +800,7 @@ namespace Samsys_Custos.Controllers {
                     }
                 }
                 return RedirectToAction(nameof(Viatura));
-            }
-
-            
+            }   
             return View(custo);
         }
 
@@ -808,30 +809,27 @@ namespace Samsys_Custos.Controllers {
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditSalario(int? id)
         {
-
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var salario = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
+            var salario = await _context.SALARIO.SingleOrDefaultAsync(m => m.id_salario == id);
+            var custo = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == salario.id_custo);
             if (salario == null)
             {
                 return NotFound();
             }
 
-            /*var viatura_categoria = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura_categoria.id_categoria), "id_categoria", "nome", viatura.id_categoria);*/
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome",custo.id_colaborador);
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
                 Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
             Years.OrderByDescending(x => x.Value);
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.nome == "Salários"), "id_categoria", "nome", salario.id_categoria);
-            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", salario.ano);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", salario.id_colaborador);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value",custo.ano);
             return View(salario);
         }
 
@@ -843,9 +841,9 @@ namespace Samsys_Custos.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
-        public async Task<IActionResult> EditSalario(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, data, ano, mes, designacao, valor")] CUSTO custo)
+        public async Task<IActionResult> EditSalario(int id, CUSTO cUSTO, SALARIO sALARIO)
         {
-            if (id != custo.id_custo)
+            if (id != sALARIO.id_salario)
             {
                 return NotFound();
             }
@@ -854,13 +852,18 @@ namespace Samsys_Custos.Controllers {
             {
                 try
                 {
-                    custo.data = DateTime.Now;
-                    _context.Update(custo);
+                    cUSTO.valor = sALARIO.irs + sALARIO.liquido + sALARIO.outras_despesas + sALARIO.outras_regalias + sALARIO.outros + sALARIO.seguranca_social + sALARIO.subsidio_alimentacao;
+                    sALARIO.CUSTO = cUSTO;
+
+                    _context.Update(sALARIO);
+
+
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CUSTOExists(custo.id_custo))
+                    if (!CUSTOExists(sALARIO.id_custo))
                     {
                         return NotFound();
                     }
@@ -873,7 +876,7 @@ namespace Samsys_Custos.Controllers {
             }
 
 
-            return View(custo);
+            return View(sALARIO);
         }
 
         public static class GlobalVariables
@@ -915,11 +918,6 @@ namespace Samsys_Custos.Controllers {
             if (GlobalVariables.PageServer == "Viatura")
             {
                 return RedirectToAction(nameof(Viatura));
-
-            }
-            if (GlobalVariables.PageServer == "Salario")
-            {
-                return RedirectToAction(nameof(Salario));
 
             }
             if (GlobalVariables.PageServer == "Gsm")
