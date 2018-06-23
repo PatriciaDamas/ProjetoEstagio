@@ -3,30 +3,44 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<br />
+<center><h2>Eliminar GSM</h2></center>
+<br />
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <center>
+            <h6>Tem a certeza que pertende eliminar este GSM?</h6>
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                    Número
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.numero)
+                </dd>
+                <dt>
+                    Equipamento
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.equipamento)
+                </dd>
+            </dl>
 
-<h2>Eliminar</h2>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="id_gsm" />
+                <input type="submit" value="Eliminar" class="btn btnCreate" />
+            </form>
+            <br />
+            <div>
+                <a asp-action="Index">Voltar</a>
+            </div>
+        </center>
+    </div>
+    <div class="col-md-4">
+    </div>
 
-<h3>Tem a certeza que pertende eliminar este GSM?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           Número
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.numero)
-        </dd>
-        <dt>
-            Equipamento
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.equipamento)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="id_gsm" />
-        <input type="submit" value="Eliminar" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar</a>
-    </form>
 </div>

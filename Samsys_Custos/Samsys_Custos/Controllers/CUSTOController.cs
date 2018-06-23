@@ -83,8 +83,8 @@ namespace Samsys_Custos.Controllers {
         }        
         public JsonResult GeralJson(int? ano)
         {
-
-            if(ano==null)
+            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
+            if (ano==null)
             {
                 var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
                 return Json(applicationDbContext);
@@ -97,8 +97,7 @@ namespace Samsys_Custos.Controllers {
 
         }
 
-           /* var testo = _context.Database.ExecuteSqlCommand( "exec dbo.ANALISES_TO_CUSTO");*/
-
+        /* var testo = _context.Database.ExecuteSqlCommand( "exec dbo.ANALISES_TO_CUSTO");*/
 
 
         //------------------------------------------------------------------

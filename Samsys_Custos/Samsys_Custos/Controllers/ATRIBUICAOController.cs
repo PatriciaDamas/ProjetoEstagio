@@ -20,12 +20,12 @@ namespace Samsys_Custos.Controllers
             _context = context;
         }
 
-        // GET: ATRIBUICAO
+        /*// GET: ATRIBUICAO
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.UTILIZADOR).Include(a => a.VIATURA);
             return View(await applicationDbContext.ToListAsync());
-        }
+        }*/
 
         //Obter json das atribuições de gsm e obter json das atribuições de gsm de um determinado colaborador
         public JsonResult AtribuicaoGsmJson(int? id)
@@ -73,7 +73,7 @@ namespace Samsys_Custos.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: ATRIBUICAO/Details/5
+       /* // GET: ATRIBUICAO/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -92,7 +92,7 @@ namespace Samsys_Custos.Controllers
             }
 
             return View(aTRIBUICAO);
-        }
+        }*/
 
 
         // GET: ATRIBUICAO/Create
@@ -295,10 +295,9 @@ namespace Samsys_Custos.Controllers
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
         }
-
         // GET: ATRIBUICAO/Delete/5
-        [Authorize(Roles = "Viaturas,Gsm,Gestor,SuperAdmin")]
-        public async Task<IActionResult> Delete(int? id)
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+        public async Task<IActionResult> DeleteViatura(int? id)
         {
             if (id == null)
             {
@@ -306,7 +305,6 @@ namespace Samsys_Custos.Controllers
             }
 
             var aTRIBUICAO = await _context.ATRIBUICAO
-                .Include(a => a.GSM)
                 .Include(a => a.UTILIZADOR)
                 .Include(a => a.VIATURA)
                 .SingleOrDefaultAsync(m => m.id_atribuicao == id);
@@ -318,16 +316,57 @@ namespace Samsys_Custos.Controllers
             return View(aTRIBUICAO);
         }
 
-        // POST: ATRIBUICAO/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: ATRIBUICAO/DeleteViatura/5
+        [HttpPost, ActionName("DeleteViatura")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Viaturas,Gsm,Gestor,SuperAdmin")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+        public async Task<IActionResult> DeleteViaturaConfirmed(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var aTRIBUICAO = await _context.ATRIBUICAO.SingleOrDefaultAsync(m => m.id_atribuicao == id);
             _context.ATRIBUICAO.Remove(aTRIBUICAO);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Viatura));
+        }
+
+        // GET: ATRIBUICAO/DeleteGSM/5
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
+        public async Task<IActionResult> DeleteGSM(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var aTRIBUICAO = await _context.ATRIBUICAO
+                .Include(a => a.GSM)
+                .Include(a => a.UTILIZADOR)
+                .SingleOrDefaultAsync(m => m.id_atribuicao == id);
+            if (aTRIBUICAO == null)
+            {
+                return NotFound();
+            }
+
+            return View(aTRIBUICAO);
+        }
+
+        // POST: ATRIBUICAO/DeleteGSM/5
+        [HttpPost, ActionName("DeleteGSM")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
+        public async Task<IActionResult> DeleteGSMConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var aTRIBUICAO = await _context.ATRIBUICAO.SingleOrDefaultAsync(m => m.id_atribuicao == id);
+            _context.ATRIBUICAO.Remove(aTRIBUICAO);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(GSM));
         }
 
         private bool ATRIBUICAOExists(int id)

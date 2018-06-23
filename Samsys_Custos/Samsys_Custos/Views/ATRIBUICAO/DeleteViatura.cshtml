@@ -1,0 +1,64 @@
+﻿@model Samsys_Custos.Data.ATRIBUICAO
+
+@{
+    ViewData["Title"] = "DeleteViatura";
+}
+
+<br />
+<center><h2>Remover Atribuição de Viatura</h2></center>
+<br />
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <center>
+            <h6>Deseja remover esta atribuição?</h6>
+        </center>
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                Viatura
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VIATURA.matricula)
+            </dd>
+            <dt>
+                Marca
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.VIATURA.marca)
+            </dd>
+            <dt>
+                Colaborador
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UTILIZADOR.nome)
+            </dd>
+            <dt>
+                Data Início
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.data_inicio)
+            </dd>
+            <dt>
+                Data Final
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.data_fim)
+            </dd>
+        </dl>
+        <br />
+        <form asp-action="DeleteViatura">
+            <input type="hidden" asp-for="id_atribuicao" />
+            <center><input type="submit" value="Remover" class="btn btnCreate" /></center>
+</form>
+        <br />
+        <div>
+            <center><a asp-action="Viatura">Voltar</a></center>
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
