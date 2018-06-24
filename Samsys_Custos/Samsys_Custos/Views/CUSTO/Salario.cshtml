@@ -12,15 +12,11 @@
 
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
-    <br />
+
     <center><h2>Custos de Salários</h2></center>
-    <br />
-    <div>
-        <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
-    </div>
     <hr />
+        <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
 }
-<br />
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" cellspacing="0">
         <thead>

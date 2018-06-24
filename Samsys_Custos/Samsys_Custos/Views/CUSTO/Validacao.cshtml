@@ -7,8 +7,8 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
-<center><h2>Validação PHC</h2></center>
-<br />
+<center style="padding-top:1%"><h2>Validação PHC</h2></center>
+<hr />
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -83,16 +83,16 @@
                     <td>
                         @if (item.DADOS_PHC.custo_interno == false)
                         {
-                            <center><input id="checkbox"  type="checkbox" name="validacao_box" checked></center>
+                            <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
                             <p hidden>False</p>
                         }
                         else
                         {
-                            <center><input id="checkbox"  type="checkbox" name="validacao_box"></center>
+                            <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
                             <p hidden>True</p>
 
                         }
-                        </td>
+                    </td>
                 </tr>
             }
 

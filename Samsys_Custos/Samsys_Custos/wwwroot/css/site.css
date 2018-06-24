@@ -79,7 +79,19 @@
      text-align:center;
   
 }
-    .btnCreate:hover {
+.btnCreate:hover {
+        background-color: rgb(255,181,15);
+        color: white;
+ }
+
+#btnMediaCustos {
+    background-color: rgb(255,158,53);
+    color: white;
+    width: 200px;
+    text-align: center;
+    border-radius: 0px;
+}
+    #btnMediaCustos:hover {
         background-color: rgb(255,181,15);
         color: white;
     }

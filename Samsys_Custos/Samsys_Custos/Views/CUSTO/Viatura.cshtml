@@ -16,7 +16,6 @@
     <hr />
     <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
     }
-
 <div class="table-responsive">
 
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -69,6 +68,7 @@
                     </td>
                     <td>
                         <a asp-action="EditViatura" asp-route-id="@item.id_custo">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.id_custo">Remover</a>
                     </td>
                 </tr>
             }

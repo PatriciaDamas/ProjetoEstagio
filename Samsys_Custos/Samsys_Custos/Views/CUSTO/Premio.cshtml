@@ -9,15 +9,13 @@
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Prémios") || User.IsInRole("Gestor"))
 {
-    <br />
-    <center><h2>Custos de Prémios</h2></center>
-    <br />
-    <div>
-        <a class=" btn btnActionCreate" asp-action="CriarPremio">Novo registo de Prémios</a>
-    </div>
+
+    <center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
     <hr />
+    <a class=" btn btnActionCreate" asp-action="CriarPremio">Novo registo de Prémios</a>
+
+
 }
-<br />
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -49,32 +47,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
+                <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.mes)
-                </td>
-                <td class="categoria">
-                    @Html.DisplayFor(modelItem => item.id_categoria)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.designacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.valor)€
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Colaborador)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mes)
+                    </td>
+                    <td class="categoria">
+                        @Html.DisplayFor(modelItem => item.id_categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.designacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valor)€
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Colaborador)
+                    </td>
 
-                <td>
-                    <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Premio">Remover</a>
-                </td>
-            </tr>
+                    <td>
+                        <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.id_custo" asp-route-page="Premio">Remover</a>
+                    </td>
+                </tr>
             }
         </tbody>
 
