@@ -3,35 +3,42 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h2>Criar GSM</h2>
-
-<h4>GSM</h4>
+<br />
+<center><h2>Criar GSM</h2></center>
+<br />
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="numero" class="control-label">Número</label>
-                <input asp-for="numero" class="form-control" />
-                <span asp-validation-for="numero" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <center>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="numero" class="control-label">Número</label>
+                    <input asp-for="numero" class="form-control" />
+                    <span asp-validation-for="numero" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="equipamento" class="control-label">Equipamento</label>
+                    <input asp-for="equipamento" class="form-control" />
+                    <span asp-validation-for="equipamento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Criar" class="btn btnCreate" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="Index">Voltar</a>
             </div>
-            <div class="form-group">
-                <label asp-for="equipamento" class="control-label">Equipamento</label>
-                <input asp-for="equipamento" class="form-control" />
-                <span asp-validation-for="equipamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-default" />
-            </div>
-        </form>
+        </center>
+    </div>
+    <div class="col-md-4">
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Voltar</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

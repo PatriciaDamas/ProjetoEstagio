@@ -1,0 +1,64 @@
+﻿@model Samsys_Custos.Data.ATRIBUICAO
+
+@{
+    ViewData["Title"] = "DeleteGSM";
+}
+<br />
+<center><h2>Remover Atribuição de GSM</h2></center>
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <center>
+            <h6>Deseja remover esta atribuição?</h6>
+        </center>
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                GSM
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GSM.numero)
+            </dd>
+            <dt>
+                Equipamento
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GSM.equipamento)
+            </dd>
+            <dt>
+                Colaborador
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UTILIZADOR.nome)
+            </dd>
+            <dt>
+                Data Início
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.data_inicio)
+            </dd>
+            <dt>
+                Data Final
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.data_fim)
+            </dd>
+        </dl>
+
+        <form asp-action="DeleteGSM">
+            <input type="hidden" asp-for="id_atribuicao" />
+            <center><input type="submit" value="Remover" class="btn btnCreate" /></center>
+        </form>
+        <br />
+        <div>
+            <center><a asp-action="GSM">Voltar</a></center>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>

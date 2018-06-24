@@ -3,36 +3,52 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<br />
+<center><h2>Eliminar Viatura</h2></center>
+<br />
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <center>
+            <h6>Tem a certeza que pertende eliminar esta viatura?</h6>
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                    Matrícula
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.matricula)
+                </dd>
+                <dt>
+                    Marca
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.marca)
+                </dd>
+                <dt>
+                    Modelo
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.modelo)
+                </dd>
+            </dl>
 
-<h2>Eliminar</h2>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="id_viatura" />
+                <center>
+                    <input type="submit" value="Eliminar" class="btn btnCreate" />
+                </center>
+            </form>
+            <br />
+            <div>
+                <a asp-action="Index">Voltar</a>
+            </div>
+        </center>
+    </div>
+    <div class="col-md-4">
+    </div>
 
-<h3>Tem a certeza que pertende eliminar esta viatura?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Matrícula
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.matricula)
-        </dd>
-        <dt>
-            Marca
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.marca)
-        </dd>
-        <dt>
-            Modelo
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.modelo)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="id_viatura" />
-        <input type="submit" value="Eliminar" class="btn btn-default" /> |
-        <a asp-action="Index">Voltar</a>
-    </form>
 </div>

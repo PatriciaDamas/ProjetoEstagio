@@ -19,7 +19,7 @@ namespace Samsys_Custos.Data
         public decimal outras_despesas { get; set; }
         public decimal outras_regalias { get; set; }
         [ForeignKey("CUSTO")]
-        public int? id_custo { get; set; }
+        public int id_custo { get; set; }
         public CUSTO CUSTO { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Samsys_Custos.Controllers
         public IActionResult Colaborador()
         {
 
-            var applicationDbContext = _context.COLABORADOR.ToList();
+            var applicationDbContext = _context.UTILIZADOR.Include(a=>a.EQUIPA).ToList();
             return View(applicationDbContext);
         }
 
