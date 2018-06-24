@@ -31,7 +31,6 @@ namespace Samsys_Custos.Data
         public DbSet<Samsys_Custos.Models.MEDIA_CUSTOS> MEDIA_CUSTOS { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA> CUSTOS_EQUIPA { get; set; }
         public DbQuery<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA> DASHBOARD_CUSTOS_CATEGORIA { get; set; }
-        public DbQuery<Samsys_Custos.Models.COLABORADOR> COLABORADOR { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_COLABORADOR> CUSTOS_COLABORADOR { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_RUBRICA> CUSTOS_EQUIPA_RUBRICA { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_TOTAIS_ANO> CUSTOS_TOTAIS_ANO { get; set; }
@@ -39,9 +38,6 @@ namespace Samsys_Custos.Data
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_DETALHE> CUSTOS_EQUIPA_DETALHE { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_PREMIOS> CUSTOS_PREMIOS { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA_MEDIA> CUSTOS_EQUIPA_MEDIA { get; set; }
-       
-       
-
     }
 
 }

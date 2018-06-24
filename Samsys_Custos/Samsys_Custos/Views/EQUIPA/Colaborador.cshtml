@@ -1,4 +1,4 @@
-﻿@model List<Samsys_Custos.Models.COLABORADOR>
+﻿@model List<Samsys_Custos.Data.UTILIZADOR>
 @{ViewData["Title"] = "Colaboradores";}
 <br />
 <center><h2>Colaboradores Samsys</h2></center>
@@ -32,15 +32,15 @@
                 @Html.DisplayFor(modelItem => item.id_colaborador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Colaborador)
+                @Html.DisplayFor(modelItem => item.nome)
 
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Equipa)
+                @Html.DisplayFor(modelItem => item.EQUIPA.nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Admissao)
+                @Html.DisplayFor(modelItem => item.data_admissao)
             </td>
 
         </tr>

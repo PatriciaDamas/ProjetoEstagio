@@ -22,20 +22,29 @@ namespace Samsys_Custos.Controllers {
         {
             _context = context;
         }
-      
-        
-        //------------------------------------------------------------------
-        // GET: Custos Gerais
-        public IActionResult Geral() {
 
-            var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.ToList();
-            return View(applicationDbContext);
+        #region DASHBOARD
+
+        // GET: RETORNA DASHBOARD
+        public IActionResult Grafico_Gerais()
+        {
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+            return View();
         }
 
-        // GET: Custos Gerais por categoria/ano - Filtro do gráfico pie e do gráfico de custo total ao ano
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: FILTRO ANO GRÁFICOS CUSTOS TOTAIS
         public IActionResult Custos_Filtro(string categoria, int ano, string mes)
         {
-            if(mes == null)
+            if (mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_TOTAIS.Where(a => a.NomeCompleto == categoria & a.ano == ano).ToList();
                 ViewBag.nomeCategoria = categoria;
@@ -48,12 +57,52 @@ namespace Samsys_Custos.Controllers {
                 return View(applicationDbContext);
 
             }
-           
         }
-        // get: Filtro equipas por ano, mes, e equipa
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA INFORMAÇÃO PARA O GRÁFICO DE CUSTOS AO LONGO DO ANO
+        public JsonResult GeralJson(int? ano)
+        {
+            if (ano == null)
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA INFORMAÇÃO PARA O GRÁFICO DE CUSTOS ANUAIS
+        public JsonResult CustoTotalAnoJson(int? ano)
+        {
+            if (ano == null)
+            {
+                var applicationDbContext = _context.CUSTOS_TOTAIS_ANO.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTOS_TOTAIS_ANO.ToList().Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        #endregion
+
+        #region EQUIPA
+
+        // GET: FILTRO POR ANO,MES E EQUIPA DE CUSTO EQUIPA
         public IActionResult CustoEquipaDetalhe(int? ano, string mes, string equipa)
         {
-            if(mes == null)
+            if (mes == null)
             {
                 var applicationDbContext = _context.CUSTOS_EQUIPA_DETALHE.ToList();
                 ViewBag.nomeEquipa = equipa;
@@ -65,84 +114,11 @@ namespace Samsys_Custos.Controllers {
                 ViewBag.nomeEquipa = equipa;
                 return View(applicationDbContext);
             }
-            
-
         }
 
-        public IActionResult Grafico_Gerais()
-        {
-            List<SelectListItem> Years = new List<SelectListItem>();
-            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
-            {
-                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
-            }
-            Years.OrderByDescending(x => x.Value);
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
-            return View();
-        }        
-        public JsonResult GeralJson(int? ano)
-        {
-            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
-            if (ano==null)
-            {
-                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
-                return Json(applicationDbContext);
-            }
-            else
-            {
-                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == ano);
-                return Json(applicationDbContext);
-            }
-
-        }
-
-        /* var testo = _context.Database.ExecuteSqlCommand( "exec dbo.ANALISES_TO_CUSTO");*/
-
-
-        //------------------------------------------------------------------
-        // GET: Custos Totais Ano
-
-        public IActionResult CustoTotal()
-        {
-            var applicationDbContext = _context.CUSTOS_TOTAIS_ANO.ToList();
-            return View(applicationDbContext);
-        }
-        public JsonResult CustoTotalAnoJson(int? ano)
-        {
-            if (ano == null)
-            {
-                var applicationDbContext = _context.CUSTOS_TOTAIS_ANO.ToList().Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString()));
-                return Json(applicationDbContext);
-            }
-            else
-            {
-            var applicationDbContext = _context.CUSTOS_TOTAIS_ANO.ToList().Where(a => a.ano == ano);
-              return Json(applicationDbContext);
-            }
-
-
-         
-
-    }
-
-
-        public IActionResult Grafico_Custo_Total()
-        {
-            List<SelectListItem> Years = new List<SelectListItem>();
-            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
-            {
-                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
-            }
-            Years.OrderByDescending(x => x.Value);
-
-            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
-            return View();
-
-        }
-        
-
-        // get Json custos equipa
+        // GET: RETORNA INFORMAÇÃO PARA O GRÁFICO DE CUSTOS DE EQUIPA AO LONGO DO ANO
         public JsonResult CustoEquipaJson(int? ano)
         {
             if (ano == null)
@@ -155,9 +131,11 @@ namespace Samsys_Custos.Controllers {
                 var applicationDbContext = _context.CUSTOS_EQUIPA.ToList().Where(a => a.ano == ano);
                 return Json(applicationDbContext);
             }
-            
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA GRÁFICO DE CUSTO EQUIPAS
         public IActionResult Grafico_Equipa()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -169,29 +147,11 @@ namespace Samsys_Custos.Controllers {
 
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
-            
-        }
-        //------------------------------------------------------------------
-        // GET Json MEDIA CUSTOS EQUIPA
-        public JsonResult CustoEquipaMediaJson(string ano)
-        {
-            //chamar o stored proc para a tabela MEDIA_CUSTOS
-            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
-            if (ano == null)
-            {
-         
-                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == DateTime.Now.Year.ToString());
-                return Json(applicationDbContext);
-            }
-            else
-            {
-                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == ano);
-                return Json(applicationDbContext);
-            }
-
-           
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA GRÁFICO DE MÉDIA CUSTOS EQUIPAS
         public IActionResult Grafico_Equipa_Media()
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -203,21 +163,57 @@ namespace Samsys_Custos.Controllers {
 
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
-
         }
 
-        //------------------------------------------------------------------
-        // GET: Custos Equipa
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA INFORMAÇÃO PARA O GRÁFICO DE MÉDIA DE CUSTOS DE EQUIPA AO LONGO DO ANO
+        public JsonResult CustoEquipaMediaJson(string ano)
+        {
+            //chamar o stored proc para a tabela MEDIA_CUSTOS
+            _context.Database.ExecuteSqlCommand("exec dbo.MEDIA_CUSTO_PROC");
+            if (ano == null)
+            {
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == DateTime.Now.Year.ToString());
+                return Json(applicationDbContext);
+            }
+            else
+            {
+                var applicationDbContext = _context.MEDIA_CUSTOS.ToList().Where(a => a.ano == ano);
+                return Json(applicationDbContext);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        #endregion
+
+        #region LISTAGENS
+
+        // GET: RETORNA TODOS OS CUSTOS
+        public IActionResult Geral(int? page)
+        {
+            int pageSize = 10;
+            var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
+            var count = applicationDbContext.Count();
+            var gerais = applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToList();
+            return View(new PaginatedList<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>(gerais, count, page ?? 1, pageSize));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA EQUIPA
         public IActionResult Equipa(string equipa, string mes, int ano)
         {
-                var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
-                return View(applicationDbContext);
-           
+            var applicationDbContext = _context.CUSTOS_EQUIPA.ToList();
+            return View(applicationDbContext);
         }
-        //------------------------------------------------------------------
-        //get Custos Colaborador ???
-        public IActionResult Colaborador(int? ano, int? id)
-        {   
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA VIEW DE SELEÇÃO PARA CUSTOS DE COLABORADOR
+        public IActionResult Colaborador()
+        {
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -225,46 +221,99 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
-        
-            if(id!=null && ano!=null)
-            {
-
-                var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
-                return View( applicationDbContext.ToList());
-            }
-            else
-            {
-                return View();
-            }
-            
+            return View();
         }
 
-        //------------------------------------------------------------------
-        // GET: CUSTO COLABOADOR JSON
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA INFORMAÇÃO PARA DETALHE DO CUSTO COLABORADOR
         public JsonResult CustoColaboradorJson(int? ano, int? id)
         {
             var applicationDbContext = _context.CUSTOS_COLABORADOR.Where(a => a.Ano == ano.ToString() && a.Colaborador.Equals(id.ToString()));
- 
             return Json(applicationDbContext);
-            
-
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        //------------------------------------------------------------------
-        // GET: SALARIO
+        // GET: RETORNA TABELA SALARIO
         [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro")]
-        public async Task<IActionResult> Salario()
+        public async Task<IActionResult> Salario(int? page)
         {
-            //AUTH FOR PROFILE
+            int pageSize = 10;
             var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR);
-            return View(await applicationDbContext.ToListAsync());
+            var count = applicationDbContext.Count();
+            var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
         }
-        // GET: Criar SALARIO (CUSTO)
-        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA ECONOMATO
+        public async Task<IActionResult> Economato(int? page)
+        {
+            int pageSize = 10;
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
+            var count = applicationDbContext.Count();
+            var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<CUSTO>(users, count, page ?? 1, pageSize));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA PREMIOS
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
+        public IActionResult Premio()
+        {
+            var applicationDbContext = _context.CUSTOS_PREMIOS.ToList();
+            return View(applicationDbContext);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA EQUIPAMENTOS GSM
+        public async Task<IActionResult> Gsm(int? page)
+        {
+            int pageSize = 10;
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
+            var count = applicationDbContext.Count();
+            var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA VALIDAÇÃO DE DADOS PHC
+        public async Task<IActionResult> Validacao(int? page)
+        {
+            int pageSize = 5;
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
+            var count = applicationDbContext.Count();
+            var validacao = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");
+            return View(new PaginatedList<CUSTO>(validacao, count, page ?? 1, pageSize));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA VIATURAS
+        public async Task<IActionResult> Viatura(int? page)
+        {
+            int pageSize = 10;
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
+            var count = applicationDbContext.Count();
+            var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region CREATE
+
+        // GET: RETORNA VIEW DE REGISTO SALARIO
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
         public IActionResult CriarSalario()
         {
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -278,15 +327,18 @@ namespace Samsys_Custos.Controllers {
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
         }
-        // POST: Criar Salario
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: CREATE REGISTO SALARIO
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
         public async Task<IActionResult> CriarSalario(Samsys_Custos.Data.SALARIO sALARIO)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-            {
-               
+
                 if (sALARIO.CUSTO.designacao == null)
                 {
                     sALARIO.CUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == 16).FirstOrDefault().nome;
@@ -307,35 +359,17 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View(sALARIO);
         }
-        
-        //------------------------------------------------------------------
-        // GET: ECONOMATO
-        public async Task<IActionResult> Economato(int? page)
-        {
-            //AUTH FOR PROFILE
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
-            var count = applicationDbContext.Count();
-            var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            return View(new PaginatedList<CUSTO>(users,count,page ?? 1, pageSize));
-        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        // GET: PREMIOS
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
-        public IActionResult Premio()
-        {
-            var applicationDbContext = _context.CUSTOS_PREMIOS.ToList();
-            return View(applicationDbContext);
-        }
+        // GET: RETORNA VIEW DE REGISTO PREMIO
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public IActionResult CriarPremio()
         {
-            
-            ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a=>a.nome == "Comercial" || a.nome=="Campanha" || a.nome=="Operacional"),"id_categoria","nome");
+            ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -344,34 +378,13 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
         }
-        public JsonResult getPai(int id)//22
-        {
-            if (id != 0)
-            {
-                var tempID = _context.CATEGORIA.Where(a => a.id_categoria == id).FirstOrDefault();
-                int myPai = 0;
-                if (tempID != null)
-                {
-                    myPai = (int)tempID.id_pai;
-                    Debug.WriteLine(myPai);
-                }
-                var tempID2 = _context.CATEGORIA.Where(a => a.id_categoria == myPai).FirstOrDefault();
 
-                return Json(tempID2.nome);
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            }
-            return Json("Empty");
-
-        }
-        public JsonResult getRubrica(int id)
-        {
-          
-            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
-        }
-
+        // POST: CREATE REGISTO PREMIO
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
@@ -398,43 +411,37 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View(cUSTO);
         }
 
-        // GET: GSM
-        public async Task<IActionResult> Gsm(int? page)
-        {
-        
-           
-            //Definir Paginação
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
-            var count = applicationDbContext.Count();
-            var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            /*return View(await applicationDbContext.ToListAsync());*/
-            return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
-        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // GET: RETORNA VIEW DE REGISTO GSM
         public IActionResult CriarGsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
 
-        
+
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
-            for (int i = 2006; i<=Int32.Parse(DateTime.Now.Year.ToString());i++)
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
                 Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value),"Value","Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
         }
-        // POST: GSM
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: CREATE REGISTO GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
@@ -444,7 +451,7 @@ namespace Samsys_Custos.Controllers {
             {
                 if (cUSTO.designacao == null)
                 {
-                    cUSTO.designacao = _context.CATEGORIA.Where(a=> a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
+                    cUSTO.designacao = _context.CATEGORIA.Where(a => a.id_categoria == cUSTO.id_categoria).FirstOrDefault().nome;
                 }
                 cUSTO.data = DateTime.Now;
                 _context.Add(cUSTO);
@@ -462,41 +469,19 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
 
-        //------------------------------------------------------------------
-        // GET: dados_phc
-        public async Task<IActionResult> Validacao()
-        {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        //------------------------------------------------------------------
-        // GET: Viaturas
-        public async Task<IActionResult> Viatura(int? page)
-        {
-            
-  
-           
-            //Definir Paginação
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
-            var count = applicationDbContext.Count();
-            var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            /*return View(await applicationDbContext.ToListAsync());*/
-            return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
-        }
+        // GET: RETORNA VIEW DE REGISTO VIATURA
         [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
         public IActionResult CriarViatura()
         {
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a=> a.id_pai == viatura.id_categoria), "id_categoria", "nome");
+            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -506,16 +491,16 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View();
         }
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        // POST: CUSTO/viatura
+        // POST: CREATE REGISTO VIATURA
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
-
         public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -541,33 +526,14 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value");
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
             return View(cUSTO);
         }
-        //------------------------------------------------------------------
-        // GET: CUSTO/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        #endregion
 
-            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
-            if (cUSTO == null)
-            {
-                return NotFound();
-            }
-            ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "id_categoria", cUSTO.id_categoria);
-            ViewData["id_phc"] = new SelectList(_context.DADOS_PHC, "id_phc", "id_phc", cUSTO.id_phc);
-            ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "id_gsm", cUSTO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "id_colaborador", cUSTO.id_colaborador);
-            ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "id_viatura", cUSTO.id_viatura);
-            return View(cUSTO);
-        }
+        #region EDIT
 
-        //EDITAR PRÉMIOS ------------------------
-        // GET: CUSTO/Edit/5
+        // GET: EDIT PREMIO
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditPremio(int? id)
         {
@@ -575,16 +541,14 @@ namespace Samsys_Custos.Controllers {
             {
                 return NotFound();
             }
-
             var premio = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
             if (premio == null)
             {
                 return NotFound();
             }
             ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
-            //ViewData["id_categoria"] = new SelectList(_context.CATEGORIA, "id_categoria", "nome", premio.id_categoria);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", premio.id_colaborador);
-            
+
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -592,13 +556,13 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value", premio.ano);
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", premio.ano);
             return View(premio);
         }
 
-        // POST: GSM/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: EDIT PREMIO
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
@@ -606,15 +570,14 @@ namespace Samsys_Custos.Controllers {
         {
             if (id != custo.id_custo)
             {
-                return NotFound();   
+                return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     var catname = _context.CATEGORIA.Where(a => a.id_categoria == custo.id_categoria).FirstOrDefault();
-                    custo.designacao =catname.nome;
+                    custo.designacao = catname.nome;
                     _context.Update(custo);
                     await _context.SaveChangesAsync();
                 }
@@ -631,12 +594,12 @@ namespace Samsys_Custos.Controllers {
                 }
                 return RedirectToAction(nameof(Premio));
             }
-
             return View(custo);
         }
 
-        //EDITAR GSM ------------------------
-        // GET: CUSTO/Edit/5
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: RETORNA EDIT GSM
         [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditGsm(int? id)
         {
@@ -653,7 +616,6 @@ namespace Samsys_Custos.Controllers {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
 
-
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome", gsm.id_categoria);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", gsm.id_colaborador);
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", gsm.id_gsm);
@@ -662,14 +624,14 @@ namespace Samsys_Custos.Controllers {
             {
                 Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
             }
-            Years.OrderByDescending(x=>x.Value);
-            ViewData["ano"] = new SelectList(            Years.OrderByDescending(x => x.Value), "Value", "Value",gsm.ano);
+            Years.OrderByDescending(x => x.Value);
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", gsm.ano);
             return View(gsm);
         }
 
-        // POST: GSM/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: EDIT GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
@@ -705,22 +667,20 @@ namespace Samsys_Custos.Controllers {
             return View(custo);
         }
 
-        // Editar validação
-        // GET: custo/Edit
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: EDIT VALIDAÇÃO DADOS PHC
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
-        public async Task<DADOS_PHC> EditValidacao(int? id , bool flag, int? cat)
+        public async Task<DADOS_PHC> EditValidacao(int? id, bool flag, int? cat)
         {
-
-            
             var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
-
             try
             {
                 validaçao.custo_interno = flag;
                 if (cat != null)
                 {
-                   var custo = _context.CUSTO.Where(a => a.id_phc == validaçao.id_phc).FirstOrDefault();
-                    custo.id_categoria =(int) cat;
+                    var custo = _context.CUSTO.Where(a => a.id_phc == validaçao.id_phc).FirstOrDefault();
+                    custo.id_categoria = (int)cat;
                 }
                 _context.Update(validaçao);
                 await _context.SaveChangesAsync();
@@ -731,17 +691,14 @@ namespace Samsys_Custos.Controllers {
             {
                 return validaçao;
             }
-            
-
         }
 
-        //EDITAR VIATURA ------------------------
-        // GET: CUSTO/Edit/5
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: EDIT VIATURA
         [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditViatura(int? id)
         {
-
-            
             if (id == null)
             {
                 return NotFound();
@@ -761,15 +718,15 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList( Years.OrderByDescending(x => x.Value), "Value", "Value", viatura.ano);
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", viatura.ano);
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", viatura.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", viatura.id_viatura);
             return View(viatura);
         }
 
-        // POST: VIATURASEdit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: EDIT VIATURA
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
@@ -800,12 +757,13 @@ namespace Samsys_Custos.Controllers {
                     }
                 }
                 return RedirectToAction(nameof(Viatura));
-            }   
+            }
             return View(custo);
         }
 
-        //EDITAR SALÁRIO
-        // GET: CUSTO/Edit/5
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: EDIT SALARIO
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> EditSalario(int? id)
         {
@@ -821,7 +779,7 @@ namespace Samsys_Custos.Controllers {
                 return NotFound();
             }
 
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome",custo.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", custo.id_colaborador);
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -829,15 +787,13 @@ namespace Samsys_Custos.Controllers {
             }
             Years.OrderByDescending(x => x.Value);
 
-            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value",custo.ano);
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", custo.ano);
             return View(salario);
         }
 
-        
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        // POST: SalariosEdit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: EDIT SALARIO
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
@@ -854,11 +810,7 @@ namespace Samsys_Custos.Controllers {
                 {
                     cUSTO.valor = sALARIO.irs + sALARIO.liquido + sALARIO.outras_despesas + sALARIO.outras_regalias + sALARIO.outros + sALARIO.seguranca_social + sALARIO.subsidio_alimentacao;
                     sALARIO.CUSTO = cUSTO;
-
                     _context.Update(sALARIO);
-
-
-
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -874,18 +826,17 @@ namespace Samsys_Custos.Controllers {
                 }
                 return RedirectToAction(nameof(Salario));
             }
-
-
             return View(sALARIO);
         }
 
-        public static class GlobalVariables
-        {
-            public static string PageServer { get; set; }
-        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        // GET: CUSTO/Delete
-        public async Task<IActionResult> Delete(int? id,string page)
+        #endregion
+
+        #region DELETE
+
+        // GET: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
+        public async Task<IActionResult> Delete(int? id, string page)
         {
             GlobalVariables.PageServer = page;
             if (id == null)
@@ -907,7 +858,9 @@ namespace Samsys_Custos.Controllers {
             return View(cUSTO);
         }
 
-        // POST: CUSTO/Delete/5
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -933,7 +886,9 @@ namespace Samsys_Custos.Controllers {
             return RedirectToAction(nameof(Geral));
         }
 
-        // GET: CUSTO/Delete
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: DELETE SALÁRIO
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> DeleteSalario(int? id, string page)
         {
@@ -956,7 +911,9 @@ namespace Samsys_Custos.Controllers {
             return View(sALARIO);
         }
 
-        // POST: CUSTO/Delete/5
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: DELETE SALARIO
         [HttpPost, ActionName("DeleteSalario")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
@@ -967,7 +924,7 @@ namespace Samsys_Custos.Controllers {
             _context.SALARIO.Remove(sALARIO);
             _context.CUSTO.Remove(cUSTO);
             await _context.SaveChangesAsync();
-            
+
             if (GlobalVariables.PageServer == "Salario")
             {
                 return RedirectToAction(nameof(Salario));
@@ -975,9 +932,58 @@ namespace Samsys_Custos.Controllers {
             return RedirectToAction(nameof(Geral));
         }
 
+        #endregion
+
+        #region HELPERS
+
+        //var teste = _context.Database.ExecuteSqlCommand( "exec dbo.ANALISES_TO_CUSTO");
+
+        // GET: DEVOLVE O NOME DA CATEGORIA PAI DA SUB-CATEGORIA RECEBIDA
+        public JsonResult getPai(int id)
+        {
+            if (id != 0)
+            {
+                var tempID = _context.CATEGORIA.Where(a => a.id_categoria == id).FirstOrDefault();
+                int myPai = 0;
+                if (tempID != null)
+                {
+                    myPai = (int)tempID.id_pai;
+                    Debug.WriteLine(myPai);
+                }
+                var tempID2 = _context.CATEGORIA.Where(a => a.id_categoria == myPai).FirstOrDefault();
+
+                return Json(tempID2.nome);
+
+            }
+            return Json("Empty");
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: DEVOLVE A LISTA DE CATEGORIAS QUEM TEM COMO ID_PAI O ID RECEBIDO
+        public JsonResult getRubrica(int id)
+        {
+            return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // VARIAVEL GLOBAL PARA DETERMINAR PAGINA PARA O DELETE
+        public static class GlobalVariables
+        {
+            public static string PageServer { get; set; }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // VERIFICA SE O CUSTO EXISTE
         private bool CUSTOExists(int id)
         {
             return _context.CUSTO.Any(e => e.id_custo == id);
         }
+
+        #endregion
+
+
     }
 }

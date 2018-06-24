@@ -11,17 +11,14 @@
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
 {
-    <br />
-    <center><h2>Custos de Viaturas</h2></center>
-    <br />
-    <div>
-        <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
-    </div>
+    <center style="padding-top:1%"><h2>Custos de Viaturas</h2></center>
+    
     <hr />
-}
-<br />
+    <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
+    }
 
 <div class="table-responsive">
+
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
@@ -77,18 +74,91 @@
             }
         </tbody>
     </table>
-    <a asp-action="Viatura"
-       asp-route-page="@(Model.PageIndex - 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @prevDisabled">
-        Previous
-    </a>
-    <a asp-action="Viatura"
-       asp-route-page="@(Model.PageIndex + 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @nextDisabled">
-        Next
-    </a>
+    <br />
+    <div class="row" style="margin-right:0.5%">
+        <div class="col-md-12" align="center">
+            <a asp-action="Viatura"
+               asp-route-page="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-secondary @prevDisabled">
+                Anterior
+            </a>
+            @{
+                int minPage = 1;
+                int maxPage = Model.TotalPages;
+                int currentPage = Model.PageIndex;
+
+                int minRange = Math.Max(minPage, currentPage - 2);
+                int maxRange = Math.Min(maxPage, currentPage + 2);
+
+                if (minRange != minPage)
+                {
+                    <a asp-action="Viatura"
+                       asp-route-page=@minPage
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-light @prevDisabled">
+                        @minPage
+                    </a>
+                    if (minRange - 1 != minPage)
+                    {<a>...</a>}
+                }
+
+                for (int i = minRange; i <= maxRange; i++)
+                {
+                    var pagina = i;
+                    if (currentPage == i)
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-primary @nextDisabled">
+                            @pagina
+                        </a>
+                    }
+                    else if (maxPage == currentPage)
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-light @prevDisabled">
+                            @pagina
+                        </a>
+
+                    }
+                    else
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-light @nextDisabled">
+                            @pagina
+                        </a>
+
+                    }
+
+
+                    //if (i != maxRange) { Console.Write(" "); }
+                }
+
+                if (maxRange != maxPage)
+                {
+                    <a>...</a>
+                    <a asp-action="Viatura"
+                       asp-route-page=@maxPage
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-light @nextDisabled">
+                        @maxPage
+                    </a>
+                }
+            }
+            <a asp-action="Viatura"
+               asp-route-page="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary @nextDisabled">
+                Próxima
+            </a>
+        </div>
+    </div>
 
 </div>
 
