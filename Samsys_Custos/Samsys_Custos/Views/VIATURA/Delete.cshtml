@@ -1,52 +1,54 @@
 ﻿@model Samsys_Custos.Data.VIATURA
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Viatura";
 }
-<br />
-<center><h2>Eliminar Viatura</h2></center>
-<br />
+<center style="padding-top:1%"><h2>Eliminar Viatura</h2></center>
 <hr />
-<br />
 <div class="row">
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-        <center>
-            <h6>Tem a certeza que pertende eliminar esta viatura?</h6>
-            <br />
-            <dl class="dl-horizontal">
-                <dt>
-                    Matrícula
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.matricula)
-                </dd>
-                <dt>
-                    Marca
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.marca)
-                </dd>
-                <dt>
-                    Modelo
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.modelo)
-                </dd>
-            </dl>
 
-            <form asp-action="Delete">
-                <input type="hidden" asp-for="id_viatura" />
-                <center>
-                    <input type="submit" value="Eliminar" class="btn btnCreate" />
-                </center>
-            </form>
-            <br />
-            <div>
-                <a asp-action="Index">Voltar</a>
+        <h6>Tem a certeza que pertende remover esta viatura?</h6>
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                Matrícula
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.matricula)
+            </dd>
+            <dt>
+                Marca
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.marca)
+            </dd>
+            <dt>
+                Modelo
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="id_viatura" />
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="submit" value="Remover" class="btn btnRemove" />
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btnVoltar" asp-action="Index">Voltar</a>
+                </div>
             </div>
-        </center>
+        </form>
+        <br />
+
     </div>
     <div class="col-md-4">
     </div>

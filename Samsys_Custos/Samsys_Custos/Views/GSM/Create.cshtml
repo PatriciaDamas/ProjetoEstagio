@@ -3,36 +3,41 @@
 @{
     ViewData["Title"] = "Create";
 }
-<br />
-<center><h2>Criar GSM</h2></center>
-<br />
+<center style="padding-top:1%"><h2>Registar GSM</h2></center>
 <hr />
-<br />
 <div class="row">
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-        <center>
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="numero" class="control-label">Número</label>
-                    <input asp-for="numero" class="form-control" />
-                    <span asp-validation-for="numero" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="equipamento" class="control-label">Equipamento</label>
-                    <input asp-for="equipamento" class="form-control" />
-                    <span asp-validation-for="equipamento" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Criar" class="btn btnCreate" />
-                </div>
-            </form>
-            <div>
-                <a asp-action="Index">Voltar</a>
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="numero" class="control-label">Número</label>
+                <input asp-for="numero" class="form-control" />
+                <span asp-validation-for="numero" class="text-danger"></span>
             </div>
-        </center>
+            <div class="form-group">
+                <label asp-for="equipamento" class="control-label">Equipamento</label>
+                <input asp-for="equipamento" class="form-control" />
+                <span asp-validation-for="equipamento" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="submit" value="Criar" class="btn btnCreate" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltarEdit" asp-action="Index">Voltar</a>
+                </div>
+            </div>
+        </form>
+
+
     </div>
     <div class="col-md-4">
     </div>

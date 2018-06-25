@@ -7,15 +7,15 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+<center style="padding-top:1%"><h2>Custos Viaturas</h2></center>
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
 {
-    <center style="padding-top:1%"><h2>Custos de Viaturas</h2></center>
-    
-    <hr />
+
     <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
-    }
+}
 <div class="table-responsive">
 
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -52,9 +52,9 @@
                         @Html.DisplayFor(modelItem => item.ano)
                     </td>
                     <td>
-                        @{ 
+                        @{
                             var strarr = item.mes.ToString().ToCharArray();
-                            strarr[0] =  strarr[0].ToString().ToUpper()[0];
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
                             string mes = string.Join("", strarr);
                             <p>@mes</p>
                         }

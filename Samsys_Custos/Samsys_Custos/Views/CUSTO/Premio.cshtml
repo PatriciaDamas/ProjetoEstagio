@@ -5,13 +5,14 @@
     ViewBag.TitlePage = "Custos de Prémios";
     ViewBag.Class = "fa-table";
 }
+<center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Prémios") || User.IsInRole("Gestor"))
 {
 
-    <center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
-    <hr />
+
     <a class=" btn btnActionCreate" asp-action="CriarPremio">Novo registo de Prémios</a>
 
 
@@ -53,7 +54,12 @@
                         @Html.DisplayFor(modelItem => item.ano)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.mes)
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
                     </td>
                     <td class="categoria">
                         @Html.DisplayFor(modelItem => item.id_categoria)
