@@ -73,11 +73,11 @@
 .btnCreate {
     background-color: rgb(255,158,53);
     color: white;
-    width: 200px;
+    width: 150px;
     font-size: 16px;
     border: none;
     text-align: center;
-    float: right;
+   
 }
 .btnCreate:hover {
         background-color: rgb(255,181,15);
@@ -123,8 +123,35 @@
     border-color: rgb(255,158,53);
     color: rgb(255,158,53);
     width: 130px;
+    float: left;
 }
-.btnVoltar:hover {
+.btnVoltarEdit {
+    border-color: rgb(255,158,53);
+    color: rgb(255,158,53);
+    width: 150px;
+    float: left;
+}
+    .btnVoltar:hover, .btnVoltarEdit:hover {
         border-color: #343a40;
         color: #343a40;
+    }
+
+.btnIconEdit {
+    color: rgb(255,158,53);
 }
+.btnIconRemove {
+    color: #343a40;
+}
+
+.btnIconEdit:hover {
+    color: #343a40;
+    text-decoration: none;
+}
+.btnIconRemove:hover {
+    color: rgba(255,0,0,0.8);
+    text-decoration: none;
+}
+
+
+
+    

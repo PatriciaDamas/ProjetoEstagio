@@ -59,11 +59,18 @@
                 <input asp-for="valor" class="form-control" />
                 <span asp-validation-for="valor" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <center> <input type="submit" value="Criar Registo" class="btn btnCreate" /></center>
-            </div>
-            <div>
-                <center> <a asp-action="Premio">Voltar</a></center>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="submit" value="Criar Registo" class="btn btnCreate" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltarEdit" asp-action="Premio">Voltar</a>
+                </div>
             </div>
         </form>
     </div>

@@ -53,13 +53,21 @@
                 </select>
                 <span asp-validation-for="SelectedRoles" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <center><input type="submit" value="Create" class="btn btnCreate" /></center>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input type="submit" value="Criar User" class="btn btnCreate" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltarEdit" asp-action="Index">Voltar</a>
+                </div>
             </div>
         </form>
-        <div>
-            <center> <a asp-action="Index">Voltar</a></center>
-        </div>
+
     </div>
     <div class="col-md-4">
     </div>
