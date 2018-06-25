@@ -54,9 +54,11 @@
                     @Html.DisplayFor(modelItem => item.Roles)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "EditUser", new { id = item.Id }) |
-                    <!--@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |-->
-                    @Html.ActionLink("Remover", "Delete", new { /* id=item.PrimaryKey */ })
+
+                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditUser" asp-route-id="@item.Id"></a>
+                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.Id"></a>
+
+               
                 </td>
             </tr>
         }
