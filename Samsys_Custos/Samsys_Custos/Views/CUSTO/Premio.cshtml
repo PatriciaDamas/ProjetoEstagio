@@ -5,13 +5,14 @@
     ViewBag.TitlePage = "Custos de Prémios";
     ViewBag.Class = "fa-table";
 }
+<center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Prémios") || User.IsInRole("Gestor"))
 {
 
-    <center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
-    <hr />
+
     <a class=" btn btnActionCreate" asp-action="CriarPremio">Novo registo de Prémios</a>
 
 

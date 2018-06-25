@@ -8,12 +8,13 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+<center style="padding-top:1%"><h2>Custos de GSM</h2></center>
+<hr />
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Gsm") || User.IsInRole("Gestor"))
 {
-    <center style="padding-top:1%"><h2>Custos de GSM</h2></center>
-    <hr />
-        <a class=" btn btnActionCreate" asp-action="CriarGsm">Novo registo de Gsm</a>
- 
+    <a class=" btn btnActionCreate" asp-action="CriarGsm">Novo registo de Gsm</a>
 }
 
 <div class="table-responsive">

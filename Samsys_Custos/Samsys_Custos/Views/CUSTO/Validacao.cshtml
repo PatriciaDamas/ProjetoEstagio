@@ -13,7 +13,7 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th >
+                <th hidden>
                     id
                 </th>
                 <th>
@@ -46,10 +46,8 @@
 
             @foreach (var item in Model)
             {
-
-
                 <tr>
-                    <td >
+                    <td hidden>
                         @Html.DisplayFor(modelItem => item.id_phc)
                     </td>
                     <td>
