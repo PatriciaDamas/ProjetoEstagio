@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Samsys_Custos.Data;
+using Samsys_Custos.Helpers;
+
 namespace Samsys_Custos.Controllers
 {
     public class ATRIBUICAOController : Controller
@@ -61,16 +63,22 @@ namespace Samsys_Custos.Controllers
 
         }
         // GET: ATRIBUICAO
-        public async Task<IActionResult> GSM()
+        public async Task<IActionResult> GSM( int? page)
         {
+            var pageSize = 10;
             var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.UTILIZADOR).Where(c => c.id_gsm != null);
-            return View(await applicationDbContext.ToListAsync());
+            var count = applicationDbContext.Count();
+            var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<ATRIBUICAO>(users, count, page ?? 1, pageSize));
         }
         // GET: ATRIBUICAO
-        public async Task<IActionResult> Viatura()
+        public async Task<IActionResult> Viatura( int? page)
         {
+            int pageSize = 10;
             var applicationDbContext = _context.ATRIBUICAO.Include(a => a.VIATURA).Include(a => a.UTILIZADOR).Where(c => c.id_viatura != null);
-            return View(await applicationDbContext.ToListAsync());
+            var count = applicationDbContext.Count();
+            var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<ATRIBUICAO>(users,count,page ?? 1, pageSize));
         }
 
        /* // GET: ATRIBUICAO/Details/5

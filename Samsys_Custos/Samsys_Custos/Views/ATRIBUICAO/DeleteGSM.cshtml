@@ -52,12 +52,19 @@
 
         <form asp-action="DeleteGSM">
             <input type="hidden" asp-for="id_atribuicao" />
-            <center><input type="submit" value="Remover" class="btn btnCreate" /></center>
+            <div class="row">
+                <div class="col-md-5">
+                    <input type="submit" value="Remover" class="btn btnCreate" />
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltar" asp-action="GSM">Voltar</a>
+                </div>
+            </div>
+           
         </form>
-        <br />
-        <div>
-            <center><a asp-action="GSM">Voltar</a></center>
-        </div>
         <div class="col-md-4">
         </div>
     </div>

@@ -33,11 +33,21 @@
             <input asp-for="data_fim" class="form-control" />
             <span asp-validation-for="data_fim" class="text-danger"></span>
         </div>-->
-            <div class="form-group">
-                <input type="submit" value="Criar Atribuição" class="btn btn-default btnCriarAtribuicao" />
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <center><input type="submit" value="Criar Atribuição" class="btn btnCreate btnCriarAtribuicao" /></center> 
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltarEdit" asp-action="Viatura">Voltar</a>
+                </div>
             </div>
+           
         </form>
-        <a asp-action="Viatura">Voltar</a>
     </div>
     <div class="col-md-4">
     </div>
