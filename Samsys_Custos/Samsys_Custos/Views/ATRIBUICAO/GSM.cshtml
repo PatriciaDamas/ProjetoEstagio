@@ -7,59 +7,64 @@
 <br />
 <center><h2>Atribuições GSM </h2></center>
 <br />
-<div>
-    <a asp-action="CreateGsm" class="btn btnActionCreate" >Atribuir GSM</a>
-</div>
-<hr />
-<br />
-<div class="table-responsive">
-    <table class="table table-bordered" id="dataTable">
-        <thead>
-            <tr>
-                <th>
-                    Data Inicial
-                </th>
-                <th>
-                    Data Final
-                </th>
-                <th>
-                    Número
-                </th>
-                <th>
-                    Colaborador
-                </th>
-                <th>
-                    Opções
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data_inicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data_fim)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GSM.numero)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                    </td>
-                    <td>
-                        <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Editar</a> |
-                        <a asp-action="DeleteGSM" asp-route-id="@item.id_atribuicao">Eliminar</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-@section scripts {
-
-    <script src="~/js/site.js"></script>
-
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Atribuições") || User.IsInRole("Gestor"))
+{
+    <div>
+        <a asp-action="CreateGsm" class="btn btnActionCreate">Atribuir GSM</a>
+    </div>
 }
+    <hr />
+    <br />
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        Data Inicial
+                    </th>
+                    <th>
+                        Data Final
+                    </th>
+                    <th>
+                        Número
+                    </th>
+                    <th>
+                        Colaborador
+                    </th>
+                    <th>
+                        Opções
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data_inicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data_fim)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GSM.numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                        </td>
+                        <td>
+                            <a asp-action="EditGSM" asp-route-id="@item.id_atribuicao">Editar</a> |
+                            <a asp-action="DeleteGSM" asp-route-id="@item.id_atribuicao">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @section scripts {
+
+        <script src="~/js/site.js"></script>
+
+    }
