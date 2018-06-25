@@ -888,6 +888,138 @@ namespace Samsys_Custos.Controllers {
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        // GET: DELETE VIATURA
+        public async Task<IActionResult> DeleteViatura(int? id, string page)
+        {
+            GlobalVariables.PageServer = page;
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cUSTO = await _context.CUSTO
+                 .Include(c => c.CATEGORIA)
+                 .Include(c => c.DADOS_PHC)
+                 .Include(c => c.GSM)
+                 .Include(c => c.UTILIZADOR)
+                 .Include(c => c.VIATURA)
+                 .SingleOrDefaultAsync(m => m.id_custo == id);
+            if (cUSTO == null)
+            {
+                return NotFound();
+            }
+            return View(cUSTO);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: DELETE VIATURA
+        [HttpPost, ActionName("DeleteViatura")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedViatura(int id)
+        {
+            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
+            _context.CUSTO.Remove(cUSTO);
+            await _context.SaveChangesAsync();
+
+            if (GlobalVariables.PageServer == "Viatura")
+            {
+                return RedirectToAction(nameof(Viatura));
+
+            }
+
+            return RedirectToAction(nameof(Viatura));
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: DELETE GSM
+        public async Task<IActionResult> DeleteGsm(int? id, string page)
+        {
+            GlobalVariables.PageServer = page;
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cUSTO = await _context.CUSTO
+                .Include(c => c.CATEGORIA)
+                .Include(c => c.GSM)
+                .Include(c => c.UTILIZADOR)
+                .SingleOrDefaultAsync(m => m.id_custo == id);
+            if (cUSTO == null)
+            {
+                return NotFound();
+            }
+            return View(cUSTO);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: DELETE GSM
+        [HttpPost, ActionName("DeleteGsm")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedGsm(int id)
+        {
+            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
+            _context.CUSTO.Remove(cUSTO);
+            await _context.SaveChangesAsync();
+          
+            if (GlobalVariables.PageServer == "Gsm")
+            {
+                return RedirectToAction(nameof(Gsm));
+
+            }
+           
+            return RedirectToAction(nameof(Geral));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // GET: DELETE PREMIO
+        public async Task<IActionResult> DeletePremio(int? id, string page)
+        {
+            GlobalVariables.PageServer = page;
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cUSTO = await _context.CUSTO
+                 .Include(c => c.CATEGORIA)
+                 .Include(c => c.DADOS_PHC)
+                 .Include(c => c.GSM)
+                 .Include(c => c.UTILIZADOR)
+                 .Include(c => c.VIATURA)
+                 .SingleOrDefaultAsync(m => m.id_custo == id);
+            if (cUSTO == null)
+            {
+                return NotFound();
+            }
+            return View(cUSTO);
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // POST: DELETE VIATURA
+        [HttpPost, ActionName("DeletePremio")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedPremio(int id)
+        {
+            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
+            _context.CUSTO.Remove(cUSTO);
+            await _context.SaveChangesAsync();
+
+            if (GlobalVariables.PageServer == "Premio")
+            {
+                return RedirectToAction(nameof(Premio));
+
+            }
+
+            return RedirectToAction(nameof(Premio));
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
         // GET: DELETE SALÁRIO
         [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
         public async Task<IActionResult> DeleteSalario(int? id, string page)

@@ -76,8 +76,8 @@
     width: 200px;
     font-size: 16px;
     border: none;
-     text-align:center;
-  
+    text-align: center;
+    float: right;
 }
 .btnCreate:hover {
         background-color: rgb(255,181,15);
@@ -95,3 +95,36 @@
         background-color: rgb(255,181,15);
         color: white;
     }
+
+#btnLogout {
+    border-color: #f78839;
+    color: #f78839;
+}
+
+#btnLogout:hover {
+    background-color: #f78839;
+    color: white;
+}
+.btnRemove {
+    background-color: rgb(255,158,53);
+    color: white;
+    width: 130px;
+    font-size: 16px;
+    border: none;
+    text-align: center;
+}
+
+    .btnRemove:hover {
+        background-color: rgb(255,181,15);
+        
+    }
+
+.btnVoltar {
+    border-color: rgb(255,158,53);
+    color: rgb(255,158,53);
+    width: 130px;
+}
+.btnVoltar:hover {
+        border-color: #343a40;
+        color: #343a40;
+}
