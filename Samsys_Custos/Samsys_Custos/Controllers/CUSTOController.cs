@@ -838,59 +838,6 @@ namespace Samsys_Custos.Controllers {
 
         #region DELETE
 
-        // GET: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
-       /* public async Task<IActionResult> Delete(int? id, string page)
-        {
-            GlobalVariables.PageServer = page;
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cUSTO = await _context.CUSTO
-                .Include(c => c.CATEGORIA)
-                .Include(c => c.DADOS_PHC)
-                .Include(c => c.GSM)
-                .Include(c => c.UTILIZADOR)
-                .Include(c => c.VIATURA)
-                .SingleOrDefaultAsync(m => m.id_custo == id);
-            if (cUSTO == null)
-            {
-                return NotFound();
-            }
-            return View(cUSTO);
-        }
-
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        // POST: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
-            _context.CUSTO.Remove(cUSTO);
-            await _context.SaveChangesAsync();
-            if (GlobalVariables.PageServer == "Viatura")
-            {
-                return RedirectToAction(nameof(Viatura));
-
-            }
-            if (GlobalVariables.PageServer == "Gsm")
-            {
-                return RedirectToAction(nameof(Gsm));
-
-            }
-            if (GlobalVariables.PageServer == "Premio")
-            {
-                return RedirectToAction(nameof(Premio));
-
-            }
-            return RedirectToAction(nameof(Geral));
-        }*/
-
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
         // GET: DELETE VIATURA
         public async Task<IActionResult> DeleteViatura(int? id, string page)
         {
