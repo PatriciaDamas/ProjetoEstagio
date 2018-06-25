@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -836,7 +837,7 @@ namespace Samsys_Custos.Controllers {
         #region DELETE
 
         // GET: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
-        public async Task<IActionResult> Delete(int? id, string page)
+       /* public async Task<IActionResult> Delete(int? id, string page)
         {
             GlobalVariables.PageServer = page;
             if (id == null)
@@ -884,7 +885,7 @@ namespace Samsys_Custos.Controllers {
 
             }
             return RedirectToAction(nameof(Geral));
-        }
+        }*/
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -18,11 +18,15 @@
         <thead>
             <tr>
                 <th>
-                    Categoria
+                    Ano
                 </th>
                 <th>
                     Mês
                 </th>
+                <th>
+                    Categoria
+                </th>
+
                 <th>
                     Total
                 </th>
@@ -31,19 +35,23 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeCompleto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mes)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Total)€
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)€
+                </td>
 
 
-                </tr>
+            </tr>
             }
         </tbody>
     </table>
