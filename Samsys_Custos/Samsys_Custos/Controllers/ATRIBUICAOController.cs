@@ -96,7 +96,7 @@ namespace Samsys_Custos.Controllers
 
 
         // GET: ATRIBUICAO/Create
-        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
         public IActionResult CreateViatura()
         {
             ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
@@ -105,7 +105,7 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: ATRIBUICAO/Create
-        [Authorize(Roles = "Gsm")]
+        [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
         public IActionResult CreateGSM()
         {
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
