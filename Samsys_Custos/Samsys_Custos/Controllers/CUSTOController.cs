@@ -193,6 +193,8 @@ namespace Samsys_Custos.Controllers {
         // GET: RETORNA TODOS OS CUSTOS
         public IActionResult Geral(int? page)
         {
+           // _context.Database.ExecuteSqlCommand("exec dbo.INSERT_PHC");
+
             int pageSize = 10;
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
             var count = applicationDbContext.Count();
@@ -671,7 +673,7 @@ namespace Samsys_Custos.Controllers {
 
         // GET: EDIT VALIDAÇÃO DADOS PHC
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
-        public async Task<DADOS_PHC> EditValidacao(int? id, bool flag, int? cat)
+        public async Task<DADOS_PHC> EditValidacao(string id, bool flag, int? cat)
         {
             var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
             try
