@@ -4,14 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<br />
-<center><h2>Viaturas</h2></center>
+<center style="padding-top:1%"><h2>Viaturas Samsys</h2></center>
 <hr />
-<br />
-<div>
-    <a class="btn btnActionCreate" asp-action="Create">Nova Viatura</a>
-</div>
-<br />
+<a class="btn btnActionCreate" asp-action="Create">Nova Viatura</a>
+
 <table class="table table-bordered" id="dataTable" cellspacing="0">
     <thead>
         <tr>
@@ -24,7 +20,7 @@
             <th>
                 Modelo
             </th>
-            <th></th>
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody>
@@ -41,8 +37,8 @@
                     @Html.DisplayFor(modelItem => item.modelo)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_viatura">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_viatura">Eliminar</a>
+                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_viatura"></a> 
+                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_viatura"></a>
                 </td>
             </tr>
         }
