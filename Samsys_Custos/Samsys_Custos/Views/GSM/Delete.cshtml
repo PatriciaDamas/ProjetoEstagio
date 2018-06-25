@@ -12,7 +12,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-        <center>
+       
             <h6>Tem a certeza que pertende eliminar este GSM?</h6>
             <br />
             <dl class="dl-horizontal">
@@ -32,13 +32,21 @@
 
             <form asp-action="Delete">
                 <input type="hidden" asp-for="id_gsm" />
-                <input type="submit" value="Eliminar" class="btn btnCreate" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="submit" value="Remover" class="btn btnRemove" />
+                    </div>
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-4">
+                        <a class="btn btnVoltar" asp-action="Index">Voltar</a>
+                    </div>
+                </div>
             </form>
             <br />
-            <div>
-                <a asp-action="Index">Voltar</a>
-            </div>
-        </center>
+           
+        
     </div>
     <div class="col-md-4">
     </div>

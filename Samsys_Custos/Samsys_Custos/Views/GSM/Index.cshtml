@@ -1,17 +1,11 @@
 ﻿@model IEnumerable<Samsys_Custos.Data.GSM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GSM";
 }
-<br />
-<center><h2>GSM</h2></center>
+<center style="padding-top:1%"><h2>GSM Samsys</h2></center>
 <hr />
-<br />
-<div>
-    <a class="btn btnActionCreate" asp-action="Create">Criar GSM</a>
-</div>
-
-<br />
+<a class="btn btnActionCreate" asp-action="Create">Novo GSM</a>
 <table class="table table-bordered" id="dataTable" cellspacing="0">
     <thead>
         <tr>
@@ -21,7 +15,9 @@
             <th>
                 Equipamento
             </th>
-            <th></th>
+            <th>
+                Opções
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -35,8 +31,8 @@
                     @Html.DisplayFor(modelItem => item.equipamento)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id_gsm">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id_gsm">Eliminar</a>
+                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_gsm"></a>
+                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_gsm"></a>
                 </td>
             </tr>
         }
