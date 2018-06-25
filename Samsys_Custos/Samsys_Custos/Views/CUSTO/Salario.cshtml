@@ -52,7 +52,12 @@
                         @Html.DisplayFor(modelItem => item.CUSTO.ano)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.mes)
+                        @{
+                            var strarr = item.CUSTO.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
                     </td>
 
                     <td>

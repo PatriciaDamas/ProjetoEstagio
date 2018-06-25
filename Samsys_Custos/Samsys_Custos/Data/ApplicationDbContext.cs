@@ -20,13 +20,10 @@ namespace Samsys_Custos.Data
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
         public DbSet<Samsys_Custos.Data.VIATURA> VIATURA { get; set; }
         public DbSet<Samsys_Custos.Data.SALARIO> SALARIO { get; set; }
-        public DbSet<Samsys_Custos.Data.PERMISSAO> PERMISSAO { get; set; }
         public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
-        public DbSet<Samsys_Custos.Data.PERFIL> PERFIL { get; set; }
         public DbSet<Samsys_Custos.Data.CATEGORIA> CATEGORIA { get; set; }
         public DbSet<Samsys_Custos.Data.UTILIZADOR> UTILIZADOR { get; set; }
         public DbSet<Samsys_Custos.Data.EQUIPA> EQUIPA { get; set; }
-        public DbSet<Samsys_Custos.Data.UTILIZADOR_PERMISSAO> UTILIZADOR_PERMISSAO { get; set; }
         public DbSet<Samsys_Custos.Data.DADOS_PHC> DADOS_PHC { get; set; }
         public DbSet<Samsys_Custos.Models.MEDIA_CUSTOS> MEDIA_CUSTOS { get; set; }
         public DbQuery<Samsys_Custos.Models.CUSTOS_EQUIPA> CUSTOS_EQUIPA { get; set; }

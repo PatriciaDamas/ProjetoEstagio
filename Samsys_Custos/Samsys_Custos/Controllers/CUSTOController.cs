@@ -194,6 +194,8 @@ namespace Samsys_Custos.Controllers {
         // GET: RETORNA TODOS OS CUSTOS
         public IActionResult Geral(int? page)
         {
+           // _context.Database.ExecuteSqlCommand("exec dbo.INSERT_PHC");
+
             int pageSize = 10;
             var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
             var count = applicationDbContext.Count();
@@ -672,7 +674,7 @@ namespace Samsys_Custos.Controllers {
 
         // GET: EDIT VALIDAÇÃO DADOS PHC
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
-        public async Task<DADOS_PHC> EditValidacao(int? id, bool flag, int? cat)
+        public async Task<DADOS_PHC> EditValidacao(string id, bool flag, int? cat)
         {
             var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
             try
@@ -835,59 +837,6 @@ namespace Samsys_Custos.Controllers {
         #endregion
 
         #region DELETE
-
-        // GET: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
-       /* public async Task<IActionResult> Delete(int? id, string page)
-        {
-            GlobalVariables.PageServer = page;
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cUSTO = await _context.CUSTO
-                .Include(c => c.CATEGORIA)
-                .Include(c => c.DADOS_PHC)
-                .Include(c => c.GSM)
-                .Include(c => c.UTILIZADOR)
-                .Include(c => c.VIATURA)
-                .SingleOrDefaultAsync(m => m.id_custo == id);
-            if (cUSTO == null)
-            {
-                return NotFound();
-            }
-            return View(cUSTO);
-        }
-
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        // POST: DELETE GLOBAL PARA CADA TIPO DE CUSTOS
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
-            _context.CUSTO.Remove(cUSTO);
-            await _context.SaveChangesAsync();
-            if (GlobalVariables.PageServer == "Viatura")
-            {
-                return RedirectToAction(nameof(Viatura));
-
-            }
-            if (GlobalVariables.PageServer == "Gsm")
-            {
-                return RedirectToAction(nameof(Gsm));
-
-            }
-            if (GlobalVariables.PageServer == "Premio")
-            {
-                return RedirectToAction(nameof(Premio));
-
-            }
-            return RedirectToAction(nameof(Geral));
-        }*/
-
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: DELETE VIATURA
         public async Task<IActionResult> DeleteViatura(int? id, string page)

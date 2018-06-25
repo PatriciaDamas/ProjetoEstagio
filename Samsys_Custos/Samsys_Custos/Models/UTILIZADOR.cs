@@ -12,9 +12,6 @@ namespace Samsys_Custos.Data
         [Key]
         public int id_colaborador { get; set; }
         public string nome { get; set; }
-        [ForeignKey("PERFIL")]
-        public int id_perfil { get; set; }
-        public PERFIL PERFIL { get; set; }
         [ForeignKey("EQUIPA")]
         public string id_equipa { get; set; }
         public EQUIPA EQUIPA { get; set; }

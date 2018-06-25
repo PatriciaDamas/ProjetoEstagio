@@ -53,7 +53,12 @@
                         @Html.DisplayFor(modelItem => item.ano)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.mes)
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
                     </td>
                     <td class="categoria">
                         @Html.DisplayFor(modelItem => item.id_categoria)

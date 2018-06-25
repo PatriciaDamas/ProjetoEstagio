@@ -49,25 +49,30 @@
                     {
                         <tr>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ano)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.mes)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.valor)€
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GSM.numero)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                            </td>
-                            <td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valor)€
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GSM.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    </td>
+                    <td>
 
                                 <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditGsm" asp-route-id="@item.id_custo"></a>
                                 <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteGsm" asp-route-id="@item.id_custo" asp-route-page="Gsm"></a>
