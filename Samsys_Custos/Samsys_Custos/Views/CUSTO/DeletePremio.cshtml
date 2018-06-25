@@ -1,0 +1,68 @@
+﻿@model Samsys_Custos.Data.CUSTO
+
+@{
+    ViewData["Title"] = "Remover Premio";
+}
+
+<center style="padding-top:1%"><h2>Remover Custo de Prémio</h2></center>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+        <center>
+            <h6>Deseja remover este custo?</h6>
+        </center>
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                Colaborador
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UTILIZADOR.nome)
+            </dd>
+            <dt>
+                Categoria
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CATEGORIA.nome)
+            </dd>
+            <dt>
+               Ano
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ano)
+            </dd>
+            <dt>
+              Mês
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.mes)
+            </dd>
+            <dt>
+               Valor
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.valor)€
+            </dd>
+        </dl>
+
+        <form asp-action="DeletePremio">
+            <input type="hidden" asp-for="id_custo" />
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="submit" value="Remover" class="btn btnRemove" />
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btnVoltar" asp-action="Premio">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
