@@ -68,8 +68,8 @@
                     </td>
 
                     <td>
-                        <a asp-action="EditSalario" asp-route-id="@item.id_salario">Editar</a>
-                        <a asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario">Remover</a>
+                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditSalario" asp-route-id="@item.id_salario"></a>
+                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario"></a>
                     </td>
                 </tr>
             }

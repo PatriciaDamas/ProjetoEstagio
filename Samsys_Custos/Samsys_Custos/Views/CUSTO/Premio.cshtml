@@ -69,8 +69,8 @@
                     </td>
 
                     <td>
-                        <a asp-action="EditPremio" asp-route-id="@item.id_custo">Editar</a>
-                        <a asp-action="DeletePremio" asp-route-id="@item.id_custo" asp-route-page="Premio">Remover</a>
+                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditPremio" asp-route-id="@item.id_custo"></a>
+                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeletePremio" asp-route-id="@item.id_custo" asp-route-page="Premio"></a>
                     </td>
                 </tr>
             }
