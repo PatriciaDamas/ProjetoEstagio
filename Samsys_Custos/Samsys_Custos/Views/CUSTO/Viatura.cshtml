@@ -9,6 +9,21 @@
 }
 <center style="padding-top:1%"><h2>Custos Viaturas</h2></center>
 <hr />
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Ano</label>
+        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos"></select>
+    </div>
+    <div class="col-md-4">
+        <label class="control-label">&ensp;</label><br />
+        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroViatura" />
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<br />
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
@@ -166,5 +181,7 @@
     </div>
 
 </div>
-
+@section scripts {
+    <script src="~/js/filtros.js"></script>
+}
 

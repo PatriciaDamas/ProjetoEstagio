@@ -10,6 +10,21 @@
 }
 <center style="padding-top:1%"><h2>Custos de GSM</h2></center>
 <hr />
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Ano</label>
+        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos"></select>
+    </div>
+    <div class="col-md-4">
+        <label class="control-label">&ensp;</label><br />
+        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroGsm" />
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<br />
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Gsm") || User.IsInRole("Gestor"))
@@ -17,38 +32,38 @@
     <a class=" btn btnActionCreate" asp-action="CriarGsm">Novo registo de Gsm</a>
 }
 
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
 
-                        <th>
-                            Ano
-                        </th>
-                        <th>
-                            Mês
-                        </th>
-                        <th>
-                            Valor
-                        </th>
-                        <th>
-                            Categoria
-                        </th>
-                        <th>
-                            GSM
-                        </th>
-                        <th>
-                            Colaborador
-                        </th>
-                        <th>
-                            Opções
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
+                <th>
+                    Ano
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Categoria
+                </th>
+                <th>
+                    GSM
+                </th>
+                <th>
+                    Colaborador
+                </th>
+                <th>
+                    Opções
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
 
                     <td>
                         @Html.DisplayFor(modelItem => item.ano)
@@ -75,96 +90,99 @@
                     </td>
                     <td>
 
-                                <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditGsm" asp-route-id="@item.id_custo"></a>
-                                <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteGsm" asp-route-id="@item.id_custo" asp-route-page="Gsm"></a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <br />
-            <div class="row" style="margin-right:0.5%">
-                <div class="col-md-12" align="center">
-                    <a asp-action="Gsm"
-                       asp-route-page="@(Model.PageIndex - 1)"
+                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditGsm" asp-route-id="@item.id_custo"></a>
+                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteGsm" asp-route-id="@item.id_custo" asp-route-page="Gsm"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <div class="row" style="margin-right:0.5%">
+        <div class="col-md-12" align="center">
+            <a asp-action="Gsm"
+               asp-route-page="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-secondary @prevDisabled">
+                Anterior
+            </a>
+            @{
+                int minPage = 1;
+                int maxPage = Model.TotalPages;
+                int currentPage = Model.PageIndex;
+
+                int minRange = Math.Max(minPage, currentPage - 2);
+                int maxRange = Math.Min(maxPage, currentPage + 2);
+
+                if (minRange != minPage)
+                {
+                    <a asp-action="Viatura"
+                       asp-route-page=@minPage
                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-secondary @prevDisabled">
-                        Anterior
+                       class="btn btn-light @prevDisabled">
+                        @minPage
                     </a>
-                    @{
-                        int minPage = 1;
-                        int maxPage = Model.TotalPages;
-                        int currentPage = Model.PageIndex;
+                    if (minRange - 1 != minPage)
+                    {<a>...</a>}
+                }
 
-                        int minRange = Math.Max(minPage, currentPage - 2);
-                        int maxRange = Math.Min(maxPage, currentPage + 2);
-
-                        if (minRange != minPage)
-                        {
-                            <a asp-action="Viatura"
-                               asp-route-page=@minPage
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-light @prevDisabled">
-                                @minPage
-                            </a>
-                            if (minRange - 1 != minPage)
-                            {<a>...</a>}
-                        }
-
-                        for (int i = minRange; i <= maxRange; i++)
-                        {
-                            var pagina = i;
-                            if (currentPage == i)
-                            {
-                                <a asp-action="Viatura"
-                                   asp-route-page=@pagina
-                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-primary @nextDisabled">
-                                    @pagina
-                                </a>
-                            }
-                            else if (maxPage == currentPage)
-                            {
-                                <a asp-action="Viatura"
-                                   asp-route-page=@pagina
-                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-light @prevDisabled">
-                                    @pagina
-                                </a>
-
-                            }
-                            else
-                            {
-                                <a asp-action="Viatura"
-                                   asp-route-page=@pagina
-                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-light @nextDisabled">
-                                    @pagina
-                                </a>
-
-                            }
-
-
-                            //if (i != maxRange) { Console.Write(" "); }
-                        }
-
-                        if (maxRange != maxPage)
-                        {
-                            <a>...</a>
-                            <a asp-action="Viatura"
-                               asp-route-page=@maxPage
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-primary @nextDisabled">
-                                @maxPage
-                            </a>
-                        }
+                for (int i = minRange; i <= maxRange; i++)
+                {
+                    var pagina = i;
+                    if (currentPage == i)
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-primary @nextDisabled">
+                            @pagina
+                        </a>
                     }
-                    <a asp-action="Gsm"
-                       asp-route-page="@(Model.PageIndex + 1)"
+                    else if (maxPage == currentPage)
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-light @prevDisabled">
+                            @pagina
+                        </a>
+
+                    }
+                    else
+                    {
+                        <a asp-action="Viatura"
+                           asp-route-page=@pagina
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-light @nextDisabled">
+                            @pagina
+                        </a>
+
+                    }
+
+
+                    //if (i != maxRange) { Console.Write(" "); }
+                }
+
+                if (maxRange != maxPage)
+                {
+                    <a>...</a>
+                    <a asp-action="Viatura"
+                       asp-route-page=@maxPage
                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
                        class="btn btn-primary @nextDisabled">
-                        Próxima
+                        @maxPage
                     </a>
-                </div>
-            </div>
+                }
+            }
+            <a asp-action="Gsm"
+               asp-route-page="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-primary @nextDisabled">
+                Próxima
+            </a>
         </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/js/filtros.js"></script>
+}
