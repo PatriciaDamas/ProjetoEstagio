@@ -23,7 +23,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var pageSize = 10;
-            var applicationDbContext = _context.CATEGORIA.OrderBy(a=>a.id_pai);
+            var applicationDbContext = _context.CATEGORIA.Include("CATEGORIAPAI").OrderBy(a=>a.id_pai);
             var count = applicationDbContext.Count();
             var categorias = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<CATEGORIA>(categorias, count, page ?? 1, pageSize));

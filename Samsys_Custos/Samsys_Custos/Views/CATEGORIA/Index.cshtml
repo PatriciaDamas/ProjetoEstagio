@@ -29,7 +29,7 @@
         {
             <tr>
                 <td>
-                    @{
+                    @*@{
                         foreach (var item2 in Model)
                         {
                             var idpai = item.id_pai;
@@ -44,7 +44,8 @@
 
                         }
 
-                    }
+                    }*@
+                    @Html.DisplayFor(modelItem=>item.CATEGORIAPAI.nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.nome)
