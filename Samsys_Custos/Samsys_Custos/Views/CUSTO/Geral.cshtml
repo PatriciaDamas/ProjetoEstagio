@@ -12,6 +12,23 @@
 <center style="padding-top:1%"><h2>Custos Gerais</h2></center>
 <hr />
 
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Ano</label>
+        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos">
+            <option value=null>Selecione um ano</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label class="control-label">&ensp;</label><br />
+        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroGeral" />
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<br />
+<hr />
 
 <div class="table-responsive ">
     <table class="table table-bordered" id="dataTable" cellspacing="0">
@@ -35,28 +52,28 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
-                </td>
-                <td>
-                    @{
-                        var strarr = item.mes.ToString().ToCharArray();
-                        strarr[0] = strarr[0].ToString().ToUpper()[0];
-                        string mes = string.Join("", strarr);
-                        <p>@mes</p>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeCompleto)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeCompleto)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)€
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)€
+                    </td>
 
 
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
@@ -147,3 +164,6 @@
     </div>
 </div>
 
+@section scripts {
+    <script src="~/js/filtros.js"></script>
+}

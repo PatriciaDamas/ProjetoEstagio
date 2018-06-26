@@ -192,15 +192,35 @@ namespace Samsys_Custos.Controllers {
         #region LISTAGENS
 
         // GET: RETORNA TODOS OS CUSTOS
-        public IActionResult Geral(int? page)
+        public IActionResult Geral(int? page, int? ano)
         {
-           // _context.Database.ExecuteSqlCommand("exec dbo.INSERT_PHC");
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
 
-            int pageSize = 10;
-            var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA;
-            var count = applicationDbContext.Count();
-            var gerais = applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToList();
-            return View(new PaginatedList<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>(gerais, count, page ?? 1, pageSize));
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            // _context.Database.ExecuteSqlCommand("exec dbo.INSERT_PHC");
+            if (ano == null)
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString())); ;
+                var count = applicationDbContext.Count();
+                var gerais = applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToList();
+                return View(new PaginatedList<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>(gerais, count, page ?? 1, pageSize));
+            }
+            else
+            {
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == ano);
+                var count = applicationDbContext.Count();
+                var gerais = applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToList();
+                return View(new PaginatedList<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>(gerais, count, page ?? 1, pageSize));
+            }
+           
+            
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
