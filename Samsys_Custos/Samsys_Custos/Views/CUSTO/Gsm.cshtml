@@ -101,7 +101,7 @@
 
                         if (minRange != minPage)
                         {
-                            <a asp-action="Viatura"
+                            <a asp-action="Gsm"
                                asp-route-page=@minPage
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @prevDisabled">
@@ -116,7 +116,7 @@
                             var pagina = i;
                             if (currentPage == i)
                             {
-                                <a asp-action="Viatura"
+                                <a asp-action="Gsm"
                                    asp-route-page=@pagina
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                    class="btn btn-primary @nextDisabled">
@@ -125,7 +125,7 @@
                             }
                             else if (maxPage == currentPage)
                             {
-                                <a asp-action="Viatura"
+                                <a asp-action="Gsm"
                                    asp-route-page=@pagina
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                    class="btn btn-light @prevDisabled">
@@ -135,7 +135,7 @@
                             }
                             else
                             {
-                                <a asp-action="Viatura"
+                                <a asp-action="Gsm"
                                    asp-route-page=@pagina
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                    class="btn btn-light @nextDisabled">
@@ -151,7 +151,7 @@
                         if (maxRange != maxPage)
                         {
                             <a>...</a>
-                            <a asp-action="Viatura"
+                            <a asp-action="Gsm"
                                asp-route-page=@maxPage
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-primary @nextDisabled">

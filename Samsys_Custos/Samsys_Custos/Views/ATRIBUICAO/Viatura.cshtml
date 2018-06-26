@@ -85,7 +85,7 @@
 
                     if (minRange != minPage)
                     {
-                        <a asp-action="Economato"
+                        <a asp-action="Viatura"
                            asp-route-page=@minPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @prevDisabled">
@@ -100,7 +100,7 @@
                         var pagina = i;
                         if (currentPage == i)
                         {
-                            <a asp-action="Economato"
+                            <a asp-action="Viatura"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-primary @nextDisabled">
@@ -109,7 +109,7 @@
                         }
                         else if (maxPage == currentPage)
                         {
-                            <a asp-action="Economato"
+                            <a asp-action="Viatura"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @prevDisabled">
@@ -119,7 +119,7 @@
                         }
                         else
                         {
-                            <a asp-action="Economato"
+                            <a asp-action="Viatura"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @nextDisabled">
@@ -135,7 +135,7 @@
                     if (maxRange != maxPage)
                     {
                         <a>...</a>
-                        <a asp-action="Economato"
+                        <a asp-action="Viatura"
                            asp-route-page=@maxPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @nextDisabled">
@@ -143,7 +143,7 @@
                         </a>
                     }
                 }
-                <a asp-action="Economato"
+                <a asp-action="Viatura"
                    asp-route-page="@(Model.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary @nextDisabled">

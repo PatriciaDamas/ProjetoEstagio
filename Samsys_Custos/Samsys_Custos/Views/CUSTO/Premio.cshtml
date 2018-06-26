@@ -6,7 +6,7 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
-}
+
 <center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
 <hr />
 @using Microsoft.AspNetCore.Authorization
@@ -87,7 +87,7 @@
         </table>
         <div class="row" style="margin-right:0.5%">
             <div class="col-md-12" align="center">
-                <a asp-action="Salario"
+                <a asp-action="Premio"
                    asp-route-page="@(Model.PageIndex - 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-secondary @prevDisabled">
@@ -103,7 +103,7 @@
 
                     if (minRange != minPage)
                     {
-                        <a asp-action="Salario"
+                        <a asp-action="Premio"
                            asp-route-page=@minPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @prevDisabled">
@@ -118,7 +118,7 @@
                         var pagina = i;
                         if (currentPage == i)
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-primary @nextDisabled">
@@ -127,7 +127,7 @@
                         }
                         else if (maxPage == currentPage)
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @prevDisabled">
@@ -137,7 +137,7 @@
                         }
                         else
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @nextDisabled">
@@ -153,7 +153,7 @@
                     if (maxRange != maxPage)
                     {
                         <a>...</a>
-                        <a asp-action="Salario"
+                        <a asp-action="Premio"
                            asp-route-page=@maxPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @nextDisabled">
@@ -161,7 +161,7 @@
                         </a>
                     }
                 }
-                <a asp-action="Salario"
+                <a asp-action="Premio"
                    asp-route-page="@(Model.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary @nextDisabled">
