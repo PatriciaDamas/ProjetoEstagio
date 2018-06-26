@@ -295,7 +295,7 @@ namespace Samsys_Custos.Controllers {
         public async Task<IActionResult> Validacao(int? page)
         {
             int pageSize = 5;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_phc != null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.UTILIZADOR).Include(c => c.DADOS_PHC.FORNECEDOR).Where(c => c.id_phc != null);
             var count = applicationDbContext.Count();
             var validacao = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");

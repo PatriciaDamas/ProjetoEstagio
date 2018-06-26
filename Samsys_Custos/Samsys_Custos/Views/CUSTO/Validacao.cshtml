@@ -17,12 +17,6 @@
                     id
                 </th>
                 <th>
-                    Colaborador
-                </th>
-                <th>
-                    Categoria
-                </th>
-                <th>
                     Data
                 </th>
                 <th>
@@ -33,6 +27,15 @@
                 </th>
                 <th>
                     Designação
+                </th>
+                <th>
+                    Categoria
+                </th>
+                <th>
+                    Fornecedor
+                </th>
+                <th>
+                    Colaborador
                 </th>
                 <th>
                     Valor
@@ -46,55 +49,57 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td hidden>
-                        @Html.DisplayFor(modelItem => item.id_phc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                        <select class="form-control" asp-items="ViewBag.id_categoria">
-                            <option selected="selected" value="vazio">
-                                Atribuir Categoria
-                            </option>
-                        </select>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ano)
-                    </td>
-                    <td>
-                        @{
-                            var strarr = item.mes.ToString().ToCharArray();
-                            strarr[0] = strarr[0].ToString().ToUpper()[0];
-                            string mes = string.Join("", strarr);
-                            <p>@mes</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.designacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.valor)
-                    </td>
-                    <td>
-                        @if (item.DADOS_PHC.custo_interno == false)
-                        {
-                            <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
-                            <p hidden>False</p>
-                        }
-                        else
-                        {
-                            <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
-                            <p hidden>True</p>
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.id_phc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
 
-                        }
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @{
+                        var strarr = item.mes.ToString().ToCharArray();
+                        strarr[0] = strarr[0].ToString().ToUpper()[0];
+                        string mes = string.Join("", strarr);
+                        <p>@mes</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    <select class="form-control" asp-items="ViewBag.id_categoria">
+                        <option selected="selected" value="vazio">
+                            Atribuir Categoria
+                        </option>
+                    </select>
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.DADOS_PHC.FORNECEDOR.nome)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @if (item.DADOS_PHC.custo_interno == false)
+                    {
+                        <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
+                        <p id="state" hidden>False</p>
+                    }
+                    else
+                    {
+                        <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
+                        <p id="state" hidden>True</p>
+
+                    }
+                </td>
+            </tr>
             }
 
         </tbody>
