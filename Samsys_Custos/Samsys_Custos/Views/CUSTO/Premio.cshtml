@@ -6,8 +6,24 @@
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
-}
+
 <center style="padding-top:1%"><h2>Custos de Prémios</h2></center>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Ano</label>
+        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos"></select>
+    </div>
+    <div class="col-md-4">
+        <label class="control-label">&ensp;</label><br />
+        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroPremio" />
+    </div>
+    <div class="col-md-4">
+    </div>
+
+</div>
+<br />
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
@@ -19,75 +35,75 @@
 
 
 }
-    <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" cellspacing="0">
-            <thead>
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+        <thead>
+            <tr>
+
+                <th>
+                    Ano
+                </th>
+                <th>
+                    Mês
+                </th>
+                <th>
+                    Categoria
+                </th>
+                <th>
+                    Sub-Categoria
+                </th>
+                <th>
+                    Valor
+                </th>
+
+
+                <th>
+                    Colaborador
+                </th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
 
-                    <th>
-                        Ano
-                    </th>
-                    <th>
-                        Mês
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
-                    <th>
-                        Sub-Categoria
-                    </th>
-                    <th>
-                        Valor
-                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
+                    </td>
+                    <td class="categoria">
+                        @Html.DisplayFor(modelItem => item.id_categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.designacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valor)€
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Colaborador)
+                    </td>
 
-
-                    <th>
-                        Colaborador
-                    </th>
-                    <th>Opções</th>
+                    <td>
+                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditPremio" asp-route-id="@item.id_custo"></a>
+                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeletePremio" asp-route-id="@item.id_custo" asp-route-page="Premio"></a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ano)
-                        </td>
-                        <td>
-                            @{
-                                var strarr = item.mes.ToString().ToCharArray();
-                                strarr[0] = strarr[0].ToString().ToUpper()[0];
-                                string mes = string.Join("", strarr);
-                                <p>@mes</p>
-                            }
-                        </td>
-                        <td class="categoria">
-                            @Html.DisplayFor(modelItem => item.id_categoria)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.designacao)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.valor)€
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Colaborador)
-                        </td>
-
-                        <td>
-                            <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditPremio" asp-route-id="@item.id_custo"></a>
-                            <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeletePremio" asp-route-id="@item.id_custo" asp-route-page="Premio"></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            }
+        </tbody>
 
         </table>
         <div class="row" style="margin-right:0.5%">
             <div class="col-md-12" align="center">
-                <a asp-action="Salario"
+                <a asp-action="Premio"
                    asp-route-page="@(Model.PageIndex - 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-secondary @prevDisabled">
@@ -98,12 +114,12 @@
                     int maxPage = Model.TotalPages;
                     int currentPage = Model.PageIndex;
 
-                    int minRange = Math.Max(minPage, currentPage - 2);
-                    int maxRange = Math.Min(maxPage, currentPage + 2);
+                int minRange = Math.Max(minPage, currentPage - 2);
+                int maxRange = Math.Min(maxPage, currentPage + 2);
 
                     if (minRange != minPage)
                     {
-                        <a asp-action="Salario"
+                        <a asp-action="Premio"
                            asp-route-page=@minPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @prevDisabled">
@@ -118,7 +134,7 @@
                         var pagina = i;
                         if (currentPage == i)
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-primary @nextDisabled">
@@ -127,7 +143,7 @@
                         }
                         else if (maxPage == currentPage)
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @prevDisabled">
@@ -137,23 +153,23 @@
                         }
                         else
                         {
-                            <a asp-action="Salario"
+                            <a asp-action="Premio"
                                asp-route-page=@pagina
                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                class="btn btn-light @nextDisabled">
                                 @pagina
                             </a>
 
-                        }
-
-
-                        //if (i != maxRange) { Console.Write(" "); }
                     }
+
+
+                    //if (i != maxRange) { Console.Write(" "); }
+                }
 
                     if (maxRange != maxPage)
                     {
                         <a>...</a>
-                        <a asp-action="Salario"
+                        <a asp-action="Premio"
                            asp-route-page=@maxPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @nextDisabled">
@@ -161,7 +177,7 @@
                         </a>
                     }
                 }
-                <a asp-action="Salario"
+                <a asp-action="Premio"
                    asp-route-page="@(Model.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    class="btn btn-primary @nextDisabled">
@@ -172,4 +188,5 @@
     </div>
 @section scripts {
     <script src="~/js/premios.js"></script>
+    <script src="~/js/filtros.js"></script>
 }

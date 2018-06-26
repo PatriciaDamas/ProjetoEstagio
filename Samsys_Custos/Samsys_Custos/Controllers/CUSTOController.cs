@@ -207,7 +207,7 @@ namespace Samsys_Custos.Controllers {
             // _context.Database.ExecuteSqlCommand("exec dbo.INSERT_PHC");
             if (ano == null)
             {
-                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString())); ;
+                var applicationDbContext = _context.DASHBOARD_CUSTOS_CATEGORIA.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString())); 
                 var count = applicationDbContext.Count();
                 var gerais = applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToList();
                 return View(new PaginatedList<Samsys_Custos.Models.DASHBOARD_CUSTOS_CATEGORIA>(gerais, count, page ?? 1, pageSize));
@@ -262,51 +262,127 @@ namespace Samsys_Custos.Controllers {
 
         // GET: RETORNA TABELA SALARIO
         [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro")]
-        public async Task<IActionResult> Salario(int? page)
+        public async Task<IActionResult> Salario(int? page, int? ano)
         {
-            int pageSize = 10;
-            var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR);
-            var count = applicationDbContext.Count();
-            var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            if (ano == null)
+            {
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR).Where(a => a.CUSTO.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var count = applicationDbContext.Count();
+                var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
+            }
+            else
+            {
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR).Where(a => a.CUSTO.ano == ano);
+                var count = applicationDbContext.Count();
+                var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
+            }
+           
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA ECONOMATO
-        public async Task<IActionResult> Economato(int? page)
+        public async Task<IActionResult> Economato(int? page, int? ano)
         {
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            if (ano == null)
+            {
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
             var count = applicationDbContext.Count();
             var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
-        }
-
+            }
+            else
+            {
+             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == ano);
+             var count = applicationDbContext.Count();
+             var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+             return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
+            }
+           }
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        // GET: RETORNA PREMIOS
+            // GET: RETORNA PREMIOS
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
-        public async Task<IActionResult> Premio(int? page)
+        public async Task<IActionResult> Premio(int? page, int? ano)
         {
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTOS_PREMIOS;
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            if (ano == null)
+            {
+            var applicationDbContext = _context.CUSTOS_PREMIOS.Where(a => a.ano == Int32.Parse(DateTime.Now.Year.ToString())); ;
             var count = applicationDbContext.Count();
             var premios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return View(new PaginatedList<Samsys_Custos.Models.CUSTOS_PREMIOS>(premios, count, page ?? 1, pageSize));
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTOS_PREMIOS.Where(a => a.ano == ano);
+                var count = applicationDbContext.Count();
+                var premios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+
+                return View(new PaginatedList<Samsys_Custos.Models.CUSTOS_PREMIOS>(premios, count, page ?? 1, pageSize));
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA EQUIPAMENTOS GSM
-        public async Task<IActionResult> Gsm(int? page)
+        public async Task<IActionResult> Gsm(int? page, int?ano)
         {
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null);
-            var count = applicationDbContext.Count();
-            var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            if (ano == null)
+            {
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var count = applicationDbContext.Count();
+                var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
+            }
+            else{
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null && c.ano == ano);
+                var count = applicationDbContext.Count();
+                var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,13 +401,32 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA VIATURAS
-        public async Task<IActionResult> Viatura(int? page)
+        public async Task<IActionResult> Viatura(int? page, int?ano)
         {
-            int pageSize = 10;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null);
-            var count = applicationDbContext.Count();
-            var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
+            List<SelectListItem> Years = new List<SelectListItem>();
+            for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
+            {
+                Years.Add(new SelectListItem() { Text = "", Value = i.ToString() });
+            }
+            Years.OrderByDescending(x => x.Value);
+
+            ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
+
+            int pageSize = 50;
+            if (ano == null){
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var count = applicationDbContext.Count();
+                var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
+            }
+            else
+            {
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == ano);
+                var count = applicationDbContext.Count();
+                var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+                return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
+            }
+            
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
