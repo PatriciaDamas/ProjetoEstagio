@@ -83,6 +83,19 @@
         background-color: rgb(255,181,15);
         color: white;
     }
+
+.btnSave {
+    background-color: rgb(255,158,53);
+    color: white;
+    font-size: 16px;
+    border: none;
+    text-align: center;
+}
+
+    .btnSave:hover {
+        background-color: rgb(255,181,15);
+        color: white;
+    }
 .btn2 {
     background-color: rgb(255,158,53);
     color: white;
@@ -147,6 +160,16 @@
         color: #343a40;
     }
 
+.btnVoltarEdit2 {
+    border-color: rgb(255,158,53);
+    color: rgb(255,158,53);
+    float: left;
+}
+
+    .btnVoltar:hover, .btnVoltarEdit2:hover {
+        border-color: #343a40;
+        color: #343a40;
+    }
 .btnIconEdit {
     color: rgb(255,158,53);
 }

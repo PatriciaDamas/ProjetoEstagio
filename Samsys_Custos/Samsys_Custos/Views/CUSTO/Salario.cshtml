@@ -8,13 +8,12 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<center><h2></h2></center>
+<center><h2>@ViewBag.TitlePAge</h2></center>
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
-
     <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
 }
 <div class="table-responsive">
