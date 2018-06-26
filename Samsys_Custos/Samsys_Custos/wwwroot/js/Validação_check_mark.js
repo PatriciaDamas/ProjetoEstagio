@@ -11,11 +11,11 @@ $(document).ready(function () {
         var cat = null;
 
         if ($(this).find(":checkbox").is(':checked')) {
-            $(this).find("p").text("False")
+            $(this).find("#state").text("False")
             flag = false;
         }
         else {
-            $(this).find("p").text("True")
+            $(this).find("#state").text("True")
 
             flag = true;
         }
