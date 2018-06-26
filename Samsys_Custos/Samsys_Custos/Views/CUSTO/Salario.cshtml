@@ -1,21 +1,21 @@
 ﻿@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.Data.SALARIO>
 
 @{
-    ViewData["Title"] = "Salario";
+    ViewData["Title"] = "Custos Salários";
     ViewBag.TitlePage = "Custos de Salários";
     ViewBag.Class = "fa-table";
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
+
+<center><h2></h2></center>
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
 
-    <center><h2>Custos de Salários</h2></center>
-    <hr />
-        <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
+    <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
 }
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" cellspacing="0">

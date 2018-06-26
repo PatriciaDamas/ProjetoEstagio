@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Helpers;
 using Samsys_Custos.Models;
 
 namespace Samsys_Custos.Controllers
@@ -20,9 +21,13 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: VIATURA
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.VIATURA.ToListAsync());
+            var pageSize = 10;
+            var applicationDbContext = _context.VIATURA;
+            var count = applicationDbContext.Count();
+            var viaturas = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<VIATURA>(viaturas, count, page ?? 1, pageSize));
         }
 
         // GET: VIATURA/Details/5

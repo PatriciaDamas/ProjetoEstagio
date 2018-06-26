@@ -1,8 +1,8 @@
 ﻿@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.Data.CUSTO>
 
 @{
-    ViewData["Title"] = "Validacao";
-    ViewBag.TitlePage = "Validação PHC";
+    ViewData["Title"] = "Validação";
+    ViewBag.TitlePage = "Validação Compras";
     ViewBag.Class = "fa-table";
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
@@ -13,7 +13,7 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th >
+                <th hidden>
                     id
                 </th>
                 <th>
@@ -46,10 +46,8 @@
 
             @foreach (var item in Model)
             {
-
-
                 <tr>
-                    <td >
+                    <td hidden>
                         @Html.DisplayFor(modelItem => item.id_phc)
                     </td>
                     <td>

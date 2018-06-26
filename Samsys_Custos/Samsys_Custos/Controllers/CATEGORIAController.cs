@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Helpers;
 
 namespace Samsys_Custos.Controllers
 {
@@ -19,9 +20,13 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: CATEGORIA
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.CATEGORIA.ToListAsync());
+            var pageSize = 10;
+            var applicationDbContext = _context.CATEGORIA.Include("CATEGORIAPAI").OrderBy(a=>a.id_pai);
+            var count = applicationDbContext.Count();
+            var categorias = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<CATEGORIA>(categorias, count, page ?? 1, pageSize));
         }
 
         // GET: CATEGORIA/Details/5

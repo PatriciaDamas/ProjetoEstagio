@@ -36,11 +36,20 @@
             <input asp-for="data_fim" class="form-control" />
             <span asp-validation-for="data_fim" class="text-danger"></span>
         </div>-->
-            <div class="form-group">
-                <center><input type="submit" value="Guardar" class="btn btnCreate btnCriarAtribuicao" /></center>
-</div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <center><input type="submit" value="Guardar" class="btn btnCreate btnCriarAtribuicao" /></center>
+                    </div>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <a class="btn btnVoltarEdit" asp-action="GSM">Voltar</a>
+                </div>
+            </div>
         </form>
-        <center><a asp-action="GSM">Voltar</a></center>
 </div>
     <div class="col-md-4">
     </div>

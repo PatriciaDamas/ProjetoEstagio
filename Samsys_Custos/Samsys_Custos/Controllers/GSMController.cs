@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Helpers;
 
 namespace Samsys_Custos.Controllers
 {
@@ -19,9 +20,14 @@ namespace Samsys_Custos.Controllers
         }
 
         // GET: GSM
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.GSM.ToListAsync());
+            var pageSize = 10;
+            var applicationDbContext = _context.GSM;
+            var count = applicationDbContext.Count();
+            var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<GSM>(gsm, count, page ?? 1, pageSize));
+
         }
 
         // GET: GSM/Details/5
