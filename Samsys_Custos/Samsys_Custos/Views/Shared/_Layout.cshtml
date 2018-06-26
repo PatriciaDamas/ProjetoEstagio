@@ -42,21 +42,25 @@
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipa">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEquipa" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-sitemap"></i>
-                        <span class="nav-link-text">Equipa</span>
+                        <span class="nav-link-text">Análise de Custos</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseEquipa">
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Equipa">Custos por Equipa</a>
                         </li>
                         <li>
+                            <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Equipa_Media">Média de Custos por Equipa</a>
+                        </li>
+                        <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="COLABORADOR">Colaborador</a>
                         </li>
+
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Custos">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCusto" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-eur"></i>
-                        <span class="nav-link-text">Custos</span>
+                        <span class="nav-link-text">Registo de Custos</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseCusto">
                         <li>
