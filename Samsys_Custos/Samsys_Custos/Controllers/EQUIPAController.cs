@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Samsys_Custos.Data;
+using Samsys_Custos.Helpers;
 using Samsys_Custos.Models;
 
 namespace Samsys_Custos.Controllers
@@ -27,12 +28,14 @@ namespace Samsys_Custos.Controllers
             return View(applicationDbContext);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            //ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
-            var applicationDbContext = _context.EQUIPA.ToList();
-            return View(applicationDbContext);
-           
+            int pageSize = 10;
+            var applicationDbContext = _context.EQUIPA;
+            var count = applicationDbContext.Count();
+            var equipas = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<EQUIPA>(equipas, count, page ?? 1, pageSize));
+
         }
 
         // GET: EQUIPA/Details/5

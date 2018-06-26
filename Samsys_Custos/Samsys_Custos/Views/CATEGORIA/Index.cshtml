@@ -1,24 +1,26 @@
-﻿@model IEnumerable<Samsys_Custos.Data.CATEGORIA>
+﻿@model Samsys_Custos.Helpers.PaginatedList<Samsys_Custos.Data.CATEGORIA>
 
 @{
     ViewData["Title"] = "Categorias";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
 <center style="padding-top:1%"><h2>Categorias</h2></center>
 <hr />
 <a class=" btn btnActionCreate" asp-action="Create">Criar Categoria</a>
-
+<div class="table-responsive">
 <table class="table table-bordered" id="dataTable" cellspacing="0">
     <thead>
         <tr>
             <th>
-                Identificador
+                Sub-Categoria de:
             </th>
             <th>
                 Categoria
             </th>
             <th>
-               Opções
+                Opções
             </th>
         </tr>
     </thead>
@@ -27,7 +29,22 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.id_pai)
+                    @{
+                        foreach (var item2 in Model)
+                        {
+                            var idpai = item.id_pai;
+                            var id = item2.id_categoria;
+                            if (id == idpai)
+                            {
+                                System.Diagnostics.Debug.WriteLine("blah");
+
+
+                                @Html.DisplayFor(modelItem => item2.nome);
+                            }
+
+                        }
+
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.nome)
@@ -40,3 +57,89 @@
         }
     </tbody>
 </table>
+<br />
+<div class="row" style="margin-right:0.5%">
+    <div class="col-md-12" align="center">
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-secondary @prevDisabled">
+            Anterior
+        </a>
+        @{
+            int minPage = 1;
+            int maxPage = Model.TotalPages;
+            int currentPage = Model.PageIndex;
+
+            int minRange = Math.Max(minPage, currentPage - 2);
+            int maxRange = Math.Min(maxPage, currentPage + 2);
+
+            if (minRange != minPage)
+            {
+                <a asp-action="Index"
+                   asp-route-page=@minPage
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-light @prevDisabled">
+                    @minPage
+                </a>
+                if (minRange - 1 != minPage)
+                {<a>...</a>}
+            }
+
+            for (int i = minRange; i <= maxRange; i++)
+            {
+                var pagina = i;
+                if (currentPage == i)
+                {
+                    <a asp-action="Index"
+                       asp-route-page=@pagina
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-primary @nextDisabled">
+                        @pagina
+                    </a>
+                }
+                else if (maxPage == currentPage)
+                {
+                    <a asp-action="Index"
+                       asp-route-page=@pagina
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-light @prevDisabled">
+                        @pagina
+                    </a>
+
+                }
+                else
+                {
+                    <a asp-action="Index"
+                       asp-route-page=@pagina
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-light @nextDisabled">
+                        @pagina
+                    </a>
+
+                }
+
+
+                //if (i != maxRange) { Console.Write(" "); }
+            }
+
+            if (maxRange != maxPage)
+            {
+                <a>...</a>
+                <a asp-action="Index"
+                   asp-route-page=@maxPage
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-light @nextDisabled">
+                    @maxPage
+                </a>
+            }
+        }
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @nextDisabled">
+            Próxima
+        </a>
+    </div>
+</div>
+</div>

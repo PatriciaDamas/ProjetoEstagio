@@ -9,9 +9,14 @@
         <ul class="nav navbar-nav navbar-right">
 
             <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
-                Ola @User.Identity.Name !
+                @{
+                    var myuser = UserManager.Users.FirstOrDefault(a => a.UserName == User.Identity.Name);
+                    var nome = myuser.Name;
+                }
+                Ola @nome !
             </a>
-         
+
+
             <li>
                 <button type="submit" class="btn btn-outline-warning" id="btnLogout">Log out</button>
             </li>

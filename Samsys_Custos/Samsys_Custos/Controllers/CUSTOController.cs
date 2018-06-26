@@ -259,18 +259,22 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 10;
             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32);
             var count = applicationDbContext.Count();
-            var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
-            return View(new PaginatedList<CUSTO>(users, count, page ?? 1, pageSize));
+            var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+            return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA PREMIOS
         [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
-        public IActionResult Premio()
+        public async Task<IActionResult> Premio(int? page)
         {
-            var applicationDbContext = _context.CUSTOS_PREMIOS.ToList();
-            return View(applicationDbContext);
+            int pageSize = 10;
+            var applicationDbContext = _context.CUSTOS_PREMIOS;
+            var count = applicationDbContext.Count();
+            var premios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return View(new PaginatedList<Samsys_Custos.Models.CUSTOS_PREMIOS>(premios, count, page ?? 1, pageSize));
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------

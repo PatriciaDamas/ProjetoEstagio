@@ -56,8 +56,8 @@ namespace Samsys_Custos.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Alteração de palavra-passe",
+                    $"<p>Pediu a alteração da sua palavra-passe</p><p>Por favor altere a sua palavra-passe ao <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicar aqui</a>.</p><p><img src='http://www.lispolis.pt/wp-content/uploads/2016/12/logo-samsys.png'/></p>");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
