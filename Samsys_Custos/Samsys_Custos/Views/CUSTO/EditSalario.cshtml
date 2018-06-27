@@ -7,86 +7,92 @@
 <center style="padding-top:1%"><h2>Editar Custo de Salário</h2></center>
     <hr />
     <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <form asp-action="EditSalario">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="id_salario" />
                 <input type="hidden" asp-for="CUSTO.id_custo" />
                 <input type="hidden" asp-for="CUSTO.id_categoria" />
 
+                <div class="form-row">
+                    <div class="col-md-3">
 
+                        <label asp-for="CUSTO.id_colaborador" class="control-label">Colaborador</label>
+                        <select asp-for="CUSTO.id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="liquido" class="control-label">Liquido</label>
+                        <input asp-for="liquido" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="irs" class="control-label">IRS</label>
+                        <input asp-for="irs" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="outras_despesas" class="control-label">Outras Despesas</label>
+                        <input asp-for="outras_despesas" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label asp-for="outras_regalias" class="control-label">Regalias</label>
+                        <input asp-for="outras_regalias" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="outros" class="control-label">Outros</label>
+                        <input asp-for="outros" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="seguranca_social" class="control-label">Seg. Social</label>
+                        <input asp-for="seguranca_social" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="subsidio_alimentacao" class="control-label">Sub. Alimentação</label>
+                        <input asp-for="subsidio_alimentacao" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label asp-for="CUSTO.ano" class="control-label">Ano</label>
+                        <select asp-for="CUSTO.ano" class="form-control" asp-items="ViewBag.ano"></select>
+                        <span asp-validation-for="CUSTO.ano" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="CUSTO.mes" class="control-label">Mês</label>
+                        <select asp-for="CUSTO.mes" class="form-control">
+                            <option value="Janeiro">Janeiro</option>
+                            <option value="Fevereiro">Fevereiro</option>
+                            <option value="Março">Março</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Maio">Maio</option>
+                            <option value="Junho">Junho</option>
+                            <option value="Julho">Julho</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Setembro">Setembro</option>
+                            <option value="Outubro">Outubro</option>
+                            <option value="Novembro">Novembro</option>
+                            <option value="Dezembro">Dezembro</option>
+                        </select>
 
-
-                <div class="form-group">
-
-                    <label asp-for="CUSTO.id_colaborador" class="control-label">Colaborador</label>
-                    <select asp-for="CUSTO.id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
+                        <span asp-validation-for="CUSTO.mes" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                       
+                      
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="liquido" class="control-label">Liquido</label>
-                    <input asp-for="liquido" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="irs" class="control-label">IRS</label>
-                    <input asp-for="irs" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="outras_despesas" class="control-label">Outras Despesas</label>
-                    <input asp-for="outras_despesas" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="outras_regalias" class="control-label">Regalias</label>
-                    <input asp-for="outras_regalias" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="outros" class="control-label">Outros</label>
-                    <input asp-for="outros" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="seguranca_social" class="control-label">Seg. Social</label>
-                    <input asp-for="seguranca_social" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="subsidio_alimentacao" class="control-label">Sub. Alimentação</label>
-                    <input asp-for="subsidio_alimentacao" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="CUSTO.ano" class="control-label">Ano</label>
-                    <select asp-for="CUSTO.ano" class="form-control" asp-items="ViewBag.ano"></select>
-                    <span asp-validation-for="CUSTO.ano" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CUSTO.mes" class="control-label">Mês</label>
-                    <select asp-for="CUSTO.mes" class="form-control">
-                        <option value="Janeiro">Janeiro</option>
-                        <option value="Fevereiro">Fevereiro</option>
-                        <option value="Março">Março</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Maio">Maio</option>
-                        <option value="Junho">Junho</option>
-                        <option value="Julho">Julho</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Setembro">Setembro</option>
-                        <option value="Outubro">Outubro</option>
-                        <option value="Novembro">Novembro</option>
-                        <option value="Dezembro">Dezembro</option>
-                    </select>
-
-                    <span asp-validation-for="CUSTO.mes" class="text-danger"></span>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <input type="submit" value="Editar" class="btn btnCreate" />
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btnVoltarEdit2 form-control" asp-action="Salario" style="margin-top:10%">Voltar</a>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" value="Guardar" class="btn btnSave form-control" style="margin-top:10%" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-1">
 
-                    </div>
-                    <div class="col-md-5">
-                        <a class="btn btnVoltarEdit" asp-action="Salario">Voltar</a>
                     </div>
                 </div>
             </form>
