@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#btnMediaCustos").click(function () {
-        location.href = "https://localhost:44382/CUSTO/Grafico_Equipa_Media"
-    });
+    
     function getchart() {
         let saveData = $.ajax({
             type: 'get',

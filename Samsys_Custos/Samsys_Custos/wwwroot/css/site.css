@@ -162,7 +162,7 @@
 .btnVoltarEdit2 {
     border-color: rgb(255,158,53);
     color: rgb(255,158,53);
-    float: left;
+    /*float: left;*/
 }
 
     .btnVoltar:hover, .btnVoltarEdit2:hover {
