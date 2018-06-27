@@ -100,65 +100,65 @@
             }
         </tbody>
 
-    </table>
-    <div class="row" style="margin-right:0.5%">
-        <div class="col-md-12" align="center">
-            <a asp-action="Salario"
-               asp-route-page="@(Model.PageIndex - 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-secondary @prevDisabled">
-                Anterior
-            </a>
-            @{
-                int minPage = 1;
-                int maxPage = Model.TotalPages;
-                int currentPage = Model.PageIndex;
+        </table>
+        <div class="row" style="margin-right:0.5%">
+            <div class="col-md-12" align="center">
+                <a asp-action="Premio"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-secondary @prevDisabled">
+                    Anterior
+                </a>
+                @{
+                    int minPage = 1;
+                    int maxPage = Model.TotalPages;
+                    int currentPage = Model.PageIndex;
 
                 int minRange = Math.Max(minPage, currentPage - 2);
                 int maxRange = Math.Min(maxPage, currentPage + 2);
 
-                if (minRange != minPage)
-                {
-                    <a asp-action="Salario"
-                       asp-route-page=@minPage
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-light @prevDisabled">
-                        @minPage
-                    </a>
-                    if (minRange - 1 != minPage)
-                    {<a>...</a>}
-                }
-
-                for (int i = minRange; i <= maxRange; i++)
-                {
-                    var pagina = i;
-                    if (currentPage == i)
+                    if (minRange != minPage)
                     {
-                        <a asp-action="Salario"
-                           asp-route-page=@pagina
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-primary @nextDisabled">
-                            @pagina
-                        </a>
-                    }
-                    else if (maxPage == currentPage)
-                    {
-                        <a asp-action="Salario"
-                           asp-route-page=@pagina
+                        <a asp-action="Premio"
+                           asp-route-page=@minPage
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
                            class="btn btn-light @prevDisabled">
-                            @pagina
+                            @minPage
                         </a>
-
+                        if (minRange - 1 != minPage)
+                        {<a>...</a>}
                     }
-                    else
+
+                    for (int i = minRange; i <= maxRange; i++)
                     {
-                        <a asp-action="Salario"
-                           asp-route-page=@pagina
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-light @nextDisabled">
-                            @pagina
-                        </a>
+                        var pagina = i;
+                        if (currentPage == i)
+                        {
+                            <a asp-action="Premio"
+                               asp-route-page=@pagina
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               class="btn btn-primary @nextDisabled">
+                                @pagina
+                            </a>
+                        }
+                        else if (maxPage == currentPage)
+                        {
+                            <a asp-action="Premio"
+                               asp-route-page=@pagina
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               class="btn btn-light @prevDisabled">
+                                @pagina
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a asp-action="Premio"
+                               asp-route-page=@pagina
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               class="btn btn-light @nextDisabled">
+                                @pagina
+                            </a>
 
                     }
 
@@ -166,26 +166,26 @@
                     //if (i != maxRange) { Console.Write(" "); }
                 }
 
-                if (maxRange != maxPage)
-                {
-                    <a>...</a>
-                    <a asp-action="Salario"
-                       asp-route-page=@maxPage
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-light @nextDisabled">
-                        @maxPage
-                    </a>
+                    if (maxRange != maxPage)
+                    {
+                        <a>...</a>
+                        <a asp-action="Premio"
+                           asp-route-page=@maxPage
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-light @nextDisabled">
+                            @maxPage
+                        </a>
+                    }
                 }
-            }
-            <a asp-action="Salario"
-               asp-route-page="@(Model.PageIndex + 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-primary @nextDisabled">
-                Próxima
-            </a>
+                <a asp-action="Premio"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @nextDisabled">
+                    Próxima
+                </a>
+            </div>
         </div>
     </div>
-</div>
 @section scripts {
     <script src="~/js/premios.js"></script>
     <script src="~/js/filtros.js"></script>

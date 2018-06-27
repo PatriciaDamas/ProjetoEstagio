@@ -8,30 +8,12 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<center><h2>Custo de Salários</h2></center>
-<hr />
-
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Ano</label>
-        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos">
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label class="control-label">&ensp;</label><br />
-        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroSalario" />
-    </div>
-    <div class="col-md-4">
-    </div>
-
-</div>
-<br />
+<center><h2>@ViewBag.TitlePAge</h2></center>
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
-
     <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
 }
 <div class="table-responsive">
