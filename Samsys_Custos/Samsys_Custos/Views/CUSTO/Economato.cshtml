@@ -29,154 +29,161 @@
     <table class="table table-bordered" id="dataTable" cellspacing="0">
         <thead>
             <tr>
-                <th>
-                    Data
-                </th>
+
                 <th>
                     Ano
                 </th>
                 <th>
-                    Mês
+                    Data
+                </th>
+
+                <!-- <th>
+        Mês
+    </th>-->
+                <th>
+                    Categoria
                 </th>
                 <th>
                     Designação
                 </th>
                 <th>
-                    Valor
-                </th>
-                <th>
-                    Categoria
-                </th>
-
-                <th>
                     Utilizador
                 </th>
+                <th style="text-align:right;">
+                    Valor
+                </th>
+
+
 
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ano)
-                    </td>
-                    <td>
-                        @{
-                            var strarr = item.mes.ToString().ToCharArray();
-                            strarr[0] = strarr[0].ToString().ToUpper()[0];
-                            string mes = string.Join("", strarr);
-                            <p>@mes</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.designacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
 
-                </tr>
-            }
-        </tbody>
-    </table>
-    <br />
-    <div class="row" style="margin-right:0.5%">
-        <div class="col-md-12" align="center">
+
+                <!--<td>
+    @{
+        /*var strarr = item.mes.ToString().ToCharArray();
+        strarr[0] = strarr[0].ToString().ToUpper()[0];
+        string mes = string.Join("", strarr);*/
+        <p></p>
+        }
+        </td>-->
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.valor)€
+                </td>
+
+
+
+            </tr>
+    }
+</tbody>
+</table>
+<br />
+<div class="row" style="margin-right:0.5%">
+<div class="col-md-12" align="center">
+    <a asp-action="Economato"
+       asp-route-page="@(Model.PageIndex - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-secondary @prevDisabled">
+        Anterior
+    </a>
+    @{
+        int minPage = 1;
+        int maxPage = Model.TotalPages;
+        int currentPage = Model.PageIndex;
+
+        int minRange = Math.Max(minPage, currentPage - 2);
+        int maxRange = Math.Min(maxPage, currentPage + 2);
+
+        if (minRange != minPage)
+        {
             <a asp-action="Economato"
-               asp-route-page="@(Model.PageIndex - 1)"
+               asp-route-page=@minPage
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-secondary @prevDisabled">
-                Anterior
+               class="btn btn-light @prevDisabled">
+                @minPage
             </a>
-            @{
-                int minPage = 1;
-                int maxPage = Model.TotalPages;
-                int currentPage = Model.PageIndex;
+            if (minRange - 1 != minPage)
+            {<a>...</a>}
+        }
 
-                int minRange = Math.Max(minPage, currentPage - 2);
-                int maxRange = Math.Min(maxPage, currentPage + 2);
-
-                if (minRange != minPage)
-                {
-                    <a asp-action="Economato"
-                       asp-route-page=@minPage
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-light @prevDisabled">
-                        @minPage
-                    </a>
-                    if (minRange - 1 != minPage)
-                    {<a>...</a>}
-                }
-
-                for (int i = minRange; i <= maxRange; i++)
-                {
-                    var pagina = i;
-                    if (currentPage == i)
-                    {
-                        <a asp-action="Economato"
-                           asp-route-page=@pagina
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-primary @nextDisabled">
-                            @pagina
-                        </a>
-                    }
-                    else if (maxPage == currentPage)
-                    {
-                        <a asp-action="Economato"
-                           asp-route-page=@pagina
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-light @prevDisabled">
-                            @pagina
-                        </a>
-
-                    }
-                    else
-                    {
-                        <a asp-action="Economato"
-                           asp-route-page=@pagina
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-light @nextDisabled">
-                            @pagina
-                        </a>
-
-                    }
-
-
-                    //if (i != maxRange) { Console.Write(" "); }
-                }
-
-                if (maxRange != maxPage)
-                {
-                    <a>...</a>
-                    <a asp-action="Economato"
-                       asp-route-page=@maxPage
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-light @nextDisabled">
-                        @maxPage
-                    </a>
-                }
+        for (int i = minRange; i <= maxRange; i++)
+        {
+            var pagina = i;
+            if (currentPage == i)
+            {
+                <a asp-action="Economato"
+                   asp-route-page=@pagina
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-primary @nextDisabled">
+                    @pagina
+                </a>
             }
+            else if (maxPage == currentPage)
+            {
+                <a asp-action="Economato"
+                   asp-route-page=@pagina
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-light @prevDisabled">
+                    @pagina
+                </a>
+
+            }
+            else
+            {
+                <a asp-action="Economato"
+                   asp-route-page=@pagina
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-light @nextDisabled">
+                    @pagina
+                </a>
+
+            }
+
+
+            //if (i != maxRange) { Console.Write(" "); }
+        }
+
+        if (maxRange != maxPage)
+        {
+            <a>...</a>
             <a asp-action="Economato"
-               asp-route-page="@(Model.PageIndex + 1)"
+               asp-route-page=@maxPage
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-primary @nextDisabled">
-                Próxima
+               class="btn btn-light @nextDisabled">
+                @maxPage
             </a>
-        </div>
-    </div>
+        }
+    }
+    <a asp-action="Economato"
+       asp-route-page="@(Model.PageIndex + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-primary @nextDisabled">
+        Próxima
+    </a>
+</div>
+</div>
 
 
 </div>
 @section scripts {
-    <script src="~/js/filtros.js"></script>
+<script src="~/js/filtros.js"></script>
 }

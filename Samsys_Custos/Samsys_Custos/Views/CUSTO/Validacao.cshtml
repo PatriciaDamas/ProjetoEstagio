@@ -18,28 +18,31 @@
                 <th hidden>
                     id
                 </th>
-                <th>
-                    Data
-                </th>
-                <th>
+                <th hidden>
                     Ano
                 </th>
                 <th>
-                    Mês
+                    Data
                 </th>
-                <th>
-                    Designação
+
+                <th hidden>
+                    Mês
                 </th>
                 <th>
                     Categoria
                 </th>
                 <th>
-                    Fornecedor
-                </th>
-                <th>
                     Colaborador
                 </th>
                 <th>
+                    Designação
+                </th>
+
+                <th>
+                    Fornecedor
+                </th>
+
+                <th style="text-align:right;">
                     Valor
                 </th>
                 <th>
@@ -51,57 +54,60 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td hidden>
-                        @Html.DisplayFor(modelItem => item.id_phc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.data)
-                    </td>
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.id_phc)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ano)
-                    </td>
-                    <td>
-                        @{
-                            var strarr = item.mes.ToString().ToCharArray();
-                            strarr[0] = strarr[0].ToString().ToUpper()[0];
-                            string mes = string.Join("", strarr);
-                            <p>@mes</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.designacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                        <select class="form-control" asp-items="ViewBag.id_categoria">
-                            <option selected="selected" value="vazio">
-                                Atribuir Categoria
-                            </option>
-                        </select>
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => item.DADOS_PHC.FORNECEDOR.nome)</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.valor)
-                    </td>
-                    <td>
-                        @if (item.DADOS_PHC.custo_interno == false)
-                        {
-                            <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
-                            <p id="state" hidden>False</p>
-                        }
-                        else
-                        {
-                            <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
-                            <p id="state" hidden>True</p>
 
-                        }
-                    </td>
-                </tr>
+                <td hidden>
+                    @{
+                        var strarr = item.mes.ToString().ToCharArray();
+                        strarr[0] = strarr[0].ToString().ToUpper()[0];
+                        string mes = string.Join("", strarr);
+                        <p>@mes</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    <select class="form-control" asp-items="ViewBag.id_categoria">
+                        <option selected="selected" value="vazio">
+                            Atribuir Categoria
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.DADOS_PHC.FORNECEDOR.nome)</td>
+
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.valor)€
+                </td>
+                <td>
+                    @if (item.DADOS_PHC.custo_interno == false)
+                    {
+                        <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
+                        <p id="state" hidden>False</p>
+                    }
+                    else
+                    {
+                        <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
+                        <p id="state" hidden>True</p>
+
+                    }
+                </td>
+            </tr>
             }
 
         </tbody>

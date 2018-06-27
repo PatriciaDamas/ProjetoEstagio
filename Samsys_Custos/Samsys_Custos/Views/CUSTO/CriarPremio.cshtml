@@ -16,23 +16,23 @@
 
             <div class="form-row">
                 <div class="col-md-3">
-                    <label asp-for="id_colaborador" class="control-label">Colaborador</label>
+                    <label asp-for="id_colaborador" class="control-label" style="font-weight:bold;">Colaborador</label>
                     <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
                 </div>
                 <div class="col-md-3">
-                    <label class="control-label">Tipo de Categoria</label>
-                    <select class="form-control tipo_categoria" id="tipo_categoria" asp-items="ViewBag.tipo_premio">
+                    <label class="control-label" style="font-weight:bold;">Tipo de Categoria</label>
+                    <select class="form-control tipo_categoria" id="tipo_categoria" asp-items="ViewBag.tipo_premio" >
                         <option selected="selected">
                             Escolha uma Categoria de Prémio
                         </option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label asp-for="id_categoria" class="control-label">Rubrica</label>
+                    <label asp-for="id_categoria" class="control-label" style="font-weight:bold;">Rubrica</label>
                     <select asp-for="id_categoria" class="form-control rubrica" id="rubrica"></select>
                 </div>
                 <div class="col-md-3">
-                    <label asp-for="ano" class="control-label">Ano</label>
+                    <label asp-for="ano" class="control-label" style="font-weight:bold;">Ano</label>
                     <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
                     <span asp-validation-for="ano" class="text-danger"></span>
                 </div>
@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="col-md-3">
 
-                    <label asp-for="mes" class="control-label">Mês</label>
+                    <label asp-for="mes" class="control-label" style="font-weight:bold;">Mês</label>
                     <select asp-for="mes" class="form-control">
                         <option value="janeiro">Janeiro</option>
                         <option value="fevereiro">Fevereiro</option>
@@ -58,8 +58,8 @@
 
                     <span asp-validation-for="mes" class="text-danger"></span>
                 </div>
-                <div class="col-md-3">
-                    <label asp-for="valor" class="control-label">Valor</label>
+                <div class="col-md-3" >
+                    <label asp-for="valor" class="control-label" style="font-weight:bold;">Valor</label>
                     <input asp-for="valor" class="form-control" />
                     <span asp-validation-for="valor" class="text-danger"></span>
                 </div>
