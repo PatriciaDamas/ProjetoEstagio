@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="id_gsm" class="control-label">Número</label>
                     <select asp-for="id_gsm" id="gsm" class="form-control" asp-items="ViewBag.id_gsm" required>
                         <option selected="selected">
@@ -22,24 +22,24 @@
                         </option>
                     </select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                     <select asp-for="id_colaborador" id="colaborador" class="form-control" asp-items="ViewBag.id_colaborador">
                         <option selected="selected"></option>
                     </select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="id_categoria" class="control-label">Categoria</label>
                     <select asp-for="id_categoria" class="form-control" asp-items="ViewBag.id_categoria"></select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="ano" class="control-label">Ano</label>
                     <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
                     <span asp-validation-for="ano" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="mes" class="control-label">Mês</label>
                     <select asp-for="mes" class="form-control">
                         <option value="janeiro">Janeiro</option>
@@ -56,24 +56,31 @@
                     </select>
                     <span asp-validation-for="mes" class="text-danger"></span>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="valor" class="control-label">Valor</label>
                     <input asp-for="valor" class="form-control" />
                     <span asp-validation-for="valor" class="text-danger"></span>
                 </div>
-                <div class="col">
-                    <input style="margin-top:7%" type="submit" value="Criar Registo" class="form-control btn btnSave" />
+                <div class="col-md-3">
+                    
                 </div>
-                <div class="col">
-                    <a  style="margin-top:7%" class="btn btnVoltarEdit2 form-control" asp-action="Gsm">Voltar</a>
-
+                <div class="col-md-3">
+                    
                 </div>
-
                 </div>
-                <div class="col-md-5">
-                    <a class="btn btnVoltarEdit" asp-action="Gsm">Voltar</a>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a style="margin-top:10%" class="btn btnVoltarEdit2 form-control" asp-action="Gsm">Voltar</a>
+                        </div>
+                        <div class="col-md-6">
+                            <input style="margin-top:10%" type="submit" value="Guardar" class="form-control btn btnSave" />
+                        </div>
+                    </div>
                 </div>
             </div>
+           
         </form>
 
     </div>

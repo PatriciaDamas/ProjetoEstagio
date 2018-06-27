@@ -14,11 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="id_colaborador" class="control-label">Colaborador</label>
                     <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label class="control-label">Tipo de Categoria</label>
                     <select class="form-control tipo_categoria" id="tipo_categoria" asp-items="ViewBag.tipo_premio">
                         <option selected="selected">
@@ -26,18 +26,18 @@
                         </option>
                     </select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="id_categoria" class="control-label">Rubrica</label>
                     <select asp-for="id_categoria" class="form-control rubrica" id="rubrica"></select>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="ano" class="control-label">Ano</label>
                     <select asp-for="ano" class="form-control" asp-items="ViewBag.ano"></select>
                     <span asp-validation-for="ano" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3">
 
                     <label asp-for="mes" class="control-label">Mês</label>
                     <select asp-for="mes" class="form-control">
@@ -57,23 +57,34 @@
 
                     <span asp-validation-for="mes" class="text-danger"></span>
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <label asp-for="valor" class="control-label">Valor</label>
                     <input asp-for="valor" class="form-control" />
                     <span asp-validation-for="valor" class="text-danger"></span>
                 </div>
-                <div class="col">
-                    <input type="submit" value="Criar Registo" class="btn btnSave form-control" style="margin-top:7%" />
+                <div class="col-md-3">
+                    
+                </div>
+                <div class="col-md-3">
+                   
 
                 </div>
-                <div class="col">
-                    <a class="btn btnVoltarEdit2 form-control" asp-action="Premio" style="margin-top:7%">Voltar</a>
-
+            </div>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btnVoltarEdit2 form-control" asp-action="Premio" style="margin-top:10%">Voltar</a>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Guardar" class="btn btnSave form-control" style="margin-top:10%" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
-          
+
         </form>
     </div>
     <div class="col-md-4">
