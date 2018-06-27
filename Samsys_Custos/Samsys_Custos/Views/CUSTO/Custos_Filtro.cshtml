@@ -1,17 +1,15 @@
 ﻿
 @model List<Samsys_Custos.Models.CUSTOS_TOTAIS>
-@{ViewData["Title"] = "Custos Totais";}
 
 @{
+    ViewData["Title"] = "Custos Totais";
     ViewBag.TitlePage = "Custos por Categoria";
-    ViewBag.Class = "fa-table";
 }
 
-<br />
-<center><h2>Custos por Categoria - @ViewBag.nomeCategoria</h2></center>
-<br />
+<center><h2>Detalhe - @ViewBag.nomeCategoria - @ViewBag.mesDetalhe - @ViewBag.anoDetalhe</h2></center>
 <hr />
-<br />
+<h8><b>Você está aqui : </b>Dashboard - <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Gerais">Dashboard</a> / Detalhe - @ViewBag.nomeCategoria - @ViewBag.mesDetalhe - @ViewBag.anoDetalhe </h8>
+<hr />
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>

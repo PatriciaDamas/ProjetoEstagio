@@ -4,7 +4,10 @@
     ViewBag.TitlePage = "Custos Equipa";
     ViewBag.Class = "fa-bar-chart";
 }
-<div class="row" style="padding-top:50px">
+<hr />
+<h8><b>Você está aqui : </b>Análise de Custos - Custo por Equipas</h8>
+<hr />
+<div class="row">
     <div class="col-lg-12">
         <div class="card mb-3">
             <div class="card-header">
@@ -13,8 +16,7 @@
             </div>
             <div class="card-body">
                 <label class="control-label">Ano</label>
-                <select class="form-control" asp-items="ViewBag.ano" id="select_ano">
-                </select>
+                <select class="form-control" asp-items="ViewBag.ano" id="select_ano"></select>
                 <br />
                 <div id="chartdiv" style="width: 100%;height: 500px"></div>
                 <br>
