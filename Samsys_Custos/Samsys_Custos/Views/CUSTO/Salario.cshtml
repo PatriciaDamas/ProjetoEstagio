@@ -10,6 +10,8 @@
 
 <center><h2>@ViewBag.TitlePAge</h2></center>
 <hr />
+<h8><b>Você está aqui : </b>Registo de Custos - Salários</h8>
+<hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
