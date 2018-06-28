@@ -21,48 +21,51 @@
 }
     <body>
         <h1 class="center">@ViewData["Title2"]</h1>
-        <section class="mysection form-control">
-            <form method="post">
+      
+        
+                <section class="mysection form-control">
+                    <form method="post">
 
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <h5>Inicio de Sessão</h5>
-                <hr />
-                <div class="email">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="pass">
-                    <label asp-for="Input.Password">Palavra-passe</label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="save">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            Guardar credenciais?
-                        </label>
-                    </div>
-                </div>
-                <div class="login">
-                    <button type="submit" class="btn btn-default form-control">Log in</button>
-                </div>
-                <div class="recover">
-                    <p>
-                        <a asp-page="./ForgotPassword">Recuperar palavra-passe?</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-        <div class="center">
-            <h1>
-                <img class="icon" src="~/images/samsysicon.png" />@ViewData["Title3"]
-            </h1>
-        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <h5>Inicio de Sessão</h5>
+                        <hr />
+                        <div class="email">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="pass">
+                            <label asp-for="Input.Password">Palavra-passe</label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="save">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    Guardar credenciais?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="login">
+                            <button type="submit" class="btn btn-default form-control">Log in</button>
+                        </div>
+                        <div class="recover">
+                            <p>
+                                <a asp-page="./ForgotPassword">Recuperar palavra-passe?</a>
+                            </p>
+                        </div>
+                    </form>
+                </section>
+         
+            <div class="center">
+                <h1>
+                    <img class="icon" src="~/images/samsysicon.png" />@ViewData["Title3"]
+                </h1>
+            </div>
 
 
-    </body>
+</body>
 
 
 @section Scripts {
