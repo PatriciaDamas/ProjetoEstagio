@@ -54,8 +54,8 @@ namespace Samsys_Custos.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Nome")]
             public string Name { get; set; }
-            [Display(Name = "Segurança Social")]
-            public int SegSocial { get; set; }
+            [Display(Name = "Contribuinte")]
+            public int contribuinte { get; set; }
             [Display(Name = "Número colaborador")]
             public int? Id_Colaborador { get; set; }
         }
@@ -70,7 +70,7 @@ namespace Samsys_Custos.Areas.Identity.Pages.Account.Manage
 
             var userName = await _userManager.GetUserNameAsync(user);
             var name = user.Name;
-            int segSocial = user.Segsocial;
+            int contribuinte = user.contribuinte;
             int? id_colaborador = user.id_colaborador;
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -82,7 +82,7 @@ namespace Samsys_Custos.Areas.Identity.Pages.Account.Manage
             {
                 Email = email,
                 Name = name,
-                SegSocial = segSocial,
+                contribuinte = contribuinte,
                 Id_Colaborador = id_colaborador
         };
 
