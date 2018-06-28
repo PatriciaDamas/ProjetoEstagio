@@ -15,7 +15,7 @@ namespace Samsys_Custos.Data
         [ForeignKey("FORNECEDOR")]
         public string id_fornecedor { get; set; }
         public FORNECEDOR FORNECEDOR { get; set; }
-
         public Boolean custo_interno { get; set; }
+        public Boolean validado { get; set; }
     }
 }

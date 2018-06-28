@@ -287,14 +287,14 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 50;
             if (ano == null)
             {
-                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA);//.Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == Int32.Parse(DateTime.Now.Year.ToString()));
                 var count = applicationDbContext.Count();
                 var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
             }
             else
             {
-                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA);//.Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == ano);
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == ano);
                 var count = applicationDbContext.Count();
                 var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
@@ -319,14 +319,14 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 50;
             if (ano == null)
             {
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA);//.Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
             var count = applicationDbContext.Count();
             var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
             }
             else
             {
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA);//.Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == ano);
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == ano);
              var count = applicationDbContext.Count();
              var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
              return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
