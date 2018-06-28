@@ -1,10 +1,13 @@
 ﻿.icon {
-    width: 80px
+    width: 80px;
+    margin-top: 2%;
 }
 
 div.center {
     text-align: center;
+  
 }
+
 
 .mysection {
     margin: auto;
@@ -13,8 +16,8 @@ div.center {
     bottom: 0;
     left: 0;
     right: 0;
-    width: 25%;
-    height: 40%;
+    width: 35%;
+    height: 60%;
     background-color: rgba(0,0,0,0.05);
 }
 
@@ -109,7 +112,10 @@ p, p > a {
 }
 
 .btn {
-    background-color: #FFB50F;
+    background-color: #FBCA08;
     color: white;
     font-weight: bold;
 }
+    .btn:hover {
+        background-color: #FED700;
+    }
