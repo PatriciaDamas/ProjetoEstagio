@@ -246,6 +246,14 @@ namespace Samsys_Custos.Controllers
             {
                 try
                 {
+                    var aTRIBUICAORESERVA = await _context.ATRIBUICAO.SingleOrDefaultAsync(c => c.data_fim == null && c.id_gsm == aTRIBUICAO.id_gsm);
+                    if (aTRIBUICAORESERVA.data_fim == null)
+                    {
+                        aTRIBUICAORESERVA.data_fim = DateTime.Now;
+                        _context.Update(aTRIBUICAORESERVA);
+                        await _context.SaveChangesAsync();
+                    }
+
                     _context.Update(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                 }
@@ -283,6 +291,14 @@ namespace Samsys_Custos.Controllers
             {
                 try
                 {
+                    var aTRIBUICAORESERVA = await _context.ATRIBUICAO.SingleOrDefaultAsync(c => c.data_fim == null && c.id_viatura == aTRIBUICAO.id_viatura);
+                    if(aTRIBUICAORESERVA.data_fim == null)
+                    {
+                        aTRIBUICAORESERVA.data_fim = DateTime.Now;
+                        _context.Update(aTRIBUICAORESERVA);
+                        await _context.SaveChangesAsync();
+                    }
+
                     _context.Update(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                 }

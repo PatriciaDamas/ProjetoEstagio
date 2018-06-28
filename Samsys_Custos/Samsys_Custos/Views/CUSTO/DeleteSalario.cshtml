@@ -56,14 +56,11 @@
         <form asp-action="DeleteSalario">
             <input type="hidden" asp-for="id_salario" />
             <div class="row">
-                <div class="col-md-4">
-                    <input type="submit" value="Remover" class="btn btnRemove" />
+                <div class="col-md-6">
+                    <a class="btn btnVoltarEdit2 form-control" asp-action="Salario">Voltar</a>
                 </div>
-                <div class="col-md-1">
-
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btnVoltar" asp-action="Salario">Voltar</a>
+                <div class="col-md-6">
+                    <input type="submit" value="Remover" class="btn btnSave form-control" />
                 </div>
             </div>
         </form>

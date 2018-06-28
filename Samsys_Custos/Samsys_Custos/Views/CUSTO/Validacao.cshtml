@@ -62,7 +62,10 @@
                     @Html.DisplayFor(modelItem => item.ano)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.data)
+                    @{
+                        var data = item.data.ToString().Split(" ");
+                        <p> @data[0]</p>
+                    }
                 </td>
 
 
