@@ -21,15 +21,16 @@
                     Mês
                 </th>
                 <th>
-                    Colaborador
-                </th>
-                <th>
                     Categoria
                 </th>
                 <th>
+                    Colaborador
+                </th>
+
+                <th>
                     Designação
                 </th>
-                <th>
+                <th style="text-align:right;">
                     Valor
                 </th>
             </tr>
@@ -37,31 +38,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @{
-                            var strarr = item.mes.ToString().ToCharArray();
-                            strarr[0] = strarr[0].ToString().ToUpper()[0];
-                            string mes = string.Join("", strarr);
-                            <p>@mes</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.colaborador)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.categoria)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.designacao)
-                    </td>
+            <tr>
+                <td>
+                    @{
+                        var strarr = item.mes.ToString().ToCharArray();
+                        strarr[0] = strarr[0].ToString().ToUpper()[0];
+                        string mes = string.Join("", strarr);
+                        <p>@mes</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.colaborador)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Total)€
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.Total)€
+                </td>
 
 
-                </tr>
+            </tr>
             }
         </tbody>
     </table>

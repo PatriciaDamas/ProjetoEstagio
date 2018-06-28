@@ -8,30 +8,14 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<center><h2>Custo de Salários</h2></center>
+<center><h2>@ViewBag.TitlePAge</h2></center>
 <hr />
-
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Ano</label>
-        <select class="form-control" asp-items="ViewBag.ano" id="select_ano_custos">
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label class="control-label">&ensp;</label><br />
-        <input type="submit" value="Filtrar" class="btn btnCreate" id="btnFiltroSalario" />
-    </div>
-    <div class="col-md-4">
-    </div>
-
-</div>
-<br />
+<h8><b>Você está aqui : </b>Registo de Custos - Salários</h8>
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Salários") || User.IsInRole("Gestor"))
 {
-
     <a class=" btn btnActionCreate" asp-action="CriarSalario">Novo registo de Salário</a>
 }
 <div class="table-responsive">
@@ -44,56 +28,52 @@
                 <th>
                     Mês
                 </th>
-
-                <th>
-                    Total
-                </th>
                 <th>
                     Categoria
                 </th>
-
-
                 <th>
                     Colaborador
                 </th>
-
+                <th style="text-align:right;">
+                    Valor
+                </th>
                 <th>Opções</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+            <tr>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.ano)
-                    </td>
-                    <td>
-                        @{
-                            var strarr = item.CUSTO.mes.ToString().ToCharArray();
-                            strarr[0] = strarr[0].ToString().ToUpper()[0];
-                            string mes = string.Join("", strarr);
-                            <p>@mes</p>
-                        }
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTO.ano)
+                </td>
+                <td>
+                    @{
+                        var strarr = item.CUSTO.mes.ToString().ToCharArray();
+                        strarr[0] = strarr[0].ToString().ToUpper()[0];
+                        string mes = string.Join("", strarr);
+                        <p>@mes</p>
+                    }
+                </td>
 
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTO.CATEGORIA.nome)
+                </td>
 
-                    <td>
-                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditSalario" asp-route-id="@item.id_salario"></a>
-                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario"></a>
-                    </td>
-                </tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CUSTO.UTILIZADOR.nome)
+                </td>
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.CUSTO.valor)€
+                </td>
+                <td>
+                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditSalario" asp-route-id="@item.id_salario"></a>
+                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteSalario" asp-route-id="@item.id_salario" asp-route-page="Salario"></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

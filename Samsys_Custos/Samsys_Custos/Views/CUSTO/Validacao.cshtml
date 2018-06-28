@@ -9,6 +9,8 @@
 }
 <center style="padding-top:1%"><h2>Validação PHC</h2></center>
 <hr />
+<h8><b>Você está aqui : </b>Registo de Custos - Validação PHC</h8>
+<hr />
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -16,28 +18,31 @@
                 <th hidden>
                     id
                 </th>
-                <th>
-                    Data
-                </th>
-                <th>
+                <th hidden>
                     Ano
                 </th>
                 <th>
-                    Mês
+                    Data
                 </th>
-                <th>
-                    Designação
+
+                <th hidden>
+                    Mês
                 </th>
                 <th>
                     Categoria
                 </th>
                 <th>
-                    Fornecedor
-                </th>
-                <th>
                     Colaborador
                 </th>
                 <th>
+                    Designação
+                </th>
+
+                <th>
+                    Fornecedor
+                </th>
+
+                <th style="text-align:right;">
                     Valor
                 </th>
                 <th>
@@ -53,23 +58,21 @@
                 <td hidden>
                     @Html.DisplayFor(modelItem => item.id_phc)
                 </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.ano)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.data)
                 </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
-                </td>
-                <td>
+
+                <td hidden>
                     @{
                         var strarr = item.mes.ToString().ToCharArray();
                         strarr[0] = strarr[0].ToString().ToUpper()[0];
                         string mes = string.Join("", strarr);
                         <p>@mes</p>
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.designacao)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
@@ -79,12 +82,17 @@
                         </option>
                     </select>
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.DADOS_PHC.FORNECEDOR.nome)</td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.valor)
+                    @Html.DisplayFor(modelItem => item.designacao)
+                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.DADOS_PHC.FORNECEDOR.nome)</td>
+
+                <td style="text-align:right;">
+                    @Html.DisplayFor(modelItem => item.valor)€
                 </td>
                 <td>
                     @if (item.DADOS_PHC.custo_interno == false)

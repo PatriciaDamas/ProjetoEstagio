@@ -8,73 +8,82 @@
 
 <center style="padding-top:1%"><h2>Editar Custo de Viatura</h2></center>
 <hr />
-
+<h8><b>Você está aqui : </b>Registo de Custos - <a asp-area="" asp-controller="CUSTO" asp-action="Viatura">Viaturas</a> / Editar Registo</h8>
+<hr />
 <div class="row">
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="EditViatura">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id_custo" />
-            <div class="form-group">
-                <label asp-for="id_colaborador" class="control-label">Colaborador</label>
-                <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
-                <span asp-validation-for="id_colaborador" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="id_categoria" class="control-label">Categoria</label>
-                <select asp-for="id_categoria" class="form-control" asp-items="ViewBag.id_categoria"></select>
-                <span asp-validation-for="id_categoria" class="text-danger"></span>
-            </div>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label asp-for="id_colaborador" class="control-label" style="font-weight:bold;">Colaborador</label>
+                    <select asp-for="id_colaborador" class="form-control" asp-items="ViewBag.id_colaborador"></select>
+                    <span asp-validation-for="id_colaborador" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="id_categoria" class="control-label" style="font-weight:bold;">Categoria</label>
+                    <select asp-for="id_categoria" class="form-control" asp-items="ViewBag.id_categoria"></select>
+                    <span asp-validation-for="id_categoria" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="id_viatura" class="control-label">Matrícula</label>
-                <select asp-for="id_viatura" class="form-control" asp-items="ViewBag.id_viatura"></select>
-                <span asp-validation-for="id_viatura" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label asp-for="id_viatura" class="control-label" style="font-weight:bold;">Matrícula</label>
+                    <select asp-for="id_viatura" class="form-control" asp-items="ViewBag.id_viatura"></select>
+                    <span asp-validation-for="id_viatura" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="ano" class="control-label" style="font-weight:bold;">Ano</label>
+                    <input asp-for="ano" class="form-control" />
+                    <span asp-validation-for="ano" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ano" class="control-label">Ano</label>
-                <input asp-for="ano" class="form-control" />
-                <span asp-validation-for="ano" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="mes" class="control-label">Mês</label>
-                <select asp-for="mes" class="form-control">
-                    <option value="janeiro">Janeiro</option>
-                    <option value="fevereiro">Fevereiro</option>
-                    <option value="março">Março</option>
-                    <option value="abril">Abril</option>
-                    <option value="junho">Junho</option>
-                    <option value="julho">Julho</option>
-                    <option value="agosto">Agosto</option>
-                    <option value="setembro">Setembro</option>
-                    <option value="outubro">Outubro</option>
-                    <option value="novembro">Novembro</option>
-                    <option value="dezembro">Dezembro</option>
-                </select>
-                <span asp-validation-for="mes" class="text-danger"></span>
-            </div>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <label asp-for="mes" class="control-label" style="font-weight:bold;">Mês</label>
+                    <select asp-for="mes" class="form-control">
+                        <option value="janeiro">Janeiro</option>
+                        <option value="fevereiro">Fevereiro</option>
+                        <option value="março">Março</option>
+                        <option value="abril">Abril</option>
+                        <option value="junho">Junho</option>
+                        <option value="julho">Julho</option>
+                        <option value="agosto">Agosto</option>
+                        <option value="setembro">Setembro</option>
+                        <option value="outubro">Outubro</option>
+                        <option value="novembro">Novembro</option>
+                        <option value="dezembro">Dezembro</option>
+                    </select>
+                    <span asp-validation-for="mes" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="valor" class="control-label">Valor</label>
-                <input asp-for="valor" class="form-control" />
-                <span asp-validation-for="valor" class="text-danger"></span>
+                <div class="col-md-3">
+                    <label asp-for="valor" class="control-label" style="font-weight:bold;">Valor</label>
+                    <input asp-for="valor" class="form-control" />
+                    <span asp-validation-for="valor" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                   
+                </div>
+                <div class="col-md-3">
+                   
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <input type="submit" value="Editar" class="btn btnCreate" />
+            <div class="form-row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btnVoltarEdit2 form-control" asp-action="Viatura" style="margin-top:10%">Voltar</a>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Guardar" class="btn btnSave form-control" style="margin-top:10%" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-1">
 
-                </div>
-                <div class="col-md-5">
-                    <a class="btn btnVoltarEdit" asp-action="Viatura">Voltar</a>
                 </div>
             </div>
         </form>
-        
+
     </div>
     <div class="col-md-4">
     </div>
