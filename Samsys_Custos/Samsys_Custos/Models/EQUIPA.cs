@@ -11,9 +11,9 @@ namespace Samsys_Custos.Data
     {
         [Key]
         public string id_equipa { get; set; }
-        [ForeignKey("UTILIZADOR")]
+        [ForeignKey("COLABORADOR")]
         public int id_lider { get; set; }
-        public UTILIZADOR UTILIZADOR { get; set; }
+        public COLABORADOR COLABORADOR { get; set; }
         public string nome { get; set; }
     }
 }

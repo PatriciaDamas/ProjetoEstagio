@@ -33,8 +33,8 @@
             <dt style="font-weight:bold;">
                 Colaborador
             </dt>
-            <dd >
-                @Html.DisplayFor(model => model.UTILIZADOR.nome)
+            <dd>
+                @Html.DisplayFor(model => model.COLABORADOR.nome)
             </dd>
             <dt style="font-weight:bold;">
                 Data Início
@@ -53,14 +53,12 @@
         <form asp-action="DeleteGSM">
             <input type="hidden" asp-for="id_atribuicao" />
             <div class="row">
-                <div class="col-md-5">
-                    <input type="submit" value="Remover" class="btn btnCreate" />
+                <div class="col-md-6">
+                    <a class="btn btnVoltarEdit2 form-control" asp-action="GSM">Voltar</a>
+                    
                 </div>
-                <div class="col-md-1">
-
-                </div>
-                <div class="col-md-5">
-                    <a class="btn btnVoltar" asp-action="GSM">Voltar</a>
+                <div class="col-md-6">
+                    <input type="submit" value="Remover" class="btn btnSave form-control" />
                 </div>
             </div>
            

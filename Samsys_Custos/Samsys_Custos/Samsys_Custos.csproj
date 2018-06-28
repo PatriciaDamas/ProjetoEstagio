@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20180628103939_dropforeignkey.cs" />
+    <Compile Remove="Data\Migrations\20180628103939_dropforeignkey.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180628104500_dropforeignkey.cs" />
+    <Compile Remove="Data\Migrations\20180628104500_dropforeignkey.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\css\all.css" />
     <Content Remove="wwwroot\css\fontawesome.css" />
   </ItemGroup>
@@ -19,19 +26,6 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Views\CUSTO\CustoEquipaDetalhe.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\CUSTO\Grafico_Equipa_Media.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\EQUIPA\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
   </ItemGroup>
 
 </Project>

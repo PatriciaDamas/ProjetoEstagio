@@ -25,7 +25,7 @@ namespace Samsys_Custos.Controllers
         /*// GET: ATRIBUICAO
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.UTILIZADOR).Include(a => a.VIATURA);
+            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.COLABORADOR).Include(a => a.VIATURA);
             return View(await applicationDbContext.ToListAsync());
         }*/
 
@@ -66,7 +66,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> GSM( int? page)
         {
             var pageSize = 10;
-            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.UTILIZADOR).Where(c => c.id_gsm != null);
+            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.GSM).Include(a => a.COLABORADOR).Where(c => c.id_gsm != null);
             var count = applicationDbContext.Count();
             var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<ATRIBUICAO>(users, count, page ?? 1, pageSize));
@@ -75,7 +75,7 @@ namespace Samsys_Custos.Controllers
         public async Task<IActionResult> Viatura( int? page)
         {
             int pageSize = 10;
-            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.VIATURA).Include(a => a.UTILIZADOR).Where(c => c.id_viatura != null);
+            var applicationDbContext = _context.ATRIBUICAO.Include(a => a.VIATURA).Include(a => a.COLABORADOR).Where(c => c.id_viatura != null);
             var count = applicationDbContext.Count();
             var users = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<ATRIBUICAO>(users,count,page ?? 1, pageSize));
@@ -91,7 +91,7 @@ namespace Samsys_Custos.Controllers
 
             var aTRIBUICAO = await _context.ATRIBUICAO
                 .Include(a => a.GSM)
-                .Include(a => a.UTILIZADOR)
+                .Include(a => a.COLABORADOR)
                 .Include(a => a.VIATURA)
                 .SingleOrDefaultAsync(m => m.id_atribuicao == id);
             if (aTRIBUICAO == null)
@@ -107,7 +107,7 @@ namespace Samsys_Custos.Controllers
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
         public IActionResult CreateViatura()
         {
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             return View();
         }
@@ -117,7 +117,7 @@ namespace Samsys_Custos.Controllers
         public IActionResult CreateGSM()
         {
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             return View();
         }
 
@@ -153,7 +153,7 @@ namespace Samsys_Custos.Controllers
                 }
             }
 
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
         }
@@ -186,7 +186,7 @@ namespace Samsys_Custos.Controllers
                 }
             }
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             return View(aTRIBUICAO);
         }
 
@@ -206,7 +206,7 @@ namespace Samsys_Custos.Controllers
                 return NotFound();
             }
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             return View(aTRIBUICAO);
         }
         // GET: ATRIBUICAO/Edit/5
@@ -223,7 +223,7 @@ namespace Samsys_Custos.Controllers
             {
                 return NotFound();
             }
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
         }
@@ -246,6 +246,14 @@ namespace Samsys_Custos.Controllers
             {
                 try
                 {
+                    var aTRIBUICAORESERVA = await _context.ATRIBUICAO.SingleOrDefaultAsync(c => c.data_fim == null && c.id_gsm == aTRIBUICAO.id_gsm);
+                    if (aTRIBUICAORESERVA.data_fim == null)
+                    {
+                        aTRIBUICAORESERVA.data_fim = DateTime.Now;
+                        _context.Update(aTRIBUICAORESERVA);
+                        await _context.SaveChangesAsync();
+                    }
+
                     _context.Update(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                 }
@@ -263,7 +271,7 @@ namespace Samsys_Custos.Controllers
                 return RedirectToAction(nameof(GSM));
             }
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", aTRIBUICAO.id_gsm);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             return View(aTRIBUICAO);
         }
         // POST: ATRIBUICAO/Edit/5
@@ -283,6 +291,14 @@ namespace Samsys_Custos.Controllers
             {
                 try
                 {
+                    var aTRIBUICAORESERVA = await _context.ATRIBUICAO.SingleOrDefaultAsync(c => c.data_fim == null && c.id_viatura == aTRIBUICAO.id_viatura);
+                    if(aTRIBUICAORESERVA.data_fim == null)
+                    {
+                        aTRIBUICAORESERVA.data_fim = DateTime.Now;
+                        _context.Update(aTRIBUICAORESERVA);
+                        await _context.SaveChangesAsync();
+                    }
+
                     _context.Update(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                 }
@@ -299,7 +315,7 @@ namespace Samsys_Custos.Controllers
                 }
                 return RedirectToAction(nameof(Viatura));
             }
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", aTRIBUICAO.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", aTRIBUICAO.id_viatura);
             return View(aTRIBUICAO);
         }
@@ -313,7 +329,7 @@ namespace Samsys_Custos.Controllers
             }
 
             var aTRIBUICAO = await _context.ATRIBUICAO
-                .Include(a => a.UTILIZADOR)
+                .Include(a => a.COLABORADOR)
                 .Include(a => a.VIATURA)
                 .SingleOrDefaultAsync(m => m.id_atribuicao == id);
             if (aTRIBUICAO == null)
@@ -351,7 +367,7 @@ namespace Samsys_Custos.Controllers
 
             var aTRIBUICAO = await _context.ATRIBUICAO
                 .Include(a => a.GSM)
-                .Include(a => a.UTILIZADOR)
+                .Include(a => a.COLABORADOR)
                 .SingleOrDefaultAsync(m => m.id_atribuicao == id);
             if (aTRIBUICAO == null)
             {

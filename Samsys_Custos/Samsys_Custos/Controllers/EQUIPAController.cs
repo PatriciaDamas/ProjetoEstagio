@@ -24,7 +24,7 @@ namespace Samsys_Custos.Controllers
         public IActionResult Colaborador()
         {
 
-            var applicationDbContext = _context.UTILIZADOR.Include(a=>a.EQUIPA).ToList();
+            var applicationDbContext = _context.COLABORADOR.Include(a=>a.EQUIPA).ToList();
             return View(applicationDbContext);
         }
 
@@ -47,7 +47,7 @@ namespace Samsys_Custos.Controllers
             }
 
             var eQUIPA = await _context.EQUIPA
-                .Include(e => e.UTILIZADOR)
+                .Include(e => e.COLABORADOR)
                 .SingleOrDefaultAsync(m => m.id_equipa == id);
             if (eQUIPA == null)
             {
@@ -60,7 +60,7 @@ namespace Samsys_Custos.Controllers
         // GET: EQUIPA/Create
         public IActionResult Create()
         {
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_lider"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             return View();
         }
 
@@ -77,7 +77,7 @@ namespace Samsys_Custos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Colaborador));
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 
@@ -94,7 +94,7 @@ namespace Samsys_Custos.Controllers
             {
                 return NotFound();
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 
@@ -130,7 +130,7 @@ namespace Samsys_Custos.Controllers
                 }
                 return RedirectToAction(nameof(Colaborador));
             }
-            ViewData["id_lider"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", eQUIPA.id_lider);
+            ViewData["id_lider"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", eQUIPA.id_lider);
             return View(eQUIPA);
         }
 
@@ -143,7 +143,7 @@ namespace Samsys_Custos.Controllers
             }
 
             var eQUIPA = await _context.EQUIPA
-                .Include(e => e.UTILIZADOR)
+                .Include(e => e.COLABORADOR)
                 .SingleOrDefaultAsync(m => m.id_equipa == id);
             if (eQUIPA == null)
             {

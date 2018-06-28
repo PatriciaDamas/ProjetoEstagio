@@ -65,7 +65,11 @@
                     @Html.DisplayFor(modelItem => item.ano)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.data)
+                    @{
+                        var data = item.data.ToString().Split(" ");
+                        <p> @data[0]</p>
+                    }
+                    
                 </td>
 
 
@@ -77,14 +81,14 @@
         <p></p>
         }
         </td>-->
-                <td>
+<td>
                     @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.designacao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UTILIZADOR.nome)
+                    @Html.DisplayFor(modelItem => item.COLABORADOR.nome)
                 </td>
                 <td style="text-align:right;">
                     @Html.DisplayFor(modelItem => item.valor)€

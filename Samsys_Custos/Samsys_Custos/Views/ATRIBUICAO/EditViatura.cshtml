@@ -32,22 +32,18 @@
                 <span asp-validation-for="data_inicio" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="data_fim" class="control-label">Data Final</label>
+            <label asp-for="data_fim" class="control-label" style="font-weight:bold;">Data Final</label>
             <input asp-for="data_fim" class="form-control" />
             <span asp-validation-for="data_fim" class="text-danger"></span>
         </div>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <a class="btn btnVoltarEdit" asp-action="Viatura">Voltar</a>
+                        <a class="btn btnVoltarEdit2 form-control" asp-action="Viatura">Voltar</a>
                     </div>
                 </div>
-                <div class="col-md-1">
-
-                </div>
-                <div class="col-md-5">
-                    <center><input type="submit" value="Guardar" class="btn btnCreate btnCriarAtribuicao" /></center>
-                    
+                <div class="col-md-6">
+                    <input type="submit" value="Guardar" class="btn btnSave btnCriarAtribuicao form-control" />
                 </div>
             </div>
         </form>

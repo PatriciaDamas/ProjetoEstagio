@@ -22,7 +22,7 @@
                 Colaborador
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.UTILIZADOR.nome)
+                @Html.DisplayFor(model => model.COLABORADOR.nome)
             </dd>
             <dt>
                 Categoria
@@ -59,14 +59,11 @@
         <form asp-action="DeleteGsm">
             <input type="hidden" asp-for="id_custo" />
             <div class="row">
-                <div class="col-md-4">
-                    <input type="submit" value="Remover" class="btn btnRemove" />
+                <div class="col-md-6">
+                    <a class="btn btnVoltarEdit2 form-control" asp-action="Gsm">Voltar</a>
                 </div>
-                <div class="col-md-1">
-
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btnVoltar" asp-action="Gsm">Voltar</a>
+                <div class="col-md-6">
+                    <input type="submit" value="Remover" class="btn btnSave form-control" />
                 </div>
             </div>
 
