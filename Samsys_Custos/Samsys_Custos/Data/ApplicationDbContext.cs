@@ -14,7 +14,7 @@ namespace Samsys_Custos.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }     
+        }
         public DbSet<Samsys_Custos.Data.CUSTO> CUSTO { get; set; }
         public DbSet<Samsys_Custos.Data.ATRIBUICAO> ATRIBUICAO { get; set; }
         public DbSet<Samsys_Custos.Data.GSM> GSM { get; set; }
@@ -22,7 +22,7 @@ namespace Samsys_Custos.Data
         public DbSet<Samsys_Custos.Data.SALARIO> SALARIO { get; set; }
         public DbSet<Samsys_Custos.Data.FORNECEDOR> FORNECEDOR { get; set; }
         public DbSet<Samsys_Custos.Data.CATEGORIA> CATEGORIA { get; set; }
-        public DbSet<Samsys_Custos.Data.UTILIZADOR> UTILIZADOR { get; set; }
+        public DbSet<Samsys_Custos.Data.COLABORADOR> COLABORADOR { get; set; }
         public DbSet<Samsys_Custos.Data.EQUIPA> EQUIPA { get; set; }
         public DbSet<Samsys_Custos.Data.DADOS_PHC> DADOS_PHC { get; set; }
         public DbSet<Samsys_Custos.Models.MEDIA_CUSTOS> MEDIA_CUSTOS { get; set; }

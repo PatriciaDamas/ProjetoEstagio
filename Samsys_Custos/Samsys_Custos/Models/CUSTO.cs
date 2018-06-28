@@ -13,9 +13,9 @@ namespace Samsys_Custos.Data
         [Key]
         public int id_custo { get; set; }
 
-        [ForeignKey("UTILIZADOR")]
+        [ForeignKey("COLABORADOR")]
         public int id_colaborador { get; set; }
-        public UTILIZADOR UTILIZADOR { get; set; }
+        public COLABORADOR COLABORADOR { get; set; }
 
         [ForeignKey("CATEGORIA")]
         public int id_categoria { get; set; }

@@ -256,7 +256,7 @@ namespace Samsys_Custos.Controllers {
             Years.OrderByDescending(x => x.Value);
 
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             return View();
         }
 
@@ -287,14 +287,14 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 50;
             if (ano == null)
             {
-                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR).Where(a => a.CUSTO.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA);//.Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == Int32.Parse(DateTime.Now.Year.ToString()));
                 var count = applicationDbContext.Count();
                 var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
             }
             else
             {
-                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA).Include(c => c.CUSTO.UTILIZADOR).Where(a => a.CUSTO.ano == ano);
+                var applicationDbContext = _context.SALARIO.Include(c => c.CUSTO).Include(c => c.CUSTO.CATEGORIA);//.Include(c => c.CUSTO.COLABORADOR).Where(a => a.CUSTO.ano == ano);
                 var count = applicationDbContext.Count();
                 var salarios = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<SALARIO>(salarios, count, page ?? 1, pageSize));
@@ -319,14 +319,14 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 50;
             if (ano == null)
             {
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA);//.Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
             var count = applicationDbContext.Count();
             var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
             }
             else
             {
-             var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == ano);
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA);//.Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.CATEGORIA.id_categoria == 32 && c.ano == ano);
              var count = applicationDbContext.Count();
              var economato = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
              return View(new PaginatedList<CUSTO>(economato, count, page ?? 1, pageSize));
@@ -383,13 +383,13 @@ namespace Samsys_Custos.Controllers {
             int pageSize = 50;
             if (ano == null)
             {
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.COLABORADOR).Where(c => c.id_gsm != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
                 var count = applicationDbContext.Count();
                 var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
             }
             else{
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.UTILIZADOR).Where(c => c.id_gsm != null && c.ano == ano);
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.GSM).Include(c => c.COLABORADOR).Where(c => c.id_gsm != null && c.ano == ano);
                 var count = applicationDbContext.Count();
                 var gsm = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<CUSTO>(gsm, count, page ?? 1, pageSize));
@@ -402,7 +402,7 @@ namespace Samsys_Custos.Controllers {
         public async Task<IActionResult> Validacao(int? page)
         {
             int pageSize = 5;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.UTILIZADOR).Include(c => c.DADOS_PHC.FORNECEDOR).Where(c => c.id_phc != null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.COLABORADOR).Include(c => c.DADOS_PHC.FORNECEDOR).Where(c => c.id_phc != null);
             var count = applicationDbContext.Count();
             var validacao = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");
@@ -425,14 +425,14 @@ namespace Samsys_Custos.Controllers {
 
             int pageSize = 50;
             if (ano == null){
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == Int32.Parse(DateTime.Now.Year.ToString()));
                 var count = applicationDbContext.Count();
                 var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
             }
             else
             {
-                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.UTILIZADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == ano);
+                var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.GSM).Include(c => c.COLABORADOR).Include(c => c.VIATURA).Where(c => c.id_viatura != null && c.ano == ano);
                 var count = applicationDbContext.Count();
                 var viatura = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
                 return View(new PaginatedList<CUSTO>(viatura, count, page ?? 1, pageSize));
@@ -449,7 +449,7 @@ namespace Samsys_Custos.Controllers {
         [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
         public IActionResult CriarSalario()
         {
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -484,7 +484,7 @@ namespace Samsys_Custos.Controllers {
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Salario));
             }
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -503,7 +503,7 @@ namespace Samsys_Custos.Controllers {
         public IActionResult CriarPremio()
         {
             ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -536,7 +536,7 @@ namespace Samsys_Custos.Controllers {
                 return RedirectToAction(nameof(Premio));
             }
             ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -560,7 +560,7 @@ namespace Samsys_Custos.Controllers {
 
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome");
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -603,7 +603,7 @@ namespace Samsys_Custos.Controllers {
             Years.OrderByDescending(x => x.Value);
 
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             return View(cUSTO);
         }
 
@@ -615,7 +615,7 @@ namespace Samsys_Custos.Controllers {
         {
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -650,7 +650,7 @@ namespace Samsys_Custos.Controllers {
             }
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == viatura.id_categoria), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome");
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula");
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -680,7 +680,7 @@ namespace Samsys_Custos.Controllers {
                 return NotFound();
             }
             ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", premio.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", premio.id_colaborador);
 
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -750,7 +750,7 @@ namespace Samsys_Custos.Controllers {
             var gsm2 = _context.CATEGORIA.Where(a => a.nome == "Comunicações").FirstOrDefault();
 
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai == temp2.id_categoria || a.id_pai == gsm2.id_categoria && a.nome != "Moveis"), "id_categoria", "nome", gsm.id_categoria);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", gsm.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", gsm.id_colaborador);
             ViewData["id_gsm"] = new SelectList(_context.GSM, "id_gsm", "numero", gsm.id_gsm);
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
@@ -852,7 +852,7 @@ namespace Samsys_Custos.Controllers {
             Years.OrderByDescending(x => x.Value);
 
             ViewData["ano"] = new SelectList(Years.OrderByDescending(x => x.Value), "Value", "Value", viatura.ano);
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", viatura.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", viatura.id_colaborador);
             ViewData["id_viatura"] = new SelectList(_context.VIATURA, "id_viatura", "matricula", viatura.id_viatura);
             return View(viatura);
         }
@@ -912,7 +912,7 @@ namespace Samsys_Custos.Controllers {
                 return NotFound();
             }
 
-            ViewData["id_colaborador"] = new SelectList(_context.UTILIZADOR, "id_colaborador", "nome", custo.id_colaborador);
+            ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome", custo.id_colaborador);
             List<SelectListItem> Years = new List<SelectListItem>();
             for (int i = 2006; i <= Int32.Parse(DateTime.Now.Year.ToString()); i++)
             {
@@ -981,7 +981,7 @@ namespace Samsys_Custos.Controllers {
                  .Include(c => c.CATEGORIA)
                  .Include(c => c.DADOS_PHC)
                  .Include(c => c.GSM)
-                 .Include(c => c.UTILIZADOR)
+                 .Include(c => c.COLABORADOR)
                  .Include(c => c.VIATURA)
                  .SingleOrDefaultAsync(m => m.id_custo == id);
             if (cUSTO == null)
@@ -1024,7 +1024,7 @@ namespace Samsys_Custos.Controllers {
             var cUSTO = await _context.CUSTO
                 .Include(c => c.CATEGORIA)
                 .Include(c => c.GSM)
-                .Include(c => c.UTILIZADOR)
+                .Include(c => c.COLABORADOR)
                 .SingleOrDefaultAsync(m => m.id_custo == id);
             if (cUSTO == null)
             {
@@ -1068,7 +1068,7 @@ namespace Samsys_Custos.Controllers {
                  .Include(c => c.CATEGORIA)
                  .Include(c => c.DADOS_PHC)
                  .Include(c => c.GSM)
-                 .Include(c => c.UTILIZADOR)
+                 .Include(c => c.COLABORADOR)
                  .Include(c => c.VIATURA)
                  .SingleOrDefaultAsync(m => m.id_custo == id);
             if (cUSTO == null)
@@ -1113,7 +1113,7 @@ namespace Samsys_Custos.Controllers {
             var sALARIO = await _context.SALARIO
                 .Include(c => c.CUSTO)
                 .Include(c => c.CUSTO.CATEGORIA)
-                .Include(c => c.CUSTO.UTILIZADOR)
+                .Include(c => c.CUSTO.COLABORADOR)
                 .SingleOrDefaultAsync(m => m.id_salario == id);
             if (sALARIO == null)
             {

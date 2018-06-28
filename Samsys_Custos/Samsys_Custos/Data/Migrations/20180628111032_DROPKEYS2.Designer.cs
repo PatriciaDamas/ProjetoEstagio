@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180628111032_DROPKEYS2")]
+    partial class DROPKEYS2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,15 +141,11 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<DateTime>("data_inicio");
 
-                    b.Property<int>("id_colaborador");
-
                     b.Property<int?>("id_gsm");
 
                     b.Property<int?>("id_viatura");
 
                     b.HasKey("id_atribuicao");
-
-                    b.HasIndex("id_colaborador");
 
                     b.HasIndex("id_gsm");
 
@@ -181,13 +179,9 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<DateTime>("data_admissao");
 
-                    b.Property<string>("id_equipa");
-
                     b.Property<string>("nome");
 
                     b.HasKey("id_colaborador");
-
-                    b.HasIndex("id_equipa");
 
                     b.ToTable("COLABORADOR");
                 });
@@ -206,8 +200,6 @@ namespace Samsys_Custos.Data.Migrations
 
                     b.Property<int>("id_categoria");
 
-                    b.Property<int>("id_colaborador");
-
                     b.Property<int?>("id_gsm");
 
                     b.Property<string>("id_phc");
@@ -221,8 +213,6 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasKey("id_custo");
 
                     b.HasIndex("id_categoria");
-
-                    b.HasIndex("id_colaborador");
 
                     b.HasIndex("id_gsm");
 
@@ -254,14 +244,9 @@ namespace Samsys_Custos.Data.Migrations
                     b.Property<string>("id_equipa")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("id_lider");
-
                     b.Property<string>("nome");
 
                     b.HasKey("id_equipa");
-
-                    b.HasIndex("id_lider")
-                        .IsUnique();
 
                     b.ToTable("EQUIPA");
                 });
@@ -474,11 +459,6 @@ namespace Samsys_Custos.Data.Migrations
 
             modelBuilder.Entity("Samsys_Custos.Data.ATRIBUICAO", b =>
                 {
-                    b.HasOne("Samsys_Custos.Data.COLABORADOR", "COLABORADOR")
-                        .WithMany()
-                        .HasForeignKey("id_colaborador")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Samsys_Custos.Data.GSM", "GSM")
                         .WithMany()
                         .HasForeignKey("id_gsm");
@@ -495,23 +475,11 @@ namespace Samsys_Custos.Data.Migrations
                         .HasForeignKey("id_pai");
                 });
 
-            modelBuilder.Entity("Samsys_Custos.Data.COLABORADOR", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.EQUIPA", "EQUIPA")
-                        .WithMany()
-                        .HasForeignKey("id_equipa");
-                });
-
             modelBuilder.Entity("Samsys_Custos.Data.CUSTO", b =>
                 {
                     b.HasOne("Samsys_Custos.Data.CATEGORIA", "CATEGORIA")
                         .WithMany()
                         .HasForeignKey("id_categoria")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Samsys_Custos.Data.COLABORADOR", "COLABORADOR")
-                        .WithMany()
-                        .HasForeignKey("id_colaborador")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Samsys_Custos.Data.GSM", "GSM")
@@ -532,14 +500,6 @@ namespace Samsys_Custos.Data.Migrations
                     b.HasOne("Samsys_Custos.Data.FORNECEDOR", "FORNECEDOR")
                         .WithMany()
                         .HasForeignKey("id_fornecedor");
-                });
-
-            modelBuilder.Entity("Samsys_Custos.Data.EQUIPA", b =>
-                {
-                    b.HasOne("Samsys_Custos.Data.COLABORADOR", "COLABORADOR")
-                        .WithOne()
-                        .HasForeignKey("Samsys_Custos.Data.EQUIPA", "id_lider")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Samsys_Custos.Data.FORNECEDOR", b =>

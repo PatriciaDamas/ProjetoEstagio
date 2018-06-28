@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Samsys_Custos.Data
 {
-    public class UTILIZADOR
+    public class COLABORADOR
     {
         [Key]
         public int id_colaborador { get; set; }

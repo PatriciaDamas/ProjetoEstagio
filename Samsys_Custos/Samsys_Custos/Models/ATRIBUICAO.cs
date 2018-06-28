@@ -21,9 +21,9 @@ namespace Samsys_Custos.Data
         public int? id_gsm { get; set; }
         public GSM GSM { get; set; }
 
-        [ForeignKey("UTILIZADOR")]
+        [ForeignKey("COLABORADOR")]
         public int id_colaborador { get; set; }
-        public UTILIZADOR UTILIZADOR { get; set; }
+        public COLABORADOR COLABORADOR { get; set; }
 
         public DateTime data_inicio { get; set; }
         public DateTime? data_fim { get; set; }
