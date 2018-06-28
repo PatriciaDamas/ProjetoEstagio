@@ -37,7 +37,10 @@
                     @Html.DisplayFor(modelItem => item.EQUIPA.nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.data_admissao)
+                    @{
+                        var data = item.data_admissao.ToString().Split(" ");
+                        <p> @data[0]</p>
+                    }
                 </td>
 
             </tr>

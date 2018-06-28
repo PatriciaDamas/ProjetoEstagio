@@ -16,6 +16,9 @@
                     Fornecedor
                 </th>
                 <th>
+                    Tipo Custo
+                </th>
+                <th>
                     Categoria
                 </th>
                 <th>Opções</th>
@@ -25,29 +28,42 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nome)
-                    </td>
-                    <td>
-                        @{ 
-                            string nome = "NA";
-                            try
-                            {
-                                nome = item.CATEGORIA.nome;
-                                <p>@nome</p>
-                            }
-                            catch(NullReferenceException e)
-                            {
-                                <p>@nome</p>
-                            }
-                         
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome)
+                </td>
+                <td>
+                    @{
+                        var sugestao = item.sugestao_custo;
+                        if (sugestao == false)
+                        {
+                            <p>Interno</p>
                         }
-                    </td>
-                    <td>
-                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_fornecedor"></a>
-                    </td>
-                </tr>
+                        else
+                        {
+                            <p>Externo</p>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        string nome = "NA";
+                        try
+                        {
+                            nome = item.CATEGORIA.nome;
+                            <p>@nome</p>
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            <p>@nome</p>
+                        }
+
+                    }
+                </td>
+                <td>
+                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_fornecedor"></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
