@@ -41,7 +41,7 @@ namespace Samsys_Custos.Controllers
                   Id = n.Id,
                   Name = n.Name,
                   id_colaborador=n.id_colaborador,
-                  Segsocial = n.Segsocial
+                   contribuinte = n.contribuinte
                   
                  
               });
@@ -84,7 +84,7 @@ namespace Samsys_Custos.Controllers
                     UserName = vmUser.Email,
                     Email = vmUser.Email,
                      id_colaborador = vmUser.id_colaborador,
-                      Segsocial = vmUser.Segsocial,      
+                      contribuinte = vmUser.contribuinte,      
 
                   
                   
@@ -129,7 +129,7 @@ namespace Samsys_Custos.Controllers
                 Email = user.Email,
                 Name = user.Name,
                 id_colaborador = user.id_colaborador,
-                Segsocial = user.Segsocial,
+                contribuinte = user.contribuinte,
              
                 SelectedRoles = (await _userManager.GetRolesAsync(user)).ToArray(),
                 RolesList = new SelectList(await _roleManager.Roles.Where(a => a.NormalizedName != "SUPERADMIN").ToListAsync(), "Name", "Name")
@@ -148,7 +148,7 @@ namespace Samsys_Custos.Controllers
                     return NotFound();                
             
                 user.Name = editUserViewModel.Name;
-                user.Segsocial = editUserViewModel.Segsocial;
+                user.contribuinte = editUserViewModel.contribuinte;
                 user.id_colaborador = editUserViewModel.id_colaborador;
 
                 var userupdateresult = await _userManager.UpdateAsync(user);

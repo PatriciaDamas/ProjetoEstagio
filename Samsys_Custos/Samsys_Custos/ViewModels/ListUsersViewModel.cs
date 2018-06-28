@@ -11,7 +11,7 @@ namespace Samsys_Custos.ViewModels
         public int? id_colaborador { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public int Segsocial { get; set; }
+        public int contribuinte { get; set; }
         public string Roles { get; set; }
 
     }

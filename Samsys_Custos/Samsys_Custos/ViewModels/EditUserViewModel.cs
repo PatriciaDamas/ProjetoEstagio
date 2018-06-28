@@ -18,8 +18,8 @@ namespace Samsys_Custos.ViewModels
         [Display(Name = "Nº Colaborador")]
         [Required]
         public int? id_colaborador { get; set; }
-        [Display(Name = "Segurança Social")]
-        public int Segsocial { get; set; }
+        [Display(Name = "Contribuinte")]
+        public int contribuinte { get; set; }
         [Required]
         [ReadOnly(true)]
         public string Email { get; set; }
