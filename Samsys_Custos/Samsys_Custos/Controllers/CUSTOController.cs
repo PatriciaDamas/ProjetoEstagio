@@ -402,7 +402,7 @@ namespace Samsys_Custos.Controllers {
         public async Task<IActionResult> Validacao(int? page)
         {
             int pageSize = 5;
-            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.COLABORADOR).Include(c => c.DADOS_PHC.FORNECEDOR).Where(c => c.id_phc != null);
+            var applicationDbContext = _context.CUSTO.Include(c => c.CATEGORIA).Include(c => c.DADOS_PHC).Include(c => c.COLABORADOR).Include(c => c.DADOS_PHC.FORNECEDOR).Where(c => c.id_phc != null).OrderBy(a=> Int32.Parse(a.id_phc.ToString()));
             var count = applicationDbContext.Count();
             var validacao = await applicationDbContext.Skip(((page ?? 1) - 1) * pageSize).Take(pageSize).ToListAsync();
             ViewData["id_categoria"] = new SelectList(_context.CATEGORIA.Where(a => a.id_pai != null), "id_categoria", "nome");
@@ -804,27 +804,29 @@ namespace Samsys_Custos.Controllers {
 
         // GET: EDIT VALIDAÇÃO DADOS PHC
         [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
-        public async Task<DADOS_PHC> EditValidacao(string id, bool flag, int? cat)
+        public async Task<DADOS_PHC> EditValidacao(string id, bool interno, bool validar, int? cat)
         {
-            var validaçao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
+            var validacao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
             try
             {
-                validaçao.custo_interno = flag;
+                validacao.custo_interno = interno;
+                validacao.validado = validar;
                 if (cat != null)
                 {
-                    var custo = _context.CUSTO.Where(a => a.id_phc == validaçao.id_phc).FirstOrDefault();
+                    var custo = _context.CUSTO.Where(a => a.id_phc == validacao.id_phc).FirstOrDefault();
                     custo.id_categoria = (int)cat;
                 }
-                _context.Update(validaçao);
+                _context.Update(validacao);
                 await _context.SaveChangesAsync();
-                var validaçao2 = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
-                return validaçao2;
+                var validacao2 = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
+                return validacao2;
             }
             catch
             {
-                return validaçao;
+                return validacao;
             }
         }
+
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1176,6 +1178,12 @@ namespace Samsys_Custos.Controllers {
         public JsonResult getRubrica(int id)
         {
             return Json(JsonConvert.SerializeObject(new SelectList(_context.CATEGORIA.Where(a => a.id_pai == id), "id_categoria", "nome")));
+        }
+
+        // GET: DEVOLVE A LISTA DE CATEGORIAS QUEM TEM COMO ID_PAI O ID RECEBIDO
+        public JsonResult getValidacao(string id)
+        {
+            return Json(JsonConvert.SerializeObject(new SelectList(_context.DADOS_PHC.Where(a => a.id_phc == id), "validado", "validado")));
         }
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
     <table class="table table-bordered" id="dataTable" cellspacing="0">
         <thead>
             <tr>
-                <th hidden>
+                <th>
                     id
                 </th>
                 <th hidden>
@@ -48,6 +48,8 @@
                 <th>
                     Custo Interno
                 </th>
+                <th>Estado</th>
+                <th>Validar</th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +57,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <td hidden>
+                <td>
                     @Html.DisplayFor(modelItem => item.id_phc)
                 </td>
                 <td hidden>
@@ -79,7 +81,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                    <select class="form-control" asp-items="ViewBag.id_categoria">
+                    <select class="form-control" id="myselect" asp-items="ViewBag.id_categoria">
                         <option selected="selected" value="vazio">
                             Atribuir Categoria
                         </option>
@@ -100,16 +102,37 @@
                 <td>
                     @if (item.DADOS_PHC.custo_interno == false)
                     {
-                        <center><input id="checkbox" type="checkbox" name="validacao_box" checked></center>
+                        <center><input id="checkbox" type="checkbox" name="validacao_box" checked/></center>
                         <p id="state" hidden>False</p>
                     }
                     else
                     {
-                        <center><input id="checkbox" type="checkbox" name="validacao_box"></center>
+                        <center><input id="checkbox" type="checkbox" name="validacao_box"/></center>
                         <p id="state" hidden>True</p>
 
                     }
                 </td>
+                <td>
+                    @{
+                        string texto = "NA";
+                        if (item.DADOS_PHC.validado)
+                        {
+                            texto = "Validado";
+                            <p>@texto</p>
+                        }
+                        else
+                        {
+                            texto = "Por Validar";
+                            <p>@texto</p>
+
+
+                        }
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btnvalidate" style="background-color:rgb(255,158,53);color:white">Validar</a>
+                </td>
+
             </tr>
             }
 
@@ -118,7 +141,7 @@
     <br />
     <div class="form-inline">
 
-        <div style="padding-left:35%">
+        <div class="col-6 offset-4">
             <a asp-action="Validacao"
                asp-route-page="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
@@ -199,12 +222,9 @@
                class="btn btn-primary @nextDisabled">
                 Próxima
             </a>
-
-        </div>
-        <a class="fa fa-fw fas fa-refresh fa-lg" style="padding-left:35%" href=""></a>
-
-    </div>
+            </div>
 </div>
+    </div>
 @section scripts {
     <script src="~/js/Validação_check_mark.js"></script>
 }

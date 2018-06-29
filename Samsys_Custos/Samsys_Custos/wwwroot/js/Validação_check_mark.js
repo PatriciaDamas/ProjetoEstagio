@@ -1,42 +1,61 @@
 ﻿
 $(document).ready(function () {
+
     var table = $('#dataTable').DataTable();
+    var validate = false;
+    var cat = null;
 
-
-    $('#dataTable tbody').on('click', 'tr', function () {
-        console.log("entrei!");
-        var data = table.row(this).data();
-        console.log(data)
+    $('.btnvalidate').click(function () {
+        console.log("CLICK!");
+        validate = true;
+        var data2 = table.row($(this).closest("td")).data();
         var flag = false;
-        var cat = null;
-
-        if ($(this).find(":checkbox").is(':checked')) {
-            $(this).find("#state").text("False")
+        var tr = $(this).closest("tr");
+        if (tr.find(":checkbox").is(":checked")) {
+            console.log("checked");
+            tr.find("#state").text("False")
             flag = false;
         }
         else {
-            $(this).find("#state").text("True")
-
+            console.log("unchecked");
+            tr.find("#state").text("True")
             flag = true;
         }
-        console.log($(this).find("select").val());
 
-        if ($(this).find("select").val() != "vazio") {
-            cat = $(this).find("select").val();
-            console.log(cat);
+        if (tr.find("#myselect").val() != "vazio") {
+            console.log("Cheio");
+            cat = tr.find("select").val();
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44382/custo/EditValidacao?id=' + data2[0] + '&interno=' + flag + '&validar=' + validate + '&cat=' + cat,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (err) {
+                    alert('Falha ao validar ' + err);
+                }
+            });
         }
-        $.ajax({
-             type: 'GET',
-            url: 'https://localhost:44382/custo/EditValidacao?id=' + data[0] + '&flag=' + flag + '&cat='+cat,
-             success: function (data) {
-                 console.log(data);
-             },
-             error: function (err) {
-                 console.log(err);
-                 alert('Falha ao validar ' + err);
-             }
-         });
+        else {
+            console.log("Vazio");
+
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44382/custo/EditValidacao?id=' + data2[0] + '&interno=' + flag + '&validar=' + validate,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (err) {
+                    alert('Falha ao validar ' + err);
+                }
+            });
+        }
+  
+        console.log("cat=" + cat + " flag=" + flag + " valido=" + validate);
+        
     });
+
+ 
         
 
 });
