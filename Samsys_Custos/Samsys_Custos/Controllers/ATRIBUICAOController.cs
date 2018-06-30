@@ -141,12 +141,14 @@ namespace Samsys_Custos.Controllers
                     // edição da atribuição antiga
                     await EditViatura(aTRIBUICAORESERVA.id_atribuicao, aTRIBUICAORESERVA);
                     // criar atribuição
+                    aTRIBUICAO.data_inicio = DateTime.Now;
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Viatura));
                 }
                 else
                 {
+                    aTRIBUICAO.data_inicio = DateTime.Now;
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Viatura));
@@ -174,12 +176,14 @@ namespace Samsys_Custos.Controllers
                     // edição da atribuição antiga
                     await EditGSM(aTRIBUICAORESERVA.id_atribuicao, aTRIBUICAORESERVA);
                     // criar atribuição
+                    aTRIBUICAO.data_inicio = DateTime.Now;
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(GSM));
                 }
                 else
                 {
+                    aTRIBUICAO.data_inicio = DateTime.Now;
                     _context.Add(aTRIBUICAO);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(GSM));
