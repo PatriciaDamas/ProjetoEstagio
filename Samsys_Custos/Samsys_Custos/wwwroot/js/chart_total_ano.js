@@ -28,7 +28,7 @@
                     "type": "pie",
                     "theme": "light",
                     "titles": [{
-                        "text": total + "€",
+                        "text": total.toFixed(2) + "€",
                         "size": 30,
                     }],
                     "dataProvider": [],
