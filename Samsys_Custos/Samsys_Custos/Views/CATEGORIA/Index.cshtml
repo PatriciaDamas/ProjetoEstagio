@@ -19,42 +19,26 @@
             <th>
                 Categoria
             </th>
-            <th>
+            @*<th>
                 Opções
-            </th>
+            </th>*@
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @*@{
-                        foreach (var item2 in Model)
-                        {
-                            var idpai = item.id_pai;
-                            var id = item2.id_categoria;
-                            if (id == idpai)
-                            {
-                                System.Diagnostics.Debug.WriteLine("blah");
-
-
-                                @Html.DisplayFor(modelItem => item2.nome);
-                            }
-
-                        }
-
-                    }*@
-                    @Html.DisplayFor(modelItem=>item.CATEGORIAPAI.nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nome)
-                </td>
-                <td>
-                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_categoria"></a>
-                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_categoria"></a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CATEGORIAPAI.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            @*<td>
+        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_categoria"></a>
+        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_categoria"></a>
+            </td>*@
+        </tr>
         }
     </tbody>
 </table>

@@ -18,26 +18,26 @@
                 <th>
                     Equipamento
                 </th>
-                <th>
-                    Opções
-                </th>
+                @* <th>
+            Opções
+        </th>*@
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.numero)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.equipamento)
-                    </td>
-                    <td>
-                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_gsm"></a>
-                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_gsm"></a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.equipamento)
+                </td>
+                @* <td>
+            <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="Edit" asp-route-id="@item.id_gsm"></a>
+            <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="Delete" asp-route-id="@item.id_gsm"></a>
+        </td>*@
+            </tr>
             }
         </tbody>
     </table>
