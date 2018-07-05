@@ -23,16 +23,14 @@
                 <span asp-validation-for="equipamento" class="text-danger"></span>
             </div>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <input type="submit" value="Editar" class="btn btnCreate" />
+                        <a class="btn btnVoltarEdit2 form-control" asp-action="Index">Voltar</a>
+                        
                     </div>
                 </div>
-                <div class="col-md-1">
-
-                </div>
-                <div class="col-md-5">
-                    <a class="btn btnVoltarEdit" asp-action="Index">Voltar</a>
+                <div class="col-md-6">
+                    <input type="submit" value="Guardar" class="btn btnSave form-control" />
                 </div>
             </div>
         </form>
