@@ -29,18 +29,18 @@
                         //table += '<td>' + data[i].colaborador + '</td>';
                         table += '<td>' + data[i].categoria + '</td>';
                         table += '<td>' + data[i].ano + '</td>';
-                        table += '<td>' + data[i].janeiro + '</td>';
-                        table += '<td>' + data[i].fevereiro + '</td>';
-                        table += '<td>' + data[i].março + '</td>';
-                        table += '<td>' + data[i].abril + '</td>';
-                        table += '<td>' + data[i].maio + '</td>';
-                        table += '<td>' + data[i].junho + '</td>';
-                        table += '<td>' + data[i].julho + '</td>';
-                        table += '<td>' + data[i].agosto + '</td>';
-                        table += '<td>' + data[i].setembro + '</td>';
-                        table += '<td>' + data[i].outubro + '</td>';
-                        table += '<td>' + data[i].novembro + '</td>';
-                        table += '<td>' + data[i].dezembro + '</td>';
+                        table += '<td>' + data[i].janeiro + '€' + '</td>';
+                        table += '<td>' + data[i].fevereiro + '€' + '</td>';
+                        table += '<td>' + data[i].março + '€' + '</td>';
+                        table += '<td>' + data[i].abril + '€' + '</td>';
+                        table += '<td>' + data[i].maio + '€' + '</td>';
+                        table += '<td>' + data[i].junho + '€' + '</td>';
+                        table += '<td>' + data[i].julho + '€' + '</td>';
+                        table += '<td>' + data[i].agosto + '€' + '</td>';
+                        table += '<td>' + data[i].setembro + '€' + '</td>';
+                        table += '<td>' + data[i].outubro + '€' + '</td>';
+                        table += '<td>' + data[i].novembro + '€' + '</td>';
+                        table += '<td>' + data[i].dezembro + '€' + '</td>';
                         table += '<tr>';
                     }
                     
