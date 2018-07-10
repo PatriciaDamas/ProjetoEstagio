@@ -13,6 +13,7 @@ using Samsys_Custos.Helpers;
 
 namespace Samsys_Custos.Controllers
 {
+    [Authorize(Roles = "SuperAdmin,Gestor,Financeiro,Administrativo")]
     public class ATRIBUICAOController : Controller
     {
         private readonly ApplicationDbContext _context;

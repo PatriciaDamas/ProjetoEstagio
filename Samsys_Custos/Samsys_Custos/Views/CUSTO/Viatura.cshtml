@@ -28,9 +28,8 @@
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-@if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor"))
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Viaturas") || User.IsInRole("Gestor") || User.IsInRole("Financeiro") || User.IsInRole("Administrativo"))
 {
-
     <a class=" btn btnActionCreate" asp-action="CriarViatura">Novo registo de Viatura</a>
 }
 <div class="table-responsive">

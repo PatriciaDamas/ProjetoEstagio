@@ -51,10 +51,12 @@
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Grafico_Equipa_Media">Média de Custos por Equipa</a>
                         </li>
-                        <li>
-                            <a asp-area="" asp-controller="CUSTO" asp-action="COLABORADOR">Colaborador</a>
-                        </li>
-
+                        @if (User.IsInRole("Administrativo") || User.IsInRole("SuperAdmin") || User.IsInRole("Financeiro") || User.IsInRole("Gestor"))
+                        {
+                            <li>
+                                <a asp-area="" asp-controller="CUSTO" asp-action="COLABORADOR">Colaborador</a>
+                            </li>
+                        }
                     </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Custos">
@@ -72,14 +74,14 @@
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Gsm">Gsm</a>
                         </li>
-                        @if (User.IsInRole("Prémios") || User.IsInRole("SuperAdmin") || User.IsInRole("Financeiro") || User.IsInRole("Gestor"))
+                        @if (User.IsInRole("Prémios") || User.IsInRole("Administrativo") || User.IsInRole("SuperAdmin") || User.IsInRole("Financeiro") || User.IsInRole("Gestor"))
                         {
                             <li>
                                 <a asp-area="" asp-controller="CUSTO" asp-action="Premio">Prémios</a>
                             </li>
                         }
 
-                        @if (User.IsInRole("Salários") || User.IsInRole("SuperAdmin") || User.IsInRole("Financeiro") || User.IsInRole("Gestor"))
+                        @if (User.IsInRole("Salários") || User.IsInRole("SuperAdmin") || User.IsInRole("Administrativo") || User.IsInRole("Financeiro") || User.IsInRole("Gestor"))
                         {
                             <li>
                                 <a asp-area="" asp-controller="CUSTO" asp-action="Salario">Salários</a>
@@ -89,7 +91,7 @@
                         <li>
                             <a asp-area="" asp-controller="CUSTO" asp-action="Economato">Economato</a>
                         </li>
-                        @if (User.IsInRole("Salários") || User.IsInRole("SuperAdmin") || User.IsInRole("Atribuições") || User.IsInRole("Gestor"))
+                        @if (User.IsInRole("Administrativo") || User.IsInRole("Financeiro") || User.IsInRole("SuperAdmin") || User.IsInRole("Gestor"))
                         {
                             <li>
                                 <a asp-area="" asp-controller="CUSTO" asp-action="Validacao">Validação PHC</a>
@@ -97,45 +99,51 @@
                         }
                     </ul>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Atribuições">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAtri" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        <span class="nav-link-text">Atribuições</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseAtri">
-                        <li>
-                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Viaturas</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">GSM</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gestão">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseGestao" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-list"></i>
-                        <span class="nav-link-text">Gestão</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseGestao">
-                        <li>
-                            <a asp-area="" asp-controller="EQUIPA" asp-action="Colaborador">Colaborador</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="FORNECEDOR" asp-action="Index">Fornecedores</a>
-                        </li>
+                @if (User.IsInRole("Administrativo") || User.IsInRole("Financeiro") || User.IsInRole("Gestor") || User.IsInRole("Atribuições"))
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Atribuições">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAtri" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-plus-square"></i>
+                            <span class="nav-link-text">Atribuições</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseAtri">
+                            <li>
+                                <a asp-area="" asp-controller="ATRIBUICAO" asp-action="Viatura">Viaturas</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="ATRIBUICAO" asp-action="GSM">GSM</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("Administrativo") || User.IsInRole("Financeiro") || User.IsInRole("Gestor") || User.IsInRole("Atribuições"))
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gestão">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseGestao" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-list"></i>
+                            <span class="nav-link-text">Gestão</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseGestao">
+                            <li>
+                                <a asp-area="" asp-controller="EQUIPA" asp-action="Colaborador">Colaborador</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="FORNECEDOR" asp-action="Index">Fornecedores</a>
+                            </li>
 
-                        <li>
-                            <a asp-area="" asp-controller="CATEGORIA" asp-action="Index">Categorias</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="VIATURA" asp-action="Index">Viaturas</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="GSM" asp-action="Index">GSM</a>
-                        </li>
+                            <li>
+                                <a asp-area="" asp-controller="CATEGORIA" asp-action="Index">Categorias</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="VIATURA" asp-action="Index">Viaturas</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="GSM" asp-action="Index">GSM</a>
+                            </li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                }
                 @if (User.IsInRole("Gestor") || User.IsInRole("SuperAdmin"))
                 {
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administrador">

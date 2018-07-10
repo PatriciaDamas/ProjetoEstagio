@@ -30,13 +30,13 @@
 <hr />
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-@if (User.IsInRole("SuperAdmin") || User.IsInRole("Gsm") || User.IsInRole("Gestor"))
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Gsm") || User.IsInRole("Gestor") || User.IsInRole("Financeiro") || User.IsInRole("Administrativo"))
 {
     <a class=" btn btnActionCreate" asp-action="CriarGsm">Novo registo de Gsm</a>
 }
 
 <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable"  cellspacing="0">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
         <thead>
             <tr>
 
@@ -67,38 +67,38 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
+                <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ano)
-                </td>
-                <td>
-                    @{
-                        var strarr = item.mes.ToString().ToCharArray();
-                        strarr[0] = strarr[0].ToString().ToUpper()[0];
-                        string mes = string.Join("", strarr);
-                        <p>@mes</p>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GSM.numero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ano)
+                    </td>
+                    <td>
+                        @{
+                            var strarr = item.mes.ToString().ToCharArray();
+                            strarr[0] = strarr[0].ToString().ToUpper()[0];
+                            string mes = string.Join("", strarr);
+                            <p>@mes</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GSM.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CATEGORIA.nome)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.COLABORADOR.nome)
-                </td>
-                <td style="text-align:right;">
-                    @Html.DisplayFor(modelItem => item.valor)€
-                </td>
-                <td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COLABORADOR.nome)
+                    </td>
+                    <td style="text-align:right;">
+                        @Html.DisplayFor(modelItem => item.valor)€
+                    </td>
+                    <td>
 
-                    <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditGsm" asp-route-id="@item.id_custo"></a>
-                    <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteGsm" asp-route-id="@item.id_custo" asp-route-page="Gsm"></a>
-                </td>
-            </tr>
+                        <a class="fa fa-fw fas fa-edit fa-lg btnIconEdit" asp-action="EditGsm" asp-route-id="@item.id_custo"></a>
+                        <a class="fa fa-fw fas fa-trash fa-lg btnIconRemove" asp-action="DeleteGsm" asp-route-id="@item.id_custo" asp-route-page="Gsm"></a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

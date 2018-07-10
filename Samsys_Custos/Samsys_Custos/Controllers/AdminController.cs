@@ -15,7 +15,7 @@ using Samsys_Custos.Data;
 
 namespace Samsys_Custos.Controllers
 {
-    //[Authorize(Roles ="SuperAdmin,Gestor")]
+    [Authorize(Roles ="SuperAdmin,Gestor")]
     public class AdminController : Controller
     {
       

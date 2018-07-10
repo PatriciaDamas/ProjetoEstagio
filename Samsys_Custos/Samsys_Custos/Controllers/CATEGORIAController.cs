@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Samsys_Custos.Helpers;
 
 namespace Samsys_Custos.Controllers
 {
+    [Authorize(Roles = "SuperAdmin,Gestor,Financeiro,Administrativo")]
     public class CATEGORIAController : Controller
     {
         private readonly ApplicationDbContext _context;

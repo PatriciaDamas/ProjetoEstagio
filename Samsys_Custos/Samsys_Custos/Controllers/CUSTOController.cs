@@ -109,6 +109,7 @@ namespace Samsys_Custos.Controllers {
         #region EQUIPA
 
         // GET: FILTRO POR ANO,MES E EQUIPA DE CUSTO EQUIPA
+        [Authorize(Roles = "Salários,Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public IActionResult CustoEquipaDetalhe(int? ano, string mes, string equipa)
         {
             if (mes == null)
@@ -272,7 +273,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA TABELA SALARIO
-        [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro")]
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro,Administrativo")]
         public async Task<IActionResult> Salario(int? page, int? ano)
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -335,7 +336,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
             // GET: RETORNA PREMIOS
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro")]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Financeiro,Administrativo")]
         public async Task<IActionResult> Premio(int? page, int? ano)
         {
             List<SelectListItem> Years = new List<SelectListItem>();
@@ -399,6 +400,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA VALIDAÇÃO DE DADOS PHC
+        [Authorize(Roles = "Gestor,SuperAdmin,Financeiro,Administrativo")]
         public async Task<IActionResult> Validacao(int? page)
         {
             int pageSize = 5;
@@ -446,7 +448,7 @@ namespace Samsys_Custos.Controllers {
         #region CREATE
 
         // GET: RETORNA VIEW DE REGISTO SALARIO
-        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro,Administrativo")]
         public IActionResult CriarSalario()
         {
             ViewData["id_colaborador"] = new SelectList(_context.COLABORADOR, "id_colaborador", "nome");
@@ -466,7 +468,7 @@ namespace Samsys_Custos.Controllers {
         // POST: CREATE REGISTO SALARIO
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Salário,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salário,Gestor,SuperAdmin,Financeiro,Administrativo")]
         public async Task<IActionResult> CriarSalario(Samsys_Custos.Data.SALARIO sALARIO)
         {
             if (ModelState.IsValid)
@@ -499,7 +501,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA VIEW DE REGISTO PREMIO
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public IActionResult CriarPremio()
         {
             ViewData["tipo_premio"] = new SelectList(_context.CATEGORIA.Where(a => a.nome == "Comercial" || a.nome == "Campanha" || a.nome == "Operacional"), "id_categoria", "nome");
@@ -520,7 +522,7 @@ namespace Samsys_Custos.Controllers {
         // POST: CREATE REGISTO PREMIO
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> CriarPremio([Bind("id_colaborador,id_categoria,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -552,6 +554,7 @@ namespace Samsys_Custos.Controllers {
 
 
         // GET: RETORNA VIEW DE REGISTO GSM
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public IActionResult CriarGsm()
         {
             var temp2 = _context.CATEGORIA.Where(a => a.nome == "Moveis").FirstOrDefault();
@@ -577,7 +580,7 @@ namespace Samsys_Custos.Controllers {
         // POST: CREATE REGISTO GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> CriarGsm([Bind("id_colaborador,id_categoria,id_gsm,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -610,7 +613,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA VIEW DE REGISTO VIATURA
-        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public IActionResult CriarViatura()
         {
             var viatura = _context.CATEGORIA.Where(a => a.nome == "Viaturas").FirstOrDefault();
@@ -633,7 +636,7 @@ namespace Samsys_Custos.Controllers {
         // POST: CREATE REGISTO VIATURA
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Viaturas,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> CriarViatura([Bind("id_colaborador,id_categoria,id_viatura,ano,mes,designacao,valor")] CUSTO cUSTO)
         {
             if (ModelState.IsValid)
@@ -667,7 +670,7 @@ namespace Samsys_Custos.Controllers {
         #region EDIT
 
         // GET: EDIT PREMIO
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditPremio(int? id)
         {
             if (id == null)
@@ -698,7 +701,7 @@ namespace Samsys_Custos.Controllers {
         // POST: EDIT PREMIO
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Prémios,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditPremio(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -733,7 +736,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: RETORNA EDIT GSM
-        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditGsm(int? id)
         {
             if (id == null)
@@ -767,7 +770,7 @@ namespace Samsys_Custos.Controllers {
         // POST: EDIT GSM
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Gsm,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditGsm(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -803,7 +806,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: EDIT VALIDAÇÃO DADOS PHC
-        [Authorize(Roles = "Atribuições,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<DADOS_PHC> EditValidacao(string id, bool interno, bool validar, int? cat)
         {
             var validacao = await _context.DADOS_PHC.SingleOrDefaultAsync(n => n.id_phc == id.ToString());
@@ -831,7 +834,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: EDIT VIATURA
-        [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditViatura(int? id)
         {
             if (id == null)
@@ -864,7 +867,7 @@ namespace Samsys_Custos.Controllers {
         // POST: EDIT VIATURA
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Viatura,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditViatura(int id, [Bind("id_custo, id_colaborador, id_categoria, id_gsm, id_phc, id_viatura, id_salario, data, ano, mes, designacao, valor")] CUSTO custo)
         {
             if (id != custo.id_custo)
@@ -899,7 +902,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: EDIT SALARIO
-        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditSalario(int? id)
         {
             if (id == null)
@@ -931,7 +934,7 @@ namespace Samsys_Custos.Controllers {
         // POST: EDIT SALARIO
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> EditSalario(int id, CUSTO cUSTO, SALARIO sALARIO)
         {
             if (id != sALARIO.id_salario)
@@ -971,6 +974,7 @@ namespace Samsys_Custos.Controllers {
         #region DELETE
 
         // GET: DELETE VIATURA
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteViatura(int? id, string page)
         {
             GlobalVariables.PageServer = page;
@@ -998,6 +1002,7 @@ namespace Samsys_Custos.Controllers {
         // POST: DELETE VIATURA
         [HttpPost, ActionName("DeleteViatura")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Viatura,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteConfirmedViatura(int id)
         {
             var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
@@ -1015,6 +1020,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: DELETE GSM
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteGsm(int? id, string page)
         {
             GlobalVariables.PageServer = page;
@@ -1040,6 +1046,7 @@ namespace Samsys_Custos.Controllers {
         // POST: DELETE GSM
         [HttpPost, ActionName("DeleteGsm")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gsm,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteConfirmedGsm(int id)
         {
             var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
@@ -1058,6 +1065,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: DELETE PREMIO
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeletePremio(int? id, string page)
         {
             GlobalVariables.PageServer = page;
@@ -1085,6 +1093,8 @@ namespace Samsys_Custos.Controllers {
         // POST: DELETE VIATURA
         [HttpPost, ActionName("DeletePremio")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Prémios,Gestor,SuperAdmin,Administrativo,Financeiro")]
+
         public async Task<IActionResult> DeleteConfirmedPremio(int id)
         {
             var cUSTO = await _context.CUSTO.SingleOrDefaultAsync(m => m.id_custo == id);
@@ -1103,7 +1113,7 @@ namespace Samsys_Custos.Controllers {
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
         // GET: DELETE SALÁRIO
-        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteSalario(int? id, string page)
         {
             GlobalVariables.PageServer = page;
@@ -1130,7 +1140,7 @@ namespace Samsys_Custos.Controllers {
         // POST: DELETE SALARIO
         [HttpPost, ActionName("DeleteSalario")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Salários,Gestor,SuperAdmin")]
+        [Authorize(Roles = "Salários,Gestor,SuperAdmin,Administrativo,Financeiro")]
         public async Task<IActionResult> DeleteSalarioConfimed(int id)
         {
             var sALARIO = await _context.SALARIO.SingleOrDefaultAsync(m => m.id_salario == id);
