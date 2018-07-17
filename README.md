@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="" width="256px">
+  <img src="https://www.lispolis.pt/wp-content/uploads/2016/12/logo-samsys.png" width="400px">
 
   <h3 align="center"><b>Análise de Custos Internos - Samsys</b></h3>
 
@@ -7,7 +7,7 @@
     Aplicação de gestão e análise e custos internos para a empresa Samsys.
     <br>
     <br>
-    Projeto desonvolvido na unidade curricular de projeto Final/Estágio.
+    Projeto desenvolvido na unidade curricular de projeto Final/Estágio.
     <br>
     Nota Final: Em breve
     <br>
