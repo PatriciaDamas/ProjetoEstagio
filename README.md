@@ -9,7 +9,7 @@
     <br>
     Projeto desenvolvido na unidade curricular de projeto Final/Estágio.
     <br>
-    Nota Final: Em breve
+    Nota Final: 18/20
     <br>
   <br>
   </p>
